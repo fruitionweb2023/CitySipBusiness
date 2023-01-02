@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Restaurent.MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_lawyer" />
+
+        <!--<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <include
+                android:id="@+id/bottomnavigation"
+                layout="@layout/new_bottom_navigation" />
+        </RelativeLayout>-->
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="52dp"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/login_to_yo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Customer"
+                android:textAppearance="@style/login_to_yo"
+                android:textStyle="normal" />
+
+           <!-- <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/thrity_six_dp_corner_box"
+                android:orientation="vertical"
+                android:paddingTop="36dp">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@drawable/search_box"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:searchIcon="@drawable/ic_search_icon_grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="117dp"
+                android:background="@drawable/thrity_six_dp_corner_box_white"
+                android:orientation="vertical"
+                android:paddingTop="36dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rclr_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/twenty_dp"
+                    android:background="#A4AFB7"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>-->
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rclr_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/login_to_yo"
+                android:layout_marginTop="24dp"
+                android:clipToPadding="false" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

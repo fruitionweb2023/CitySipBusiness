@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#F54748</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="login_title_text">#124A00</color>
+    <color name="vertical_line">#FF3D00</color>
+    <color name="red">#F44336</color>
+    <color name="grey_9e9e9e">#9E9E9E</color>
+
+
+    <color name="color_gray_alpha">#65b7b7b7</color>
+    <color name="app_blue">#0e1f2f</color>
+    <color name="text_color">#000000</color>
+    <color name="seekbar_color">#3be3e3</color>
+    <color name="line_color">#FF15FF00</color>
+    <color name="shadow_color">#00000000</color>
+    <color name="clay">#6AF7EB</color>
+    <color name="menu_view_divider_color">#94FF70</color>
+    <color name="menu_background_color">#43425D</color>
+    <color name="menu_selected_color">#343347</color>
+    <color name="menu_drawable_default_color">#A5A4BF</color>
+    <color name="ff3d00">#FF3D00</color>
+    <color name="clr_272c3f">#272C3F</color>
+    <color name="clr_505463">#505463</color>
+    <color name="clr_d8d8d8">#D8D8D8</color>
+    <color name="clr_474040">#474040</color>
+    <color name="clr_888888">#888888</color>
+    <color name="clr_979592">#979592</color>
+    <color name="clr_333333">#333333</color>
+    <color name="clr_f54748">#F54748</color>
+    <color name="cle_eeeeee">#EEEEEE</color>
+    <color name="clr_aaaaaa">#AAAAAA</color>
+    <color name="clr_eaeaea">#EAEAEA</color>
+    <color name="clr_ffdada">#FFDADA</color>
+
+    <color name="blue_1">#003A6B</color>
+    <color name="blue_2"> #1B5886</color>
+    <color name="blue_3">#3776A1</color>
+    <color name="blue_4">#5293BB</color>
+    <color name="blue_5">#6EB1D6</color>
+    <color name="blue_6">#89CFF1</color>
+
+    <color name="white_3">#FFFAFA</color>
+    <color name="white_2"> #EBF7F5</color>
+    <color name="white_1"> #D4F1F2</color>
+    <color name="clr_f8f8f8">#F8F8F8</color>
+    <color name="cle_979592">#979592</color>
+    <color name="clr_F54748">#F54748</color>
+    <color name="clr_666666">#666666</color>
+    <color name="clr_111111">#111111</color>
+    <color name="clr_0059C8">#0059C8</color>
+    <color name="clr_cccccc">#CCCCCC</color>
+
+    <color name="clr_2C3564">#2C3564</color>
+</resources>

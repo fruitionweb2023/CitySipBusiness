@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.CommonActivities.SplashScreenActivity"
+        android:background="@drawable/ic_pattern_1"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/logo_one"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/citysip_logo_new"
+            app:tint="@color/clr_f54748" />
+
+
+    </RelativeLayout>
+</layout>

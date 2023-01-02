@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Doctor.DoctorSelectTimingActivtiy">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_doctor" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update"
+            android:layout_width="328dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_doctor"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="#F8F8F8"
+            android:textSize="17sp" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="62dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <TextView
+                    android:id="@+id/login_to_yo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="top"
+                    android:text="Add Timings"
+                    android:textAppearance="@style/login_to_yo" />
+
+                <TextView
+                    android:id="@+id/good_to_see"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="This information will help your customers to reach you in their nearby area."
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Weekdays"
+                    android:textAllCaps="true"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="70">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_monday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="M"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_tuesday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="T"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_wednesday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="w"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_thursday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="t"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_friday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="f"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_saturday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="s"
+                            android:textAllCaps="true"
+                            android:textColor="#979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/txt_sunday"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/weekdays"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="s"
+                            android:textAllCaps="true"
+                            android:textColor="@color/clr_979592"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center_vertical"
+                        android:text="Select Services"
+                        android:textColor="#666666"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/spinner_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_rect_spinner"
+                        android:fontFamily="@font/roboto_regular"
+                        android:overlapAnchor="false"
+                        android:padding="10dp"
+                        android:text="Select Services"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_vertical"
+                    android:text="Restaurant Timings"
+                    android:textColor="#666666"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="45"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_add_select_from_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/bg_rect_spinner"
+                            android:fontFamily="@font/roboto_regular"
+                            android:hint="Select"
+                            android:padding="@dimen/ten_dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center"
+                        android:text="To"
+                        android:textSize="12sp" />
+
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="45"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_add_select_to_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/bg_rect_spinner"
+                            android:fontFamily="@font/roboto_regular"
+                            android:hint="Select"
+                            android:padding="@dimen/ten_dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="25dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_add"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_box_doctor"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Add"
+                        android:textAllCaps="false"
+                        android:textColor="#F8F8F8"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rclr_timing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:clipToPadding="false" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+</layout>

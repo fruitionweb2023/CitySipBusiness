@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/four_dp_corner_box_green"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/four_dp_orange_background"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_dish_logo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/food_dish_white_icon" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:orientation="horizontal"
+                        android:padding="6dp"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/txt_cuisines"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="50"
+                            android:background="@drawable/four_dp_corner_box_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="8dp"
+                            android:text="Cuisines"
+                            android:textColor="#505463" />
+
+                        <TextView
+                            android:id="@+id/txt_dish_type"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:background="@drawable/four_dp_corner_box_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="8dp"
+                            android:text="Dish Type"
+                            android:textColor="#505463" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/txt_veg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/ten_dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/four_dp_corner_box_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center"
+                            android:text="Veg"
+                            android:textColor="#505463"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txt_non_veg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/ten_dp"
+                            android:layout_weight="40"
+                            android:background="@drawable/four_dp_corner_box_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center"
+                            android:text="NonVeg"
+                            android:textColor="#505463"
+                            android:textSize="10sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_dish_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:fontFamily="@font/roboto_black"
+                    android:gravity="center_vertical"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:padding="6dp"
+                    android:textColor="#124A00"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:weightSum="100">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="@string/Rs"
+                            android:textColor="#505463"
+                            android:textSize="19sp" />
+
+
+                        <TextView
+                            android:id="@+id/txt_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="35"
+                            android:background="@null"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center_vertical"
+                            android:textColor="#505463"
+                            android:textSize="19sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="60"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="50"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center_vertical"
+                                android:text="Max Dish Limits"
+                                android:textColor="#505463"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/txt_dish_limit"
+                                android:layout_width="0dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="8dp"
+                                android:layout_weight="50"
+                                android:background="@drawable/four_dp_corner_box_grey"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center"
+                                android:textColor="#505463"
+                                android:textSize="12sp"
+
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Descrisption"
+                            android:textColor="#505463"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/edt_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:background="@drawable/two_dp_corner_box_grey"
+                            android:maxLines="2"
+                            android:padding="5dp"
+                            android:textAlignment="gravity"
+                            android:textColor="#7E808C"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

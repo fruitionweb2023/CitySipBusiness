@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Restaurent.MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <include
+                android:id="@+id/bottomnavigation"
+                layout="@layout/new_bottom_navigation" />
+        </RelativeLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="52dp"
+            android:fillViewport="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/login_to_yo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="top"
+                        android:text="Dashboard"
+                        android:textAppearance="@style/login_to_yo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="100"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:layout_marginEnd="8dp">
+
+                            <TextView
+                                android:id="@+id/txt_order_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="  View \n Orders"
+                                android:background="@drawable/deshboard_border"
+                                android:gravity="center"
+                                android:textStyle="normal"
+                                android:textColor="@color/clr_f54748"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:layout_marginStart="8dp">
+
+                            <TextView
+                                android:id="@+id/txt_customer_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="View \n Customers"
+                                android:background="@drawable/deshboard_border"
+                                android:gravity="center"
+                                android:textStyle="normal"
+                                android:textColor="@color/clr_666666"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="100"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:padding="18dp"
+                        android:background="@drawable/dashboard_revenue_border"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="This Month Revenue"
+                                android:textStyle="normal"
+                                android:textColor="@color/clr_111111"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50">
+
+                            <TextView
+                                android:id="@+id/txt_revenue_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="₹180000"
+                                android:gravity="end"
+                                android:textStyle="normal"
+                                android:textColor="@color/clr_f54748"
+                                android:textSize="28sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="25dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="152dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Listing"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/clr_aaaaaa"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="152dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+                                    <LinearLayout
+                                        android:layout_width="72dp"
+                                        android:layout_height="72dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/home_screen_box"
+                                        android:orientation="vertical"
+                                        android:padding="8dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:gravity="center"
+                                            android:text="Active"
+                                            android:textColor="@color/clr_888888"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:id="@+id/txt_active_menu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:textColor="@color/clr_f54748"
+                                            android:textSize="28sp" />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="72dp"
+                                        android:layout_height="72dp"
+                                        android:layout_marginStart="4dp"
+                                        android:background="@drawable/home_screen_box"
+                                        android:orientation="vertical"
+                                        android:padding="8dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:gravity="center"
+                                            android:text="Inactive"
+                                            android:textColor="@color/clr_888888"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:id="@+id/txt_in_active_menu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:textColor="@color/clr_333333"
+                                            android:textSize="28sp" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="152dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Offers"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/clr_aaaaaa"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="152dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:layout_marginTop="16dp"
+                                    android:gravity="center_vertical|end"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+                                    <LinearLayout
+                                        android:layout_width="72dp"
+                                        android:layout_height="72dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:background="@drawable/home_screen_box"
+                                        android:orientation="vertical"
+                                        android:padding="8dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:gravity="center"
+                                            android:text="Active"
+                                            android:textColor="@color/clr_888888"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:id="@+id/txt_active_offer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:textColor="@color/clr_f54748"
+                                            android:textSize="28sp" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="72dp"
+                                        android:layout_height="72dp"
+                                        android:layout_marginStart="4dp"
+                                        android:background="@drawable/home_screen_box"
+                                        android:orientation="vertical"
+                                        android:padding="8dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_regular"
+                                            android:gravity="center"
+                                            android:text="Inactive"
+                                            android:textColor="@color/clr_888888"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:id="@+id/txt_in_active_offer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:textColor="@color/clr_333333"
+                                            android:textSize="28sp" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:weightSum="100">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="50"
+                                android:fontFamily="@font/roboto_bold"
+                                android:gravity="center_vertical"
+                                android:text="Revenue"
+                                android:textAllCaps="true"
+                                android:textColor="@color/clr_aaaaaa"
+                                android:textSize="14sp" />
+
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:layout_weight="50"
+                                android:background="@drawable/bg_rect_spinner_without_line"
+                                android:fontFamily="@font/source_sans_pro_regular"
+                                android:text="Last 6 months"
+                                android:textColor="#4D4F5C"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp">
+
+                        <WebView
+                            android:id="@+id/web_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+</layout>

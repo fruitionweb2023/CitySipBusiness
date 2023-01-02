@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
+
+        <shape android:shape="rectangle">
+
+            <size
+                android:width="150dp"
+                android:height="25dp" />
+            <!--<solid android:color="@color/purple_500" />-->
+
+        </shape>
+    </item>
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+
+        </shape>
+
+    </item>
+
+    <!--<item-->
+    <!--android:drawable="@drawable/menu_down_icon"-->
+    <!--android:gravity="center_vertical|right"-->
+    <!--android:right="0dp" />-->
+
+    <item>
+
+        <bitmap
+            android:gravity="center_vertical|right"
+            android:src="@drawable/drop_down" />
+    </item>
+
+</layer-list>
+
+
+

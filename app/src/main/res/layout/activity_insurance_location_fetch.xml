@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Doctor.DoctorLocationFetchActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_insurance" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/login_to_yo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="top"
+                        android:text="@string/select_loca"
+                        android:textAppearance="@style/login_to_yo" />
+
+                    <TextView
+                        android:id="@+id/good_to_see"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="@string/this_inform"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="30dp">
+
+
+                        <LinearLayout
+                            android:id="@+id/ii_auto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:visibility="gone">
+
+                            <fragment
+                                android:id="@+id/autocomplete_fragment"
+                                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <fragment
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/ii_auto" />
+
+                        <RelativeLayout
+                            android:layout_width="76dp"
+                            android:layout_height="76dp"
+                            android:layout_centerInParent="true">
+
+                            <ImageView
+                                android:layout_width="76dp"
+                                android:layout_height="76dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:alpha="0.25"
+                                android:src="@drawable/ic_marker_doctor" />
+
+                            <ImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_marker_dot_doctor" />
+
+                            <LinearLayout
+                                android:id="@+id/ll_progress_bar"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#CBFDFCFC"
+                                android:gravity="center"
+                                android:visibility="invisible">
+
+                                <ProgressBar
+                                    android:id="@+id/progressBar_cyclic"
+                                    style="?android:attr/progressBarStyle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:indeterminateDrawable="@drawable/progress_icon"
+                                    android:minWidth="50dp"
+                                    android:minHeight="50dp" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_confirm_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        android:weightSum="100"
+                        android:layout_marginTop="30dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="SELECT YOUR OFFICE LOCATION"
+                                android:textColor="#7E808C"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="10dp">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="20"
+                                android:gravity="center"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_map_pin_blue" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="80"
+                                android:gravity="center_vertical">
+
+
+                                <TextView
+                                    android:id="@+id/dragResult"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:gravity="center_vertical"
+                                    android:textColor="#605D5D"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <!--<LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="20"
+                                android:gravity="center">
+
+
+                                <TextView
+                                    android:id="@+id/txt_change"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="25dp"
+                                    android:background="@drawable/four_dp_corner_box_light_grey"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:gravity="center"
+                                    android:paddingStart="10dp"
+                                    android:paddingTop="5dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="5dp"
+                                    android:text="CHANGE"
+                                    android:textColor="#E75B53"
+                                    android:textSize="10sp" />
+
+                            </LinearLayout>-->
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible"
+                            android:layout_marginTop="10dp">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edt_rest_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:hint="Office Name / Building Name / Complex Name"
+                                    android:textSize="14sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/edt_street"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/white"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:hint="Road / Area (Optional)"
+                                    android:textSize="14sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp">
+
+
+                            <!-- <androidx.appcompat.widget.AppCompatButton
+                                 android:id="@+id/btn_verify"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="50dp"
+                                 android:layout_gravity="center"
+                                 android:background="@drawable/login_button_background"
+                                 android:clickable="true"
+                                 android:focusable="true"
+                                 android:fontFamily="@font/sf_pro_display_medium"
+                                 android:text="Confirm Address"
+                                 android:textAllCaps="false"
+                                 android:textColor="@color/white"
+                                 android:textSize="22sp"
+                                 android:visibility="visible" />-->
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btn_verify"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:background="@drawable/button_insurance"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Launch Business"
+                                android:textAllCaps="false"
+                                android:textColor="#F8F8F8"
+                                android:textSize="17sp" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/btn_send"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/login_button_background"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:fontFamily="@font/sf_pro_display_medium"
+                                android:text="submit"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+</layout>

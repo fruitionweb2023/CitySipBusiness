@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0D081F"
+            android:padding="5dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            android:elevation="0dp">
+
+            <!--<ImageView
+                android:id="@+id/logo_jpg"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/txttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:singleLine="true"
+                android:layout_marginRight="70dp"
+                android:textColor="#000000"
+                android:paddingLeft="10dp"
+                android:textSize="18dp"
+                android:textStyle="bold" />-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/ten_dp">
+
+                <ImageView
+                    android:id="@+id/toolbar_menu"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_menu"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/toolbar_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_back"
+                    android:visibility="gone"
+                    app:tint="@color/white"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/toolbar_logo"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/city_sip_logo_white"/>
+
+                    <!--<TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/toolbar_logo"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:singleLine="true"
+                        android:text="Restaurant"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="13dp"
+                        android:textStyle="bold"
+                        android:transitionName="title" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/toolbar_notification"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_notification"
+                        android:visibility="visible"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/toolbar_txt_number"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/eight_dp_corner_box_one_dp_thik"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto_bold"
+                        android:padding="3dp"
+                        android:layout_alignEnd="@id/toolbar_notification"
+                        android:layout_alignParentEnd="true"
+                        android:visibility="gone"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+</layout>

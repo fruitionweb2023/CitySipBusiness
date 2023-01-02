@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLayout"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        android:padding="5dp"
+        app:cardCornerRadius="@dimen/ten_dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                app:controller_layout_id="@layout/custom_controls"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:resize_mode="fixed_width"
+                app:show_buffering="when_playing">
+
+            </com.google.android.exoplayer2.ui.PlayerView>
+
+            <ImageView
+                android:id="@+id/img_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_non_select"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+            <!--<VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center" />-->
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

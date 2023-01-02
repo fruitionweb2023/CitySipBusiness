@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".Activities.IntroLoginActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_verify"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/login_button_background"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:text="Continue"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/txt_set_up_later"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Set Up Later"
+                android:textColor="#FF3D00"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="135dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="80"
+                        android:drawablePadding="11dp"
+                        android:fontFamily="@font/roboto_black"
+                        android:gravity="center_vertical"
+                        android:text="Set Up Video"
+                        android:textColor="@color/login_title_text"
+                        android:textSize="37sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/vertical_line" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="20"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_add"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/four_dp_corner_box"
+                            android:backgroundTint="#124A00"
+                            android:padding="@dimen/ten_dp"
+                            android:src="@drawable/ic_plus" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rclr_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:clipToPadding="false"
+                    />
+
+                &lt;!&ndash;<VideoView
+                    android:id="@+id/vv"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"/>&ndash;&gt;
+
+
+                &lt;!&ndash;<Button
+                    android:id="@+id/btnTrimVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="Trim Video" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Click button to trim video" />&ndash;&gt;
+
+                &lt;!&ndash;<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:orientation="vertical"
+                        android:weightSum="100"
+                        android:background="@drawable/four_dp_corner_box_green">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_weight="40"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="20"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_image"
+                                    android:layout_width="72dp"
+                                    android:layout_height="72dp"
+                                    android:background="@drawable/four_dp_orange_background"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_gravity="center">
+
+                                    <ImageView
+                                        android:id="@+id/img_dish_logo"
+                                        android:layout_width="70dp"
+                                        android:layout_height="70dp"
+                                        android:layout_gravity="center_horizontal"
+                                        android:src="@drawable/add_image"
+
+                                        />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="80"
+                                android:orientation="vertical"
+                                android:weightSum="100">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="50"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100"
+                                    >
+
+                                    <EditText
+                                        android:id="@+id/edt_dish_name"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="90"
+                                        android:layout_height="match_parent"
+                                        android:background="@null"
+                                        android:fontFamily="@font/roboto_black"
+                                        android:hint="Dish Name"
+                                        android:padding="6dp"
+                                        android:textColor="#124A00"
+                                        android:textSize="15sp" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="10"
+                                        android:gravity="center"
+                                        >
+                                        <ImageView
+                                            android:id="@+id/img_close"
+                                            android:layout_width="24dp"
+                                            android:layout_height="24dp"
+                                            android:src="@drawable/ic_cross_draw"
+                                            android:layout_gravity="center"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="50"
+                                    android:orientation="horizontal"
+                                    android:padding="6dp"
+                                    android:weightSum="100">
+
+                                    <TextView
+                                        android:id="@+id/txt_cuisines"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_weight="50"
+                                        android:background="@drawable/four_dp_corner_box_grey"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:padding="8dp"
+                                        android:text="Cuisines"
+                                        android:textColor="#505463"
+                                        app:drawableEndCompat="@drawable/drop_down" />
+
+                                    <TextView
+                                        android:id="@+id/txt_dish_type"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="50"
+                                        android:background="@drawable/four_dp_corner_box_grey"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:padding="8dp"
+                                        android:text="Dish Type"
+                                        android:textColor="#505463"
+                                        app:drawableEndCompat="@drawable/drop_down" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="60"
+                            android:orientation="horizontal"
+                            android:padding="8dp"
+                            android:weightSum="100">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="20"
+                                android:orientation="vertical"
+                                android:weightSum="100">
+
+                                <TextView
+                                    android:id="@+id/txt_veg"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_margin="@dimen/ten_dp"
+                                    android:layout_weight="40"
+                                    android:background="@drawable/four_dp_corner_box_grey"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:gravity="center"
+                                    android:text="Veg"
+                                    android:textColor="#505463"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/txt_non_veg"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_margin="@dimen/ten_dp"
+                                    android:layout_weight="40"
+                                    android:background="@drawable/four_dp_corner_box_grey"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:gravity="center"
+                                    android:text="NonVeg"
+                                    android:textColor="#505463"
+                                    android:textSize="10sp" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="80"
+                                android:orientation="vertical"
+                                android:weightSum="100">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="40"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="5"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:text="@string/Rs"
+                                        android:textColor="#505463"
+                                        android:textSize="19sp" />
+
+
+                                    <EditText
+                                        android:id="@+id/edt_price"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="35"
+                                        android:background="@null"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:text="00"
+                                        android:textColor="#505463"
+                                        android:textSize="19sp" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="60"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center_vertical"
+                                            android:text="Max Dish Limits"
+                                            android:textColor="#505463"
+                                            android:textSize="12sp" />
+
+                                        <EditText
+                                            android:id="@+id/edt_dish_limit"
+                                            android:layout_width="50dp"
+                                            android:layout_height="28dp"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="8dp"
+                                            android:background="@drawable/four_dp_corner_box_grey"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:hint="Enter"
+                                            android:textColor="#505463"
+                                            android:textSize="12sp"
+                                            />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="60"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="Descrisption"
+                                        android:textColor="#505463"
+                                        android:textSize="12sp" />
+
+
+                                    <EditText
+                                        android:id="@+id/edt_description"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="3dp"
+                                        android:background="@drawable/two_dp_corner_box_grey"
+                                        android:text="130 character"
+                                        android:textColor="#7E808C"
+                                        android:textSize="10sp"
+                                        android:maxLines="2"
+                                        android:padding="5dp"
+                                        android:textAlignment="gravity"
+                                        />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+
+                        &lt;!&ndash;<androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_submit"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/login_button_background"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/sf_pro_display_medium"
+                            android:text="Submit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="22sp" />&ndash;&gt;
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>&ndash;&gt;
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Restaurent.MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="24dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_button_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:text="Update"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:elevation="0dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"/>-->
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify"
+                    android:layout_width="328dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_disable"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="#979592"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_set_up_later"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center_horizontal"
+                    android:text="@string/Skip"
+                    android:textColor="#F54748"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:visibility="gone"/>
+
+                <!-- <include
+                    android:id="@+id/bottomnavigation"
+                    layout="@layout/new_bottom_navigation" />-->
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <LinearLayout
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--  <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/roboto_black"
+                        android:gravity="center"
+                        android:text="Video"
+                        android:textColor="@color/white"
+                        android:textSize="37sp"
+                        android:textStyle="bold" />-->
+
+                    <!-- <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/twenty_dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_add"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/four_dp_corner_box"
+                            android:backgroundTint="#124A00"
+                            android:padding="@dimen/ten_dp"
+                            android:src="@drawable/ic_plus" />
+                    </LinearLayout>-->
+                   <!-- <TextView
+                        android:id="@+id/login_to_yo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/videos"
+                        android:textAppearance="@style/login_to_yo" />-->
+
+                    <LinearLayout
+                        android:id="@+id/top_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="90">
+
+                            <TextView
+                                android:id="@+id/login_to_yo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/videos"
+                                android:textAppearance="@style/login_to_yo" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:gravity="center"
+                            android:layout_gravity="center_vertical">
+
+                            <ImageView
+                                android:id="@+id/img_delete"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_delete_outline_24px" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/good_to_see"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/top_layout"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="@string/upload_imag"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitle"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rclr_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:clipToPadding="false"
+                    android:padding="@dimen/ten_dp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>

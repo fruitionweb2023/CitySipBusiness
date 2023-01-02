@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <include
+                android:id="@+id/bottomnavigation"
+                layout="@layout/new_bottom_navigation" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="52dp"
+            android:layout_below="@id/toolbar">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <TextView
+                    android:id="@+id/menu_txt_dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="top"
+                    android:text="Business Profile"
+                    android:textAppearance="@style/login_to_yo" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="25dp"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="About Restaurant"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/cle_eeeeee"
+                        android:layout_marginTop="15dp"
+                        />
+                </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_image_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Media Library Image"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_video_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Media Library Video"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_rest_hour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Restaurant Hours"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_invoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Customer Order"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_chat_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Chat Room"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Customers"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Help Center"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/menu_txt_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Settings"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:translationY="-1.8sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cle_eeeeee"
+                    android:layout_marginTop="15dp"
+                    />
+
+            </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_logout"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="@color/clr_f54748"
+                    android:textSize="17sp" />
+
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_dashboard"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_dashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Dashboard"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_dashboard" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_invoice"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Invoices"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_invoices" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_customer"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_customer"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Customers"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_customers" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_chat_room"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_chat_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Chat Room"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_chat_room" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_payment"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Payments"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_payment" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/menu_view_divider_color" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_menu_list"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_menu_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Restaurant Menu List"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_products" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_offer_list"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_offer_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Restaurant Offer List"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_products" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_image_list"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_image_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Restaurant Image List"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_products" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_video_list"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_video_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Restaurant Video List"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_products"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_hours"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_hours"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Restaurant Hours"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_calendar" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp">
+
+                    <View
+                        android:id="@+id/menu_view_logout"
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/menu_view_divider_color"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/menu_txt_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dp"
+                        android:drawablePadding="@dimen/twenty_dp"
+                        android:fontFamily="@font/source_sans_pro_regular"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/twenty_dp"
+                        android:paddingEnd="@dimen/twenty_dp"
+                        android:text="Logout"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_icon_setting" />
+
+
+                </LinearLayout>-->
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+
+</layout>

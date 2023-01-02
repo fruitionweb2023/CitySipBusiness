@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.Doctor.DoctorBusinessProfileActivity">
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_doctor"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <include
+                android:id="@+id/bottomnavigation"
+                layout="@layout/new_bottom_navigation" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="52dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <TextView
+                    android:id="@+id/menu_txt_dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="top"
+                    android:text="Business Profile"
+                    android:textAppearance="@style/login_to_yo" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@color/cle_eeeeee" />
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="About Business"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_image_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Media Library Image"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_video_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Media Library Video"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Business Hours"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/menu_txt_doc_appoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_business_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Appontment Timeslot"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/txt_appointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Appointment"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/menu_txt_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Chat Room"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_chat_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Payments"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+
+                        android:text="Customers"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Help Center"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_txt_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Settings"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/cle_eeeeee" />
+
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_logout"
+                    android:backgroundTint="@color/clr_0059C8"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="@color/clr_0059C8"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</layout>
