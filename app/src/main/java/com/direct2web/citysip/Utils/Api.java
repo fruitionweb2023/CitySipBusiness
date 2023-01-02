@@ -84,8 +84,8 @@ import retrofit2.http.Part;
 public interface Api {
 
     //String url = "http://direct2web.in/app_demo/kabir_fresh/ws/";
-    String imageUrl = "http://www.direct2web.in/city_slip/";
-    String url = "http://www.direct2web.in/city_slip/api-firebase/";
+    String imageUrl = "http://medicaiditpark.com/city_slip/";
+    String url = "http://medicaiditpark.com/city_slip/api-firebase/";
 
     @POST("restaurant/business_side/fcm_token.php")
     @FormUrlEncoded
