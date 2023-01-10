@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activities.SpaAndSalon.SpaAndSalonAddImageActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_doctor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!--  <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/login_button_background"
+                    android:clickable="true"
+                    android:elevation="0dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:text="Update"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_verify"
+                    android:layout_width="328dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_spa_salon"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="74dp"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <LinearLayout
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!--<TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/roboto_black"
+                        android:gravity="center"
+                        android:text="Images"
+                        android:textColor="@color/white"
+                        android:textSize="37sp"
+                        android:textStyle="bold" />-->
+
+                    <LinearLayout
+                        android:id="@+id/top_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="90">
+
+                            <TextView
+                                android:id="@+id/login_to_yo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Add Images"
+                                android:textAppearance="@style/login_to_yo" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="10"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/img_delete"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_delete_outline_24px" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/good_to_see"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/top_layout"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="top"
+                        android:lineSpacingExtra="4sp"
+                        android:text="@string/upload_img_doctor"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:translationY="-1.8sp" />
+
+                    <!-- <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/twenty_dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_add"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/four_dp_corner_box"
+                            android:backgroundTint="#124A00"
+                            android:padding="@dimen/ten_dp"
+                            android:src="@drawable/ic_plus" />
+                    </LinearLayout>-->
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtTitle"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rclr_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

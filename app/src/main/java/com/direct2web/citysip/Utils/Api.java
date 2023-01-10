@@ -66,6 +66,24 @@ import com.direct2web.citysip.Model.RestaurentModels.Timming.ResponseSendTiming;
 import com.direct2web.citysip.Model.RestaurentModels.aboutrestaurant.AboutResturant;
 import com.direct2web.citysip.Model.RestaurentModels.offer.ResponseAddOffer;
 import com.direct2web.citysip.Model.RestaurentModels.offer.ResponseOfferList;
+import com.direct2web.citysip.Model.SpaAndSalon.AboutYou.ResponseSpaAndSalonAboutYou;
+import com.direct2web.citysip.Model.SpaAndSalon.Appointment.ResponseSpaAndSalonAppointment;
+import com.direct2web.citysip.Model.SpaAndSalon.BusinessDetails.ResponseSpaAndSalonBusinessDetails;
+import com.direct2web.citysip.Model.SpaAndSalon.CouponsOffer.ResponseEditOffer;
+import com.direct2web.citysip.Model.SpaAndSalon.CouponsOffer.ResponseSpaAndSalonAddCoupons;
+import com.direct2web.citysip.Model.SpaAndSalon.CouponsOffer.ResponseSpaAndSalonCoupons;
+import com.direct2web.citysip.Model.SpaAndSalon.DashBoard.ResponseSpaAndSalonDeshboard;
+import com.direct2web.citysip.Model.SpaAndSalon.DeleteData.ResponseSpaAndSalonDelete;
+import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.ResponseSpaAndSalonAddImage;
+import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.ResponseSpaAndSalonAddImageAndVedio;
+import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.ResponseSpaAndSalonAddVedio;
+import com.direct2web.citysip.Model.SpaAndSalon.SaveProfile.ResponseSpaAndSalonSaveProfile;
+import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseEditService;
+import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseSpaAndSalonAddService;
+import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseSpaAndSalonServices;
+import com.direct2web.citysip.Model.SpaAndSalon.Staff.ResponseAddStaff;
+import com.direct2web.citysip.Model.SpaAndSalon.Staff.ResponseEditStaff;
+import com.direct2web.citysip.Model.SpaAndSalon.Staff.ResponseStaffList;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -175,7 +193,7 @@ public interface Api {
                                       @Field("business_id") String id);
 
     //get-busigness details
-    @POST("restaurant/business_side/get-business-detail.php")
+    @POST("restaurant/business_side/get-business-details.php")
     @FormUrlEncoded
     Call<AboutResturant> getBusignessDetails(@Header("Authorization") String authHeader,
                                              @Field("accesskey") String accesskey,
@@ -250,7 +268,7 @@ public interface Api {
                                                   @Field("business_id") String business_id,
                                                   @Field("request") String request);
 
-    @POST("restaurant/business_side/get-business-detail.php")
+    @POST("restaurant/business_side/get-business-details.php")
     @FormUrlEncoded
     Call<ResponseBusinessDetails> getBusinessDetails(@Header("Authorization") String authHeader,
                                                      @Field("accesskey") String accesskey,
@@ -421,7 +439,7 @@ public interface Api {
                                                                     @Field("business_id") String business_id);
 
 
-    @POST("doctor/business_side/get-business-detail.php")
+    @POST("doctor/business_side/get-business-details.php")
     @FormUrlEncoded
     Call<ResponseDoctorBusinessDetails> getDoctorBusinessDetails(@Header("Authorization") String authHeader,
                                                                  @Field("accesskey") String accesskey,
@@ -556,7 +574,7 @@ public interface Api {
                                                                     @Field("business_id") String business_id);
 
 
-    @POST("lawyer/business_side/get-business-detail.php")
+    @POST("lawyer/business_side/get-business-details.php")
     @FormUrlEncoded
     Call<ResponseLawyerBusinessDetails> getLawyerBusinessDetails(@Header("Authorization") String authHeader,
                                                                  @Field("accesskey") String accesskey,
@@ -666,7 +684,7 @@ public interface Api {
                                                         @Field("accesskey") String accesskey,
                                                         @Field("business_id") String business_id);
 
-    @POST("insurance/business_side/get-business-detail.php")
+    @POST("insurance/business_side/get-business-details.php")
     @FormUrlEncoded
     Call<ResponseInsuranceBusinessDetails> getInsuranceBusinessDetails(@Header("Authorization") String authHeader,
                                                                        @Field("accesskey") String accesskey,
@@ -847,6 +865,199 @@ public interface Api {
     Call<JsonObject> setToken(@Field("token") String token,
                               @Field("uid") String uid,
                               @Field("device_id") String device_id);*/
+
+
+//===========================SPA AND SALON APP API========================================
+
+
+    @POST("spa_salon/business_side/about_you.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonAboutYou> sendSpaAndSalonAboutDetails(@Header("Authorization") String authHeader,
+                                                       @Field("accesskey") String accesskey,
+                                                       @Field("user_id") String user_id,
+                                                       @Field("name") String name,
+                                                       @Field("mobile") String mobile,
+                                                       @Field("d_o_b") String d_o_b,
+                                                       @Field("nationality") String nationality);
+
+
+    @POST("spa_salon/business_side/save_profile.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonSaveProfile> sendSpaAndSalonSaveProfile(@Header("Authorization") String authHeader,
+                                                         @Field("accesskey") String accesskey,
+                                                         @Field("user_id") String user_id,
+                                                         @Field("address_line_1") String address_line_1,
+                                                         @Field("address_line_2") String address_line_2,
+                                                         @Field("city_id") String city_id,
+                                                         @Field("email_id") String email_id,
+                                                         @Field("business_name") String business_name,
+                                                         @Field("phone_no") String phone_no,
+                                                         @Field("website") String website,
+                                                         @Field("description") String description,
+                                                         @Field("latitude") String latitude,
+                                                         @Field("longitude") String longitude,
+                                                         @Field("password") String password);
+
+
+    @POST("spa_salon/business_side/dashboard.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonDeshboard> getSpaAndSalonDeshboardDetails(@Header("Authorization") String authHeader,
+                                                                      @Field("accesskey") String accesskey,
+                                                                      @Field("business_id") String business_id);
+
+
+    @POST("spa_salon/business_side/get-order.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonAppointment> getSpaAndSalonOrder(@Header("Authorization") String authHeader,
+                                                             @Field("accesskey") String accesskey,
+                                                             @Field("business_id") String business_id);
+
+
+    @POST("spa_salon/business_side/service_list.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonServices> getSpaAndSalonServices(@Header("Authorization") String authHeader,
+                                                             @Field("accesskey") String accesskey,
+                                                             @Field("business_id") String business_id);
+
+    @Multipart
+    @POST("spa_salon/business_side/add_services.php")
+    Call<ResponseSpaAndSalonAddService> sendSpaAndSalonService(@Header("Authorization") String authorization,
+                                                               @Part("accesskey") RequestBody accesskey,
+                                                               @Part("business_id") RequestBody business_id,
+                                                               @Part("doctor_name") RequestBody doctor_name,
+                                                               @Part("service_name") RequestBody service_name,
+                                                               @Part("amount") RequestBody amount,
+                                                               @Part("description") RequestBody description,
+                                                               @Part("offer") RequestBody offer,
+                                                               @Part MultipartBody.Part image);
+
+
+    @POST("spa_salon/business_side/offer-list.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonCoupons> getSpaAndSalonCouponsList(@Header("Authorization") String authHeader,
+                                                               @Field("accesskey") String accesskey,
+                                                               @Field("business_id") String business_id);
+
+
+    @POST("spa_salon/business_side/add-offer.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonAddCoupons> sendSpaAndSalonCouponsDetails(@Header("Authorization") String authHeader,
+                                                                      @Field("accesskey") String accesskey,
+                                                                      @Field("business_id") String business_id,
+                                                                      @Field("coupn_code") String coupn_code,
+                                                                      @Field("min_amount") String min_amount,
+                                                                      @Field("max_amount") String max_amount,
+                                                                      @Field("terms_condition") String terms_condition,
+                                                                      @Field("percentage") String percentage);
+
+
+    @Multipart
+    @POST("spa_salon/business_side/add-image.php")
+    Call<ResponseSpaAndSalonAddImage> sendSpaAndSalonImage(@Header("Authorization") String authorization,
+                                                           @Part("accesskey") RequestBody accesskey,
+                                                           @Part("business_id") RequestBody s1,
+                                                           @Part MultipartBody.Part[] s12);
+
+
+    @Multipart
+    @POST("spa_salon/business_side/add-video.php")
+    Call<ResponseSpaAndSalonAddVedio> sendSpaAndSalonVedio(@Header("Authorization") String authorization,
+                                                           @Part("accesskey") RequestBody accesskey,
+                                                           @Part("business_id") RequestBody s1,
+                                                           @Part MultipartBody.Part[] s12);
+
+
+    @POST("spa_salon/business_side/media-list.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonAddImageAndVedio> getSpaAndSalonImageAndVedioList(@Header("Authorization") String authHeader,
+                                                                              @Field("accesskey") String accesskey,
+                                                                              @Field("business_id") String business_id);
+
+
+    @POST("spa_salon/business_side/get-business-details.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonBusinessDetails> getSpaAndSalonBusinessDetails(@Header("Authorization") String authHeader,
+                                                                           @Field("accesskey") String accesskey,
+                                                                           @Field("business_id") String business_id);
+
+
+    @POST("spa_salon/business_side/delete_data.php")
+    @FormUrlEncoded
+    Call<ResponseSpaAndSalonDelete> sendSpaAndSalonDeleteData(@Header("Authorization") String authHeader,
+                                                              @Field("accesskey") String accesskey,
+                                                              @Field("business_id") String business_id,
+                                                              @Field("type") String type,
+                                                              @Field("id") String id);
+
+    @POST("spa_salon/business_side/manage_status.php")
+    @FormUrlEncoded
+    Call<ResponseStatus> sendSpaAndSalonStatus(@Header("Authorization") String authHeader,
+                                          @Field("accesskey") String accesskey,
+                                          @Field("business_id") String business_id,
+                                          @Field("type") String type,
+                                          @Field("id") String id,
+                                          @Field("status") String status);
+
+    @POST("spa_salon/business_side/get-customer.php")
+    @FormUrlEncoded
+    Call<ResponseCustomerList> getSpaAndSalonCustomerList(@Header("Authorization") String authHeader,
+                                                     @Field("accesskey") String accesskey,
+                                                     @Field("business_id") String business_id);
+
+    //-----------------------------New Api----------------------------------
+
+    @POST("spa_salon/business_side/staff_list.php")
+    @FormUrlEncoded
+    Call<ResponseStaffList> getSpaAndSalonStaffList(@Header("Authorization") String authHeader,
+                                                    @Field("accesskey") String accesskey,
+                                                    @Field("business_id") String business_id);
+
+    @Multipart
+    @POST("spa_salon/business_side/add_staff.php")
+    Call<ResponseAddStaff> sendSpaAndSalonStaff(@Header("Authorization") String authorization,
+                                                @Part("accesskey") RequestBody accesskey,
+                                                @Part("business_id") RequestBody business_id,
+                                                @Part("staff_name") RequestBody staff_name,
+                                                @Part("about") RequestBody about,
+                                                @Part("time_from") RequestBody time_from,
+                                                @Part("time_to") RequestBody time_to,
+                                                @Part MultipartBody.Part image);
+    @Multipart
+    @POST("spa_salon/business_side/edit_staff.php")
+    Call<ResponseEditStaff> editSpaAndSalonStaff(@Header("Authorization") String authorization,
+                                                 @Part("accesskey") RequestBody accesskey,
+                                                 @Part("business_id") RequestBody business_id,
+                                                 @Part("staff_name") RequestBody staff_name,
+                                                 @Part("about") RequestBody about,
+                                                 @Part("time_from") RequestBody time_from,
+                                                 @Part("time_to") RequestBody time_to,
+                                                 @Part("id") RequestBody id,
+                                                 @Part MultipartBody.Part image);
+
+    @Multipart
+    @POST("spa_salon/business_side/edit_services.php")
+    Call<ResponseEditService> editSpaAndSalonService(@Header("Authorization") String authorization,
+                                                     @Part("accesskey") RequestBody accesskey,
+                                                     @Part("business_id") RequestBody business_id,
+                                                     @Part("doctor_name") RequestBody doctor_name,
+                                                     @Part("service_name") RequestBody service_name,
+                                                     @Part("amount") RequestBody amount,
+                                                     @Part("description") RequestBody description,
+                                                     @Part("offer") RequestBody offer,
+                                                     @Part("id") RequestBody id,
+                                                     @Part MultipartBody.Part image);
+
+    @POST("spa_salon/business_side/edit_offer.php")
+    @FormUrlEncoded
+    Call<ResponseEditOffer> editSpaAndSalonCouponsDetails(@Header("Authorization") String authHeader,
+                                                          @Field("accesskey") String accesskey,
+                                                          @Field("business_id") String business_id,
+                                                          @Field("coupn_code") String coupn_code,
+                                                          @Field("min_amount") String min_amount,
+                                                          @Field("max_amount") String max_amount,
+                                                          @Field("terms_condition") String terms_condition,
+                                                          @Field("percentage") String percentage,
+                                                          @Field("id") String id);
 
 
 }

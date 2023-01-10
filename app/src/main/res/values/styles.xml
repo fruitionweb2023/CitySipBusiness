@@ -45,7 +45,7 @@
 
     </style>
 
-    <style name="title">
+<style name="title">
 
         <item name="android:textSize">
             12sp

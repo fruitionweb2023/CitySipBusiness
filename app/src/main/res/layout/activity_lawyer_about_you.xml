@@ -120,6 +120,7 @@
                     android:paddingStart="10dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
+                    android:editable="false"
                     android:paddingBottom="20dp"
                     android:singleLine="true"
                     android:textColor="#333333"

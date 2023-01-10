@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout android:id="@+id/rl_main"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:padding="5dp"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/btn_addItem"
+    android:layout_width="98dp"
+    android:layout_height="98dp"
+    app:srcCompat="@drawable/add_image_spa_salon"
+    android:scaleType="fitXY"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+    />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:drawableTop="@drawable/ic_add_spa_salon"
+    android:fontFamily="@font/roboto_regular"
+    android:text="Add New"
+    android:textColor="@color/clr_spa_salon"
+    android:textSize="12sp"
+    android:drawablePadding="10dp"/>
+
+</RelativeLayout>
+

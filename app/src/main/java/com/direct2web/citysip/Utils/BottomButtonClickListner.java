@@ -21,6 +21,11 @@ import com.direct2web.citysip.Activities.Restaurent.MainActivity;
 import com.direct2web.citysip.Activities.Restaurent.MenuActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpCouponsActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpMenuActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SapAndSalonDeshboardActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAppointmentActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessProfileActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonCouponsActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonServicesActivity;
 import com.direct2web.citysip.R;
 
 
@@ -57,6 +62,9 @@ public class BottomButtonClickListner implements View.OnClickListener {
                 case "3":
                     context.startActivity(new Intent(context, InsuranceDashboardActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     break;
+                case "2":
+                    context.startActivity(new Intent(context, SapAndSalonDeshboardActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
             }
 
         } else if (id == R.id.bb_my_business) {
@@ -75,6 +83,10 @@ public class BottomButtonClickListner implements View.OnClickListener {
 //                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                     context.startActivity(new Intent(context, InsuranceServicesActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     break;
+                case "2":
+//                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, SpaAndSalonServicesActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
             }
 
         } else if (id == R.id.bb_order) {
@@ -85,6 +97,9 @@ public class BottomButtonClickListner implements View.OnClickListener {
                     break;
                 case "4":
                     context.startActivity(new Intent(context, DoctorCouponsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
+                case "2":
+                    context.startActivity(new Intent(context, SpaAndSalonCouponsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     break;
 
             }
@@ -105,6 +120,10 @@ public class BottomButtonClickListner implements View.OnClickListener {
 //                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                     context.startActivity(new Intent(context, InsuranceMenuActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     break;
+                case "2":
+//                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, SpaAndSalonBusinessProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;
             }
             //((Activity) context).finish();
         } else if (id == R.id.bb_appointment) {
@@ -118,10 +137,12 @@ public class BottomButtonClickListner implements View.OnClickListener {
 //                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                     context.startActivity(new Intent(context, InsuranceAppointmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     break;
+               /* case "2":
+//                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                    context.startActivity(new Intent(context, SpaAndSalonAppointmentActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    break;*/
 
             }
-
-
         }
     }
 }

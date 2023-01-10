@@ -81,7 +81,9 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         remove = position;
-                        delete(new SessionManager(context).getUserId(), "menu", service.getId());
+                        Log.e("Delete Services :", "UserId : "+ new SessionManager(context).getUserId() + "," + "Type : " + "hospital_services" + "Servide Id : " + service.getId() );
+
+                        delete(new SessionManager(context).getUserId(), "hospital_services", service.getId());
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

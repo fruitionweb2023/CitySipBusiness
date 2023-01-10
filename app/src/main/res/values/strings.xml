@@ -61,6 +61,7 @@
     <string name="this_inform">This information will help your customers to reach you in their nearby area.</string>
     <string name="images">Images</string>
     <string name="upload_imag">Upload Images and video of your restaurant.</string>
+    <string name="upload_spa_salon">Upload Images and video of your Spa/Salon.</string>
     <string name="Skip">Skip</string>
     <string name="videos">Videos</string>
     <string name="add_new">Add New</string>
@@ -72,6 +73,7 @@
     <string name="ratings_n_reviews_doctor"><![CDATA[Ratings &\nReviews]]></string>
     <string name="upload_img_lawyer">Upload Images of your Office.</string>
     <string name="upload_img_doctor">Upload Images of your Hospital/Clinic.</string>
+    <string name="upload_img_spa_salon">Upload Images of your Spa/Salon.</string>
     <string name="upload_videos_lawyer">Upload videos of your Office</string>
 
 

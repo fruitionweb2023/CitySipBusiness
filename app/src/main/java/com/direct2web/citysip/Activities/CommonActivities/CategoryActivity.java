@@ -29,6 +29,8 @@ import com.direct2web.citysip.Activities.Lawyer.LawyerAboutYouActivity;
 import com.direct2web.citysip.Activities.Lawyer.LawyerDashboardActivity;
 import com.direct2web.citysip.Activities.Restaurent.AddRestaurantDetailsActivity;
 import com.direct2web.citysip.Activities.Restaurent.MainActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SapAndSalonDeshboardActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAboutYouActivity;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.CategoryAdapter;
 import com.direct2web.citysip.Model.RestaurentModels.Category.Category;
 import com.direct2web.citysip.Model.RestaurentModels.Category.ResponseCategoryList;
@@ -57,6 +59,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
     String city_id = "1";
     List<Category> categoryList = new ArrayList<>();
     CategoryAdapter adapter;
+
     String[] allPermitions = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -64,6 +67,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.CALL_PHONE};
+
     boolean doubleBackToExitPressedOnce = false;
 
     int flag = 0;
@@ -284,6 +288,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
 //                        Toast.makeText(CategoryActivity.this, "UserId" + sessionManager.getUserId(), Toast.LENGTH_SHORT).show();
 
                         switch (response.body().getCatId()) {
+
                             case "1":
                                 if (launchBusiness.equals("0")) {
                                     Intent lawyer_intent = new Intent(CategoryActivity.this, LawyerAboutYouActivity.class);
@@ -295,6 +300,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
                                     sessionManager.setBusinesstype("1");
                                 }
                                 break;
+
                             case "4":
                                 if (launchBusiness.equals("0")) {
                                     Intent doc_intent = new Intent(CategoryActivity.this, DoctorAboutYouActivity.class);
@@ -306,6 +312,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
                                     sessionManager.setBusinesstype("4");
                                 }
                                 break;
+
                             case "6":
                                 if (launchBusiness.equals("0")) {
                                     Intent rest_intent = new Intent(CategoryActivity.this, AddRestaurantDetailsActivity.class);
@@ -317,6 +324,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
                                     sessionManager.setBusinesstype("6");
                                 }
                                 break;
+
                             case "3":
                                 if (launchBusiness.equals("0")) {
                                     Intent rest_intent = new Intent(CategoryActivity.this, InsuranceAboutYouActivity.class);
@@ -328,9 +336,23 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
                                     sessionManager.setBusinesstype("3");
                                 }
                                 break;
+
+                            case "2":
+                                if (launchBusiness.equals("0")) {
+                                    Intent rest_intent = new Intent(CategoryActivity.this, SpaAndSalonAboutYouActivity.class);
+                                    startActivity(rest_intent);
+                                    sessionManager.setBusinesstype("2");
+                                } else {
+                                    Intent rest_intent = new Intent(CategoryActivity.this, SapAndSalonDeshboardActivity.class);
+                                    startActivity(rest_intent);
+                                    sessionManager.setBusinesstype("2");
+                                }
+                                break;
+
                             default:
                                 Toast.makeText(CategoryActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                                 break;
+
                         }
 
 

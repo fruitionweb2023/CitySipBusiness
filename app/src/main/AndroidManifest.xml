@@ -440,6 +440,24 @@
         <activity android:name=".Activities.Insurance.InsuranceServicesActivity" />
         <activity android:name=".Activities.Insurance.InsuranceSetUpTimingListActivity" />
         <activity android:name=".Activities.Insurance.InsuranceSelectTimingActivtiy" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SapAndSalonDeshboardActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAboutBusinessActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAboutSpaAndSalonActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAboutYouActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddCouponsActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddImageActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddServicesActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddVedioActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAppointmentActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessProfileActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonCouponsActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonCustomerActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonDeleteImageActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonDeleteVideoActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonLocationFetchActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonServicesActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddStaffActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonStaffActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
