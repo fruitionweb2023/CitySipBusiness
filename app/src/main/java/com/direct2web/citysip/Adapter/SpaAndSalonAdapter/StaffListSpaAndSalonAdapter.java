@@ -42,10 +42,12 @@ public class StaffListSpaAndSalonAdapter extends RecyclerView.Adapter<StaffListS
     Context context;
     ProgressDialog pd;
     int remove;
+    OnItemClickListner addButtonClick;
 
-    public StaffListSpaAndSalonAdapter(List<Staff> serviceList, Context context) {
+    public StaffListSpaAndSalonAdapter(List<Staff> serviceList, Context context, OnItemClickListner addButtonClick) {
         this.serviceList = serviceList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
     }
 
     @NonNull
@@ -64,7 +66,7 @@ public class StaffListSpaAndSalonAdapter extends RecyclerView.Adapter<StaffListS
         holder.binding.txtServiceName.setText(service.getStaffName());
         holder.binding.txtDescription.setText(service.getAbout());
         holder.binding.txtName.setText(service.getStaffName());
-        holder.binding.txtPrice.setText(service.getTimeFrom() + "-" + service.getTimeTo());
+        holder.binding.txtPrice.setText(service.getTimeFrom() + " - " + service.getTimeTo());
 
         Glide.with(context).load(Api.imageUrl + service.getProfileImage())
                 .thumbnail(0.5f)
@@ -127,7 +129,8 @@ public class StaffListSpaAndSalonAdapter extends RecyclerView.Adapter<StaffListS
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+              //  Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -266,4 +269,9 @@ public class StaffListSpaAndSalonAdapter extends RecyclerView.Adapter<StaffListS
             }
         });
     }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
+    }
+
 }

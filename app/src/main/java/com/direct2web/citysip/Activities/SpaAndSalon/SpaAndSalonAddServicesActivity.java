@@ -22,7 +22,9 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.direct2web.citysip.Activities.Restaurent.ImagePickerActivity;
+import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseEditService;
 import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseSpaAndSalonAddService;
 import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseSpaAndSalonServices;
 import com.direct2web.citysip.R;
@@ -44,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,6 +63,7 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE = 100;
     String img2 = "";
     Bitmap bitmap2;
+    String couponId = "";
 
 
     @Override
@@ -69,7 +73,23 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
 
+        couponId = getIntent().getStringExtra("serviceId");
 
+        if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+            binding.loginToYo.setText("Edit Service");
+            binding.txtName.setText(getIntent().getStringExtra("doctorName"));
+            binding.txtService.setText(getIntent().getStringExtra("serviceName"));
+            binding.txtPrice.setText(getIntent().getStringExtra("amount"));
+            binding.txtAboutService.setText(getIntent().getStringExtra("description"));
+            binding.btnSubmit.setText("Edit");
+            couponId = getIntent().getStringExtra("serviceId");
+            img2 = getIntent().getStringExtra("image");
+            Glide.with(this).load(Api.imageUrl + img2)
+                    .thumbnail(0.5f)
+                    .error(R.drawable.city_sip_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.imgDishLogo);
+        }
 
         binding.imgDishLogo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +119,11 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
 
                 }else {
 
-                    sendSetUpMenu();
+                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                        editServices();
+                    } else {
+                        sendSetUpMenu();
+                    }
                 }
             }
         });
@@ -179,6 +203,89 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
                 }
                 t.printStackTrace();
                 Log.e("Serviceerror", t.getMessage());
+            }
+        });
+    }
+
+    private void editServices() {
+
+        pd = new ProgressDialog(SpaAndSalonAddServicesActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+
+        String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
+        String accesskey = WS_URL_PARAMS.access_key;
+        String business_id = sessionManager.getUserId();
+        String name = binding.txtName.getText().toString();
+        String service = binding.txtService.getText().toString();
+        String price = binding.txtPrice.getText().toString();
+        String description = binding.txtAboutService.getText().toString();
+        String offer = getIntent().getStringExtra("offer");
+        String serviceId = couponId;
+
+
+
+        RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
+        RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
+        RequestBody t3 = RequestBody.create(MediaType.parse("multipart/form-data"), business_id);
+        RequestBody t4 = RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody t5 = RequestBody.create(MediaType.parse("multipart/form-data"), service);
+        RequestBody t6 = RequestBody.create(MediaType.parse("multipart/form-data"), price);
+        RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), description);
+        RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), offer);
+        RequestBody t9 = RequestBody.create(MediaType.parse("multipart/form-data"), serviceId);
+        RequestBody t10 = RequestBody.create(MediaType.parse("multipart/form-data"), "");
+
+
+        File file = null;
+        MultipartBody.Part body1 = null;
+        if (!img2.equals("")) {
+            file = new File(img2);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            String s = name + "_" + file.getName();
+            String logo = s.replaceAll(" ", "_");
+            body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
+        }
+
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseEditService> call = api.editSpaAndSalonService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,body1);
+
+        call.enqueue(new Callback<ResponseEditService>() {
+            @Override
+            public void onResponse(Call<ResponseEditService> call, Response<ResponseEditService> response) {
+
+                Log.e("ResponceEditService", new Gson().toJson(response.body()));
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                if (response.body() != null && response.isSuccessful()) {
+
+                    if (response.body().getError()) {
+
+                        Toast.makeText(SpaAndSalonAddServicesActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        Intent intent = new Intent(SpaAndSalonAddServicesActivity.this, SpaAndSalonServicesActivity.class);
+                        startActivity(intent);
+                    }
+
+                } else {
+                    Toast.makeText(SpaAndSalonAddServicesActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEditService> call, Throwable t) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                t.printStackTrace();
+                Log.e("ServiceEditError", t.getMessage());
             }
         });
     }

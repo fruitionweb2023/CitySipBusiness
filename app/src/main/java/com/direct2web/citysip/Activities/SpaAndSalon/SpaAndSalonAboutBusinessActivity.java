@@ -125,6 +125,7 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
                     }
 
                 } else {
+                    assert response.body() != null;
                     Toast.makeText(SpaAndSalonAboutBusinessActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

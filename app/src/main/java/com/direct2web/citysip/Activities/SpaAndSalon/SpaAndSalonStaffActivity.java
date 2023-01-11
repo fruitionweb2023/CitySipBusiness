@@ -33,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SpaAndSalonStaffActivity extends AppCompatActivity {
+public class SpaAndSalonStaffActivity extends AppCompatActivity implements StaffListSpaAndSalonAdapter.OnItemClickListner {
 
     ActivitySpaSalonStaffBinding binding;
     SessionManager sessionManager;
@@ -48,14 +48,14 @@ public class SpaAndSalonStaffActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_spa_salon_staff);
         sessionManager = new SessionManager(this);
 
-        bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
+      /*  bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
 
         binding.bottomnavigation.bbImgMyBusiness.setColorFilter(getResources().getColor(R.color.clr_spa_salon));
 
         binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
+        binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));*/
 
 
         pd = new ProgressDialog(SpaAndSalonStaffActivity.this);
@@ -101,7 +101,7 @@ public class SpaAndSalonStaffActivity extends AppCompatActivity {
 
                         serviceList = response.body().getStaffList();
 
-                        adapter = new StaffListSpaAndSalonAdapter(serviceList, SpaAndSalonStaffActivity.this);
+                        adapter = new StaffListSpaAndSalonAdapter(serviceList, SpaAndSalonStaffActivity.this,SpaAndSalonStaffActivity.this);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SpaAndSalonStaffActivity.this);
                         binding.rcleAddServices.setLayoutManager(linearLayoutManager);
                         binding.rcleAddServices.setAdapter(adapter);
@@ -126,7 +126,23 @@ public class SpaAndSalonStaffActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(SpaAndSalonStaffActivity.this, SapAndSalonDeshboardActivity.class);
+        Intent i = new Intent(SpaAndSalonStaffActivity.this, SpaAndSalonBusinessProfileActivity.class);
+        finish();
+        startActivity(i);
+    }
+
+    @Override
+    public void onAddButtonClick(int postion) {
+        Intent i = new Intent(SpaAndSalonStaffActivity.this, SpaAndSalonAddStaffActivity.class);
+        i.putExtra("flag","1");
+        i.putExtra("staffName", serviceList.get(postion).getStaffName());
+        i.putExtra("description", serviceList.get(postion).getAbout());
+        i.putExtra("timeFrom", serviceList.get(postion).getTimeFrom());
+        i.putExtra("timeTo", serviceList.get(postion).getTimeTo());
+       // i.putExtra("offer", serviceList.get(postion).get());
+        // i.putExtra("name", serviceList.get(postion).getName());
+        i.putExtra("image", serviceList.get(postion).getProfileImage());
+        i.putExtra("staffId", serviceList.get(postion).getId());
         finish();
         startActivity(i);
     }

@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
-                            android:text=" ₹"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="normal" />
@@ -167,8 +167,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:text="100"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
+                            android:textColor="@color/clr_888888"
+                            android:textSize="14sp"
                             android:textStyle="normal" />
 
 

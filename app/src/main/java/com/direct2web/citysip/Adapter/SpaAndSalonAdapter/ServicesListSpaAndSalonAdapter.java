@@ -41,10 +41,13 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
     Context context;
     ProgressDialog pd;
     int remove;
+    OnItemClickListner addButtonClick;
 
-    public ServicesListSpaAndSalonAdapter(List<Service> serviceList, Context context) {
+    public ServicesListSpaAndSalonAdapter(List<Service> serviceList, Context context, OnItemClickListner addButtonClick) {
         this.serviceList = serviceList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
+
     }
 
     @NonNull
@@ -125,8 +128,8 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
         holder.binding.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+              //  Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -264,5 +267,9 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

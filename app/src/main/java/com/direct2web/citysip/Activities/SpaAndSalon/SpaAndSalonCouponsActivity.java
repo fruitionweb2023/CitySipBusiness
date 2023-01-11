@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SpaAndSalonCouponsActivity extends AppCompatActivity {
+public class SpaAndSalonCouponsActivity extends AppCompatActivity implements CouponListSpaAndSalonAdapter.OnItemClickListner {
 
     ActivitySpaSalonCouponsBinding binding;
     SessionManager sessionManager;
@@ -97,7 +97,7 @@ public class SpaAndSalonCouponsActivity extends AppCompatActivity {
 
                     } else {
 
-                        adapter = new CouponListSpaAndSalonAdapter(offerList, SpaAndSalonCouponsActivity.this);
+                        adapter = new CouponListSpaAndSalonAdapter(offerList, SpaAndSalonCouponsActivity.this,SpaAndSalonCouponsActivity.this);
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                         binding.rvCouponsListItem.setLayoutManager(layoutManager);
@@ -124,6 +124,20 @@ public class SpaAndSalonCouponsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(SpaAndSalonCouponsActivity.this, SapAndSalonDeshboardActivity.class);
+        finish();
+        startActivity(i);
+    }
+
+    @Override
+    public void onAddButtonClick(int postion) {
+        Intent i = new Intent(SpaAndSalonCouponsActivity.this, SpaAndSalonAddCouponsActivity.class);
+        i.putExtra("flag","1");
+        i.putExtra("couponCode", offerList.get(postion).getCoupnCode());
+        i.putExtra("maxAmount", offerList.get(postion).getMaxAmount());
+        i.putExtra("percentage", offerList.get(postion).getPercentage());
+        i.putExtra("minAmount", offerList.get(postion).getMinAmount());
+        i.putExtra("terms", offerList.get(postion).getTermsCondition());
+        i.putExtra("couponId", offerList.get(postion).getId());
         finish();
         startActivity(i);
     }

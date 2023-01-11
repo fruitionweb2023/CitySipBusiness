@@ -39,10 +39,12 @@ public class CouponListSpaAndSalonAdapter extends RecyclerView.Adapter<CouponLis
     Context context;
     ProgressDialog pd;
     int remove ;
+    OnItemClickListner addButtonClick;
 
-    public CouponListSpaAndSalonAdapter(List<Offer> offerList, Context context) {
+    public CouponListSpaAndSalonAdapter(List<Offer> offerList, Context context, OnItemClickListner addButtonClick ) {
         this.offerList = offerList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
     }
 
     @NonNull
@@ -118,7 +120,8 @@ public class CouponListSpaAndSalonAdapter extends RecyclerView.Adapter<CouponLis
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
 
             }
         });
@@ -254,5 +257,9 @@ public class CouponListSpaAndSalonAdapter extends RecyclerView.Adapter<CouponLis
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

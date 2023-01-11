@@ -26,10 +26,12 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.direct2web.citysip.Activities.Doctor.DoctorSelectTimingActivtiy;
 import com.direct2web.citysip.Activities.Restaurent.ImagePickerActivity;
 import com.direct2web.citysip.Model.SpaAndSalon.Services.ResponseSpaAndSalonAddService;
 import com.direct2web.citysip.Model.SpaAndSalon.Staff.ResponseAddStaff;
+import com.direct2web.citysip.Model.SpaAndSalon.Staff.ResponseEditStaff;
 import com.direct2web.citysip.R;
 import com.direct2web.citysip.Utils.Api;
 import com.direct2web.citysip.Utils.RetrofitClient;
@@ -51,6 +53,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -70,6 +73,7 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
     private static int flag_calander = 0;
     String add_open = "0", add_close = "0";
+    String couponId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,24 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_spa_salon_add_staff);
         sessionManager = new SessionManager(this);
 
+
+        couponId = getIntent().getStringExtra("staffId");
+
+        if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+            binding.loginToYo.setText("Edit Staff");
+            binding.txtName.setText(getIntent().getStringExtra("staffName"));
+            binding.txtAddSelectFromTime.setText(getIntent().getStringExtra("timeFrom"));
+            binding.txtAddSelectToTime.setText(getIntent().getStringExtra("timeTo"));
+            binding.txtAboutService.setText(getIntent().getStringExtra("description"));
+            binding.btnSubmit.setText("Edit");
+            couponId = getIntent().getStringExtra("staffId");
+            img2 = getIntent().getStringExtra("image");
+            Glide.with(this).load(Api.imageUrl + img2)
+                    .thumbnail(0.5f)
+                    .error(R.drawable.city_sip_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.imgDishLogo);
+        }
 
 
 
@@ -164,7 +186,11 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
 
                 }else {
 
-                    sendSetUpMenu();
+                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                        editStaff();
+                    } else {
+                        sendSetUpMenu();
+                    }
                 }
             }
         });
@@ -227,7 +253,7 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
 
                     } else {
 
-                        Intent intent = new Intent(SpaAndSalonAddStaffActivity.this, SpaAndSalonServicesActivity.class);
+                        Intent intent = new Intent(SpaAndSalonAddStaffActivity.this, SpaAndSalonStaffActivity.class);
                         startActivity(intent);
                     }
 
@@ -243,6 +269,85 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
                 }
                 t.printStackTrace();
                 Log.e("Stafferror", t.getMessage());
+            }
+        });
+    }
+
+    private void editStaff() {
+
+        pd = new ProgressDialog(SpaAndSalonAddStaffActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+
+        String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
+        String accesskey = WS_URL_PARAMS.access_key;
+        String business_id = sessionManager.getUserId();
+        String name = binding.txtName.getText().toString();
+        String about = binding.txtAboutService.getText().toString();
+        String from = binding.txtAddSelectFromTime.getText().toString();
+        String to = binding.txtAddSelectToTime.getText().toString();
+        String serviceId = couponId;
+
+
+        RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
+        RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
+        RequestBody t3 = RequestBody.create(MediaType.parse("multipart/form-data"), business_id);
+        RequestBody t4 = RequestBody.create(MediaType.parse("multipart/form-data"), name);
+        RequestBody t5 = RequestBody.create(MediaType.parse("multipart/form-data"), about);
+        RequestBody t6 = RequestBody.create(MediaType.parse("multipart/form-data"), from);
+        RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), to);
+        RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), serviceId);
+
+
+        File file = null;
+        MultipartBody.Part body1 = null;
+        if (!img2.equals("")) {
+            file = new File(img2);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            String s = name + "_" + file.getName();
+            String logo = s.replaceAll(" ", "_");
+            body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
+        }
+
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseEditStaff> call = api.editSpaAndSalonStaff(authHeader,t2,t3,t4,t5,t6,t7,t8,body1);
+
+        call.enqueue(new Callback<ResponseEditStaff>() {
+            @Override
+            public void onResponse(Call<ResponseEditStaff> call, Response<ResponseEditStaff> response) {
+
+                Log.e("ResponceEditStaff", new Gson().toJson(response.body()));
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                if (response.body() != null && response.isSuccessful()) {
+
+                    if (response.body().getError()) {
+
+                        Toast.makeText(SpaAndSalonAddStaffActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        Intent intent = new Intent(SpaAndSalonAddStaffActivity.this, SpaAndSalonStaffActivity.class);
+                        startActivity(intent);
+                    }
+
+                } else {
+                    Toast.makeText(SpaAndSalonAddStaffActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEditStaff> call, Throwable t) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                t.printStackTrace();
+                Log.e("StaffEditError", t.getMessage());
             }
         });
     }
@@ -386,7 +491,7 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(SpaAndSalonAddStaffActivity.this, SpaAndSalonServicesActivity.class);
+        Intent i = new Intent(SpaAndSalonAddStaffActivity.this, SpaAndSalonStaffActivity.class);
         finish();
         startActivity(i);
     }

@@ -10,7 +10,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_doctor" />
+            layout="@layout/toolbar_spa_and_salon" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
