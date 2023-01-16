@@ -1,10 +1,12 @@
 package com.direct2web.citysip.Adapter.RestaurentAdapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.direct2web.citysip.Activities.CommonActivities.VerificationActivity;
+import com.direct2web.citysip.Activities.Restaurent.SetUpAddMenuActivity;
+import com.direct2web.citysip.Activities.Restaurent.SetUpMenuActivity;
+import com.direct2web.citysip.Adapter.DoctorAdapters.ServicesListAdapter;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseDelete;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
 import com.direct2web.citysip.Model.RestaurentModels.MenuList.Menu;
@@ -42,22 +47,25 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
     List<Menu> menuList;
     Context context;
     ProgressDialog pd;
-    int remove ;
+    int remove;
 
     onClickSwitch onClickSwitch;
     onClickSwitchOff onClickSwitchOff;
+    OnItemClickListner addButtonClick;
 
 
-    public NewMenuListitemAdapter(List<Menu> menuList, Context context,onClickSwitch onClickSwitch,onClickSwitchOff onClickSwitchOff) {
+    public NewMenuListitemAdapter(List<Menu> menuList, Context context, onClickSwitch onClickSwitch, onClickSwitchOff onClickSwitchOff, OnItemClickListner addButtonClick) {
         this.menuList = menuList;
         this.context = context;
-        this.onClickSwitch=onClickSwitch;
-        this.onClickSwitchOff=onClickSwitchOff;
+        this.onClickSwitch = onClickSwitch;
+        this.onClickSwitchOff = onClickSwitchOff;
+        this.addButtonClick = addButtonClick;
     }
 
     public NewMenuListitemAdapter(List<Menu> menuList, Context context) {
         this.menuList = menuList;
         this.context = context;
+
 
         /*pd = new ProgressDialog(context);
         pd.setMessage("Please Wait....");
@@ -104,8 +112,7 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
         }
 
 
-
-        Glide.with(context).load(Api.imageUrl+menu.getImage())
+        Glide.with(context).load(Api.imageUrl + menu.getImage())
                 .error(context.getDrawable(R.drawable.city_sip_logo))
                 .thumbnail(0.5f)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -148,7 +155,7 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
                     holder.binding.llBottom.setAlpha(0.25f);
                     holder.binding.imgEdit.setClickable(false);
                     holder.binding.imgDelete.setClickable(false);
-                    sendStatus(new SessionManager(context).getUserId(),"menu",menu.getId(),"0");
+                    sendStatus(new SessionManager(context).getUserId(), "menu", menu.getId(), "0");
 
                 } else {
 
@@ -157,7 +164,7 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
                     holder.binding.llBottom.setAlpha(1.0f);
                     holder.binding.imgEdit.setClickable(true);
                     holder.binding.imgDelete.setClickable(true);
-                    sendStatus(new SessionManager(context).getUserId(),"menu",menu.getId(),"1");
+                    sendStatus(new SessionManager(context).getUserId(), "menu", menu.getId(), "1");
                 }
 
             }
@@ -167,24 +174,43 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, SetUpAddMenuActivity.class);
+                intent.putExtra("flag", "1");
+                intent.putExtra("dishName", menu.getTitle());
+                intent.putExtra("amount", menu.getAmount());
+                intent.putExtra("cuisine", menu.getCuisines());
+                intent.putExtra("dishType", menu.getDishType());
+                intent.putExtra("description", menu.getDescription());
+                intent.putExtra("offer", menu.getOffer());
+                intent.putExtra("image", menu.getImage());
+                intent.putExtra("maxDish", menu.getMaxDish());
+                intent.putExtra("category", menu.getCategory());
+                intent.putExtra("menuId", menu.getId());
+                Log.e("Menu Items : ", "\ndishName : " + menu.getTitle() + "\namount : " + menu.getAmount() +
+                      "\ncuisine : " +   menu.getCuisines() + "\ndishType : " + menu.getDishType() + "\ndescription : " +
+                        menu.getDescription() + "\noffer : " + menu.getOffer() + "\nimage : " + menu.getImage() + "\nmaxDish : " +
+                        menu.getMaxDish() + "\ncategory : " +  menu.getCategory() + "\nmenuId : " + menu.getId());
+                ((Activity) context).finish();
+                context.startActivity(intent);
+
+                // addButtonClick.onAddButtonClick(position);
+//                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        if (menu.getStatus().equals("1")){
+        if (menu.getStatus().equals("1")) {
 
             holder.binding.switchOnOff.setChecked(true);
             holder.binding.llBottom.setAlpha(1.0f);
             holder.binding.imgEdit.setClickable(true);
             holder.binding.imgDelete.setClickable(true);
 
-        }else {
+        } else {
             holder.binding.switchOnOff.setChecked(false);
             holder.binding.llBottom.setAlpha(0.25f);
             holder.binding.imgEdit.setClickable(false);
             holder.binding.imgDelete.setClickable(false);
-
 
 
         }
@@ -260,9 +286,9 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
         }
     }
 
-    public void updateList(List<Menu> menuList){
+    public void updateList(List<Menu> menuList) {
 
-        this.menuList=menuList;
+        this.menuList = menuList;
         notifyDataSetChanged();
     }
 
@@ -274,7 +300,7 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
         public void onSwitchItemClickOff(int position);
     }
 
-    public void sendStatus(String userId,String type,String id,String status){
+    public void sendStatus(String userId, String type, String id, String status) {
 
         /*pd = new ProgressDialog(context);
         pd.setMessage("Please Wait....");
@@ -283,7 +309,7 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
 
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseStatus> call = api.sendStatus("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
-                WS_URL_PARAMS.access_key, userId, type, id,status);
+                WS_URL_PARAMS.access_key, userId, type, id, status);
         call.enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
@@ -322,4 +348,10 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
             }
         });
     }
+
+    public interface OnItemClickListner {
+        public void onAddButtonClick(int postion);
+    }
+
+
 }

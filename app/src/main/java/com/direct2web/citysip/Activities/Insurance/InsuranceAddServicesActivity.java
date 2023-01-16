@@ -21,8 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.direct2web.citysip.Activities.Doctor.DoctorServicesActivity;
 import com.direct2web.citysip.Activities.Restaurent.ImagePickerActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpAddMenuActivity;
@@ -32,6 +34,7 @@ import com.direct2web.citysip.Adapter.InsuranceAdapters.InsuranceServiceTitleLis
 import com.direct2web.citysip.Adapter.InsuranceAdapters.SelectCompanyNameAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.AddCouponAddMenuAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.SelectOfferNameAdapter;
+import com.direct2web.citysip.Model.DoctorModels.DoctorServices.ResponseEditDoctorService;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceServices.CompanyList;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceServices.ResponseInsuranceAddService;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceServices.ResponseInsuranceServiceAndCompanyList;
@@ -56,6 +59,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,6 +76,7 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
     List<ServiceList> serviceLists = new ArrayList<>();
     List<CompanyList> companyLists = new ArrayList<>();
+    List<CompanyList> temp = new ArrayList<>();
 
     InsuranceServiceTitleListAdapter titleListAdapter;
     InsuranceCustomListViewDialogWithSearchAdapter customDialog;
@@ -81,6 +86,10 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
     ArrayList<CompanyList> addDishType = new ArrayList<CompanyList>();
     AddCompnyAdapterInsurance typeListAdapter;
     CustomListViewDialog customDialog1;
+    String couponId = "";
+    String companyId = "";
+    String cId = "";
+    String cDesc = "";
 
 
     @Override
@@ -92,20 +101,45 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
         getData();
 
-        adapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this,InsuranceAddServicesActivity.this);
+        couponId = getIntent().getStringExtra("id");
+
+
+        if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+            binding.loginToYo.setText("Edit Service");
+            companyId = getIntent().getStringExtra("company_id");
+            serviceId = getIntent().getStringExtra("service_id");
+            couponId = getIntent().getStringExtra("id");
+            binding.txtService.setText(getIntent().getStringExtra("serviceName"));
+            binding.btnSubmit.setText("Edit");
+
+            Log.e("Service get Data : ",
+                    "\ncompany_id : " + companyId +
+                            " \nservice_id : " + serviceId +
+                            "\nid : " + couponId +
+                            "\nserviceName : " + getIntent().getStringExtra("serviceName") +
+                            "\ndescription : " + getIntent().getStringExtra("description")
+            );
+
+            String[] array = getIntent().getStringExtra("company_id").split("~~");
+            String[] array2 = getIntent().getStringExtra("description").split(",");
+
+            addDishType.clear();
+            for (int i=0;i<array.length;i++) {
+                addDishType.add(new CompanyList(array[i],array2[i]));
+
+            }
+
+        }
+
+
+
+
+        typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this, InsuranceAddServicesActivity.this);
 
         GridLayoutManager layoutManager = new GridLayoutManager(InsuranceAddServicesActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
 
         binding.rclrCouponList.setLayoutManager(layoutManager);
-        binding.rclrCouponList.setAdapter(adapter);
-
-
-        /*binding.imgDishLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onProfileImageClick();
-            }
-        });*/
+        binding.rclrCouponList.setAdapter(typeListAdapter);
 
         binding.txtService.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +150,6 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
                 customDialog.show();
                 customDialog.setCanceledOnTouchOutside(false);
-
 
             }
         });
@@ -131,7 +164,14 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
                 } else {
 
-                    sendSetUpMenu();
+                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+
+                        sendEditSetUpMenu();
+
+                    } else {
+
+                        sendSetUpMenu();
+                    }
                 }
             }
         });
@@ -165,12 +205,12 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
                         serviceLists = response.body().getServiceList();
                         companyLists = response.body().getCompanyList();
 
-                        adapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this,InsuranceAddServicesActivity.this);
+                        typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this, InsuranceAddServicesActivity.this);
 
-                        GridLayoutManager layoutManager = new GridLayoutManager(InsuranceAddServicesActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(InsuranceAddServicesActivity.this,  LinearLayoutManager.VERTICAL, false);
 
                         binding.rclrCouponList.setLayoutManager(layoutManager);
-                        binding.rclrCouponList.setAdapter(adapter);
+                        binding.rclrCouponList.setAdapter(typeListAdapter);
 
                     }
 
@@ -189,7 +229,7 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
                 pd.dismiss();
                 t.printStackTrace();
-                Log.e("errorCompanyList",t.getMessage());
+                Log.e("errorCompanyList", t.getMessage());
             }
         });
 
@@ -208,9 +248,9 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
         String accesskey = WS_URL_PARAMS.access_key;
         String business_id = sessionManager.getUserId();
         String service_id = serviceId;
-        String company_id = "";
+        String company_id = companyId;
 
-        if (addDishType.size() > 0){
+        if (addDishType.size() > 0) {
 
             StringBuilder sb = new StringBuilder();
             for (CompanyList u : addDishType) {
@@ -252,6 +292,72 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
             @Override
             public void onFailure(Call<ResponseInsuranceAddService> call, Throwable t) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                t.printStackTrace();
+                Log.e("ServiceError", t.getMessage());
+            }
+        });
+    }
+
+    private void sendEditSetUpMenu() {
+
+        pd = new ProgressDialog(InsuranceAddServicesActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+
+        String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
+        String accesskey = WS_URL_PARAMS.access_key;
+        String business_id = sessionManager.getUserId();
+        String service_id = serviceId;
+        String company_id = companyId;
+        String id = couponId;
+
+        if (addDishType.size() > 0) {
+
+            StringBuilder sb = new StringBuilder();
+            for (CompanyList u : addDishType) {
+                sb.append(u.getId()).append("~~");
+            }
+            company_id = sb.toString();
+            company_id = company_id.substring(0, company_id.length() - 2);
+            Log.e("string", company_id);
+
+        }
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseEditDoctorService> call = api.editInsuranceService(authHeader, accesskey, business_id, company_id, service_id, id);
+
+        call.enqueue(new Callback<ResponseEditDoctorService>() {
+            @Override
+            public void onResponse(Call<ResponseEditDoctorService> call, Response<ResponseEditDoctorService> response) {
+
+                Log.e("responseEditService", new Gson().toJson(response.body()));
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                if (response.body() != null && response.isSuccessful()) {
+
+                    if (response.body().getError()) {
+
+                        Toast.makeText(InsuranceAddServicesActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        Intent intent = new Intent(InsuranceAddServicesActivity.this, InsuranceServicesActivity.class);
+                        startActivity(intent);
+                    }
+
+                } else {
+                    Toast.makeText(InsuranceAddServicesActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEditDoctorService> call, Throwable t) {
                 if (pd.isShowing()) {
                     pd.dismiss();
                 }
@@ -425,9 +531,12 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
     @Override
     public void onCrossButtonClick(CompanyList offer) {
 
-        addDishType.remove(offer);
+            addDishType.remove(offer);
+            if(addDishType != null)
+                typeListAdapter.updateDataList(addDishType);
 
-        typeListAdapter.updateDataList(addDishType);
+        typeListAdapter.notifyDataSetChanged();
+
 
     }
 
@@ -444,9 +553,22 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
 
     @Override
     public void clickOnSelectOfferItem(String data, String id) {
+        boolean flag = false;
 
-        CompanyList dishType = new CompanyList(id, data);
-        boolean flag=false;
+        if (getIntent().getStringExtra("flag") == "1") {
+
+            CompanyList dishType = new CompanyList(cId, cDesc);
+
+            addDishType.add(dishType);
+            typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this, InsuranceAddServicesActivity.this);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(InsuranceAddServicesActivity.this, LinearLayoutManager.VERTICAL, false);
+            binding.rclrCouponList.setLayoutManager(layoutManager);
+            binding.rclrCouponList.setAdapter(typeListAdapter);
+
+
+        } else {
+            CompanyList dishType = new CompanyList(id, data);
+
 
        /* if(addDishType.contains(dishType)){
             Toast.makeText(SetUpOfferActivity.this, "DishType already available", Toast.LENGTH_SHORT).show();
@@ -458,34 +580,37 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
             rclrDishType.setAdapter(typeListAdapter);
         }*/
 
-        if (addDishType.size() == 0) {
-            addDishType.add(dishType);
-
-            typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this,InsuranceAddServicesActivity.this);
-            GridLayoutManager layoutManager = new GridLayoutManager(InsuranceAddServicesActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
-            binding.rclrCouponList.setLayoutManager(layoutManager);
-            binding.rclrCouponList.setAdapter(typeListAdapter);
-        } else {
-            for (CompanyList d : addDishType) {
-                if (d.getId().equals(id)) {
-                    Toast.makeText(InsuranceAddServicesActivity.this, "Company already available", Toast.LENGTH_SHORT).show();
-                    flag=true;
-                }
-            }
-            if(!flag){
+            if (addDishType.size() == 0) {
                 addDishType.add(dishType);
-                typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, this,InsuranceAddServicesActivity.this);
-                GridLayoutManager layoutManager = new GridLayoutManager(InsuranceAddServicesActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
+
+                typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, InsuranceAddServicesActivity.this, InsuranceAddServicesActivity.this);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(InsuranceAddServicesActivity.this, LinearLayoutManager.VERTICAL, false);
                 binding.rclrCouponList.setLayoutManager(layoutManager);
                 binding.rclrCouponList.setAdapter(typeListAdapter);
+
+            } else {
+                for (CompanyList d : addDishType) {
+                    if (d.getId().equals(id)) {
+                        Toast.makeText(InsuranceAddServicesActivity.this, "Company already available", Toast.LENGTH_SHORT).show();
+                        flag = true;
+                    }
+                }
+                if (!flag) {
+                    addDishType.add(dishType);
+                    typeListAdapter = new AddCompnyAdapterInsurance(InsuranceAddServicesActivity.this, addDishType, this, InsuranceAddServicesActivity.this);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(InsuranceAddServicesActivity.this, LinearLayoutManager.VERTICAL, false);
+                    binding.rclrCouponList.setLayoutManager(layoutManager);
+                    binding.rclrCouponList.setAdapter(typeListAdapter);
+
+                }
+
             }
 
+            if (customDialog1 != null) {
+                customDialog1.dismiss();
+            }
+
+
         }
-
-        if (customDialog1 != null) {
-            customDialog1.dismiss();
-        }
-
-
     }
 }

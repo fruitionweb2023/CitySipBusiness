@@ -59,7 +59,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SetUpMenuActivity extends AppCompatActivity implements SelectCuisinesAdapter.RecyclerViewItemClickListener,
-        SelectDishTypeAdapter.RecyclerViewItemClickListener, NewMenuListitemAdapter.onClickSwitch, NewMenuListitemAdapter.onClickSwitchOff {
+        SelectDishTypeAdapter.RecyclerViewItemClickListener, NewMenuListitemAdapter.onClickSwitch, NewMenuListitemAdapter.onClickSwitchOff{
 
     public static final int REQUEST_IMAGE = 100;
     ActivitySetUpMenuBinding binding;
@@ -97,6 +97,7 @@ public class SetUpMenuActivity extends AppCompatActivity implements SelectCuisin
 
     NewMenuListitemAdapter.onClickSwitch onClickSwitch;
     NewMenuListitemAdapter.onClickSwitchOff onClickSwitchOff;
+    NewMenuListitemAdapter.OnItemClickListner onItemClickListner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,7 @@ public class SetUpMenuActivity extends AppCompatActivity implements SelectCuisin
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(SetUpMenuActivity.this, SetUpAddMenuActivity.class);
+                    intent.putExtra("flag","0");
                     startActivity(intent);
                 }
             });
@@ -977,4 +979,24 @@ public class SetUpMenuActivity extends AppCompatActivity implements SelectCuisin
         });
 
     }
+
+  /*  @Override
+    public void onAddButtonClick(int postion) {
+        Menu edit = menuList.get(postion);
+        Intent intent = new Intent(SetUpMenuActivity.this,SetUpAddMenuActivity.class);
+        intent.putExtra("flag","1");
+        intent.putExtra("dishName",edit.getTitle());
+        intent.putExtra("amount", edit.getAmount());
+        intent.putExtra("cuisine", edit.getCuisines());
+        intent.putExtra("dishType", edit.getDishType());
+        intent.putExtra("description", edit.getDescription());
+        intent.putExtra("offer", edit.getOffer());
+        intent.putExtra("image", edit.getImage());
+        intent.putExtra("maxDish", edit.getMaxDish());
+        intent.putExtra("category", edit.getCategory());
+        intent.putExtra("menuId", edit.getId());
+        finish();
+        startActivity(intent);
+
+    }*/
 }

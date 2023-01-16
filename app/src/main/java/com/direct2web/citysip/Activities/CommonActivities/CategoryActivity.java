@@ -270,6 +270,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseCreateAccount> call = api.sendCreateAccount("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key, strUsername, cat_id);
+        Log.e("Create Account Data :", "mobile : " + strUsername + "  " + "cat_id : " + cat_id );
         call.enqueue(new Callback<ResponseCreateAccount>() {
             @Override
             public void onResponse(@NonNull Call<ResponseCreateAccount> call, @NonNull Response<ResponseCreateAccount> response) {

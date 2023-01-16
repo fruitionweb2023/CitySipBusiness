@@ -67,7 +67,7 @@ public class StaffListSpaAndSalonAdapter extends RecyclerView.Adapter<StaffListS
         holder.binding.txtDescription.setText(service.getAbout());
         holder.binding.txtName.setText(service.getStaffName());
         holder.binding.txtPrice.setText(service.getTimeFrom() + " - " + service.getTimeTo());
-
+        Log.e("StaffImage : ",Api.imageUrl + service.getProfileImage() );
         Glide.with(context).load(Api.imageUrl + service.getProfileImage())
                 .thumbnail(0.5f)
                 .error(R.drawable.city_sip_logo)

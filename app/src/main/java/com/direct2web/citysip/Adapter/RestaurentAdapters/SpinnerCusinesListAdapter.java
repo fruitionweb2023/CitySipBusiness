@@ -18,9 +18,11 @@ import java.util.List;
 public class SpinnerCusinesListAdapter  extends ArrayAdapter<Cuisine> {
 
     LayoutInflater layoutInflater;
+    List<Cuisine> cuisines;
 
     public SpinnerCusinesListAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull List<Cuisine> cuisines) {
         super(context, resource, textViewResourceId, cuisines);
+        this.cuisines = cuisines;
 
     }
 
@@ -61,4 +63,15 @@ public class SpinnerCusinesListAdapter  extends ArrayAdapter<Cuisine> {
         TextView txtTitle ;
 
     }
+
+    public int getItemIndexByValue(String id) {
+        for (Cuisine item : cuisines) {
+            if(item.getName().equals(id)){
+                return this.cuisines.indexOf(item);
+            }
+        }
+        return 0;
+    }
+
+
 }

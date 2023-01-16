@@ -1,6 +1,7 @@
 package com.direct2web.citysip.Activities.Restaurent;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -25,10 +26,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.AddCouponAddMenuAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.SelectOfferNameAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.SpinnerCusinesListAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.SpinnerDishTypeListAdapter;
+import com.direct2web.citysip.Model.DoctorModels.DoctorServices.ResponseEditDoctorService;
 import com.direct2web.citysip.Model.RestaurentModels.Cuisines.Cuisine;
 import com.direct2web.citysip.Model.RestaurentModels.Cuisines.DishType;
 import com.direct2web.citysip.Model.RestaurentModels.Cuisines.ResponseCuisinesList;
@@ -56,6 +59,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -70,14 +74,15 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
     SessionManager sessionManager;
     public static final int REQUEST_IMAGE = 100;
     String img2 = "";
+    String menuId = "";
     int flag_image;
     Bitmap bitmap2;
     String category = "", strDishType, strDishTypeId, strCuisine, strCuisineId, strFoodType, srtFoodTypeId, strOfferAppliedOrNot, StrOfferAppliedOrNotId;
 
     List<Cuisine> cuisineList = new ArrayList<>();
     List<DishType> dishTypeList = new ArrayList<>();
-    String[] arrFoodType = new String[]{"Select", "Veg", "NonVeg"};
-    String[] arrOfferApplied = new String[]{"Select", "Yes", "No"};
+   // String[] arrFoodType = new String[]{"Select", "Veg", "NonVeg"};
+   // String[] arrOfferApplied = new String[]{"Select", "Yes", "No"};
     ProgressDialog pd;
     List<Menu> menuList;
     SpinnerCusinesListAdapter spinnerCusinesListAdapter;
@@ -87,7 +92,12 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
     CustomListViewDialog customDialog;
     ArrayList<Offer> addDishType = new ArrayList<Offer>();
     AddCouponAddMenuAdapter typeListAdapter;
+    Boolean flag = true;
+    Boolean flag2 = true;
+    Boolean flag3 = true;
 
+
+    @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +114,36 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
             }
         });
+        menuId = getIntent().getStringExtra("menuId");
+        if (getIntent().getStringExtra("flag").equals("1")) {
+
+            binding.loginToYo.setText("Edit Dish");
+            binding.edtRestName.setText( getIntent().getStringExtra("dishName"));
+            binding.edtPrice.setText( getIntent().getStringExtra("amount"));
+            binding.edtDescription.setText(getIntent().getStringExtra("description"));
+            binding.txtOrderLimit.setText( getIntent().getStringExtra("maxDish"));
+            binding.btnSubmit.setText("Edit");
+
+            menuId = getIntent().getStringExtra("menuId");
+            Glide.with(this).load(Api.imageUrl + getIntent().getStringExtra("image"))
+                    .thumbnail(0.5f)
+                    .error(R.drawable.city_sip_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.imgDishLogo);
+        } else  {
+
+            binding.loginToYo.setText("Add Dish");
+            binding.edtRestName.setText("");
+            binding.edtPrice.setText("");
+            binding.edtDescription.setText("");
+            binding.txtOrderLimit.setText("");
+            binding.btnSubmit.setText("Add");
+            Glide.with(this).load("")
+                    .thumbnail(0.5f)
+                    .error(R.drawable.city_sip_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.imgDishLogo);
+        }
 
         pd = new ProgressDialog(SetUpAddMenuActivity.this);
         pd.setMessage("Please Wait....");
@@ -130,18 +170,41 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
         spinnerCusinesListAdapter = new SpinnerCusinesListAdapter(SetUpAddMenuActivity.this,R.layout.raw_recyclear_view_drop_down,R.id.tvName,cuisineList);
         binding.txtCuisines.setAdapter(spinnerCusinesListAdapter);
+
         binding.txtCuisines.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 strCuisine = adapterView.getItemAtPosition(i).toString();
                 strCuisineId = cuisineList.get(i).getId();
+                String strCuisineName = cuisineList.get(i).getName();
+                binding.txtCuisines.setSelection(i);
+
+                if (flag) {
+                    String c = getIntent().getStringExtra("cuisine");
+                   // Log.e("C Value : ", c);
+                    if (c != null) {
+                        binding.txtCuisines.setSelection(spinnerCusinesListAdapter.getItemIndexByValue(c));
+                        Log.e("Spinner Value : ", String.valueOf(spinnerCusinesListAdapter.getItemIndexByValue(c)));
+                    }
+                    flag = false;
+                }
+
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
+
+       /* String c = getIntent().getStringExtra("cuisine");
+        Log.e("C Value : ", c);
+        if (c != null) {
+            binding.txtCuisines.setSelection(spinnerCusinesListAdapter.getItemIndexByValue(c));
+            Log.e("Spinner Value : ", String.valueOf(spinnerCusinesListAdapter.getItemIndexByValue(c)));
+        }*/
 
         spinnerDishTypeListAdapter = new SpinnerDishTypeListAdapter(SetUpAddMenuActivity.this,R.layout.raw_recyclear_view_drop_down,R.id.tvName,dishTypeList);
         binding.txtDishType.setAdapter(spinnerDishTypeListAdapter);
@@ -150,6 +213,16 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 strDishType = adapterView.getItemAtPosition(i).toString();
                 strDishTypeId = dishTypeList.get(i).getId();
+                binding.txtDishType.setSelection(i);
+
+                if (flag2) {
+                    String c = getIntent().getStringExtra("dishType");
+                    if (c != null) {
+                        binding.txtDishType.setSelection(spinnerDishTypeListAdapter.getItemIndexByValue(c));
+                    }
+                    flag2 = false;
+                }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -157,21 +230,92 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         });
 
 
-        ArrayAdapter foodType = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrFoodType);
+        String compareValue = getIntent().getStringExtra("offer");
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_state, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.txtOffer.setAdapter(adapter);
+        if (compareValue != null) {
+            Log.e("offer : ", compareValue);
+            int spinnerPosition = adapter.getPosition(compareValue);
+            binding.txtOffer.setSelection(spinnerPosition);
+            Log.e("SpinnerPositionOffer : ", String.valueOf(spinnerPosition));
+
+        }
+
+        binding.llAddOffer.setVisibility(View.GONE);
+
+        strOfferAppliedOrNot = binding.txtOffer.getSelectedItem().toString();
+        Log.e("SelectedOffer : ", strOfferAppliedOrNot);
+       if (flag3) {
+           if (binding.txtOffer.getSelectedItem().toString().equals("Yes")) {
+
+               binding.llAddOffer.setVisibility(View.VISIBLE);
+               flag3 = true;
+//                    getOfferList(sessionManager.getUserId());
+
+           } else {
+
+               binding.llAddOffer.setVisibility(View.GONE);
+               flag3 = false;
+           }
+       }
+
+
+
+        String compareValue2 = getIntent().getStringExtra("category");
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.dish_type, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.txtFoodType.setAdapter(adapter2);
+        if (compareValue2 != null) {
+            Log.e("Food Type : ", compareValue2);
+            int spinnerPosition = adapter2.getPosition(compareValue2);
+            binding.txtFoodType.setSelection(spinnerPosition);
+            Log.e("SpinnerPositionFoodType : ", String.valueOf(spinnerPosition));
+
+        }
+
+        //Log.e("SelectedFoodType : ", binding.txtFoodType.getSelectedItem().toString());
+
+
+
+       /* ArrayAdapter<CharSequence> foodType = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrFoodType);
         foodType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.txtFoodType.setAdapter(foodType);
-        binding.txtFoodType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.txtFoodType.setAdapter(foodType);*/
+
+     /*   binding.txtFoodType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 category = arrFoodType[i];
+               *//* binding.txtFoodType.setSelection(i);
+
+                if (flag3) {
+                    String compareValue = getIntent().getStringExtra("offer");
+                    if (compareValue != null) {
+                        Log.e("offer Food type : ", compareValue);
+                        int spinnerPosition = foodType.getPosition(compareValue);
+                        binding.txtFoodType.setSelection(spinnerPosition);
+                        Log.e("SpinnerPositionFoodType : ", String.valueOf(spinnerPosition));
+                    }
+                    flag3 = false;
+                }*//*
+
+               *//* if (flag3) {
+                   String c = getIntent().getStringExtra("offer");
+                    Log.e("offer Food type : ", c);
+                   if (c != null) {
+                       int spinnerPosition = foodType.getPosition(c);
+                       binding.txtFoodType.setSelection(spinnerPosition);
+                   }
+                   flag3 = false;
+               }*//*
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
-
+        });*/
+/*
         ArrayAdapter offer = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrOfferApplied);
         offer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.txtOffer.setAdapter(offer);
@@ -179,6 +323,17 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 strOfferAppliedOrNot = arrOfferApplied[i];
+                String c = getIntent().getStringExtra("category");
+                binding.txtOffer.setSelection(i);
+
+                if (flag4) {
+                    if (c != null) {
+                        int spinnerPosition = offer.getPosition(c);
+                        binding.txtOffer.setSelection(spinnerPosition);
+
+                    }
+                    flag4 = false;
+                }
 
                 if (strOfferAppliedOrNot.equals("Yes")) {
 
@@ -195,7 +350,7 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
 
 
        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +376,7 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
                     Toast.makeText(getApplicationContext(), "Please Select Dish Type First", Toast.LENGTH_SHORT).show();
 
-                } else if (category.equals("")) {
+                } else if (binding.txtFoodType.getSelectedItem().toString().equals("")) {
 
                     Toast.makeText(getApplicationContext(), "Please Select Categoty Veg or NonVeg", Toast.LENGTH_SHORT).show();
 
@@ -230,7 +385,12 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
                 } else {
 
-                    sendSetUpMenu();
+                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                        editSetUpMenu();
+                        Log.e("OfferClickedBtn", binding.txtOffer.getSelectedItem().toString());
+                    } else  {
+                        sendSetUpMenu();
+                    }
 
                 }
             }
@@ -305,7 +465,8 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         String dish_type = strDishTypeId;
         String max_dish = binding.txtOrderLimit.getText().toString();
         String description = binding.edtDescription.getText().toString();
-        String offer = "";
+        String category = binding.txtFoodType.getSelectedItem().toString();
+        String offer = binding.txtOffer.getSelectedItem().toString();
 
         if (addDishType.size() > 0){
 
@@ -380,6 +541,115 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
             @Override
             public void onFailure(Call<ResponseSetMenu> call, Throwable t) {
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                t.printStackTrace();
+                Log.e("error", t.getMessage());
+            }
+        });
+
+
+    }
+
+    private void editSetUpMenu() {
+
+        pd = new ProgressDialog(SetUpAddMenuActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+
+        String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
+        String accesskey = WS_URL_PARAMS.access_key;
+        String business_id = sessionManager.getUserId();
+        String title = binding.edtRestName.getText().toString();
+        String cuisines = strCuisineId;
+        String dish_type = strDishTypeId;
+        String amount = binding.edtPrice.getText().toString();
+        String max_dish = binding.txtOrderLimit.getText().toString();
+        String description = binding.edtDescription.getText().toString();
+        String category = binding.txtFoodType.getSelectedItem().toString();
+        String offer = binding.txtOffer.getSelectedItem().toString();
+
+        if (addDishType.size() > 0){
+
+            StringBuilder sb = new StringBuilder();
+            for (Offer u : addDishType) {
+                sb.append(u.getId()).append("~~");
+            }
+            offer = sb.toString();
+            offer = offer.substring(0, offer.length() - 2);
+            Log.e("string", offer);
+
+        }
+
+
+        RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
+        RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
+        RequestBody t3 = RequestBody.create(MediaType.parse("multipart/form-data"), business_id);
+        RequestBody t4 = RequestBody.create(MediaType.parse("multipart/form-data"), title);
+        RequestBody t5 = RequestBody.create(MediaType.parse("multipart/form-data"), cuisines);
+        RequestBody t6 = RequestBody.create(MediaType.parse("multipart/form-data"), dish_type);
+        RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), amount);
+        RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), max_dish);
+        RequestBody t9 = RequestBody.create(MediaType.parse("multipart/form-data"), description);
+        RequestBody t10 = RequestBody.create(MediaType.parse("multipart/form-data"), category);
+        RequestBody t11 = RequestBody.create(MediaType.parse("multipart/form-data"), offer);
+        RequestBody t12 = RequestBody.create(MediaType.parse("multipart/form-data"), menuId);
+
+
+        File file = null;
+        MultipartBody.Part body1 = null;
+        if (!img2.equals("")) {
+            file = new File(img2);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+            String s = title + "_" + file.getName();
+            String logo = s.replaceAll(" ", "_");
+            body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
+        }
+
+        Log.e("Menu Items Edit Send : ", "business_id : " + business_id + "\ndishName : " + title + "\namount : " + amount +
+                "\ncuisine : " +   cuisines + "\ndishType : " + dish_type + "\ndescription : " +
+                description + "\noffer : " + offer + "\nimage : " + img2 + "\nmaxDish : " +
+                max_dish + "\ncategory : " + category + "\nmenuId : " + menuId);
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseEditDoctorService> call = api.editSetUpMenu(authHeader, t2, t3, t4,t5,t6,t7,t8, t9, t10,t11,t12, body1);
+
+        call.enqueue(new Callback<ResponseEditDoctorService>() {
+            @Override
+            public void onResponse(Call<ResponseEditDoctorService> call, Response<ResponseEditDoctorService> response) {
+
+                Log.e("ResponceEditSetupMenu", new Gson().toJson(response.body()));
+                if (pd.isShowing()) {
+                    pd.dismiss();
+                }
+                if (response.body() != null && response.isSuccessful()) {
+
+                    if (response.body().getError()) {
+
+                        Toast.makeText(SetUpAddMenuActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+/*
+                        getMenuList(sessionManager.getUserId());
+*/
+                        Intent intent = new Intent(SetUpAddMenuActivity.this, SetUpMenuActivity.class);
+                        startActivity(intent);
+                        Log.e("userId", sessionManager.getUserId());
+                    }
+
+                } else {
+                    Toast.makeText(SetUpAddMenuActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEditDoctorService> call, Throwable t) {
                 if (pd.isShowing()) {
                     pd.dismiss();
                 }

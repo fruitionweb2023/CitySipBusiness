@@ -14,6 +14,7 @@ import com.direct2web.citysip.Model.DoctorModels.DoctorDeshboard.ResponseDoctorD
 import com.direct2web.citysip.Model.DoctorModels.DoctorSaveProfile.ResponseDoctorSaveProfile;
 import com.direct2web.citysip.Model.DoctorModels.DoctorServices.ResponseDoctorAddService;
 import com.direct2web.citysip.Model.DoctorModels.DoctorServices.ResponseDoctorServices;
+import com.direct2web.citysip.Model.DoctorModels.DoctorServices.ResponseEditDoctorService;
 import com.direct2web.citysip.Model.DoctorModels.ResponseDoctorGetTiming;
 import com.direct2web.citysip.Model.DoctorModels.ResponseDoctorSendTiming;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceAboutYou.ResponseInsuranceAboutYou;
@@ -397,6 +398,8 @@ public interface Api {
                                                @Part MultipartBody.Part image);
 
 
+
+
     @POST("doctor/business_side/offer-list.php")
     @FormUrlEncoded
     Call<ResponseDoctorCoupons> getCouponsList(@Header("Authorization") String authHeader,
@@ -673,6 +676,8 @@ public interface Api {
                                                            @Field("service_id") String service_id,
                                                            @Field("company_id") String company_id);
 
+
+
     @POST("insurance/business_side/company_service_list.php")
     @FormUrlEncoded
     Call<ResponseInsuranceServiceAndCompanyList> getInsuranceServiceList(@Header("Authorization") String authorization,
@@ -898,7 +903,6 @@ public interface Api {
                                                          @Field("longitude") String longitude,
                                                          @Field("password") String password);
 
-
     @POST("spa_salon/business_side/dashboard.php")
     @FormUrlEncoded
     Call<ResponseSpaAndSalonDeshboard> getSpaAndSalonDeshboardDetails(@Header("Authorization") String authHeader,
@@ -1059,5 +1063,89 @@ public interface Api {
                                                           @Field("percentage") String percentage,
                                                           @Field("id") String id);
 
+    //-----------------------------New Doctor Api----------------------------------
+
+    @Multipart
+    @POST("doctor/business_side/edit_services.php")
+    Call<ResponseEditDoctorService> editDoctorService(@Header("Authorization") String authorization,
+                                                      @Part("accesskey") RequestBody accesskey,
+                                                      @Part("business_id") RequestBody business_id,
+                                                      @Part("doctor_name") RequestBody doctor_name,
+                                                      @Part("service_name") RequestBody service_name,
+                                                      @Part("amount") RequestBody amount,
+                                                      @Part("description") RequestBody description,
+                                                      @Part("offer") RequestBody offer,
+                                                      @Part("id") RequestBody id,
+                                                      @Part MultipartBody.Part image);
+
+    @POST("doctor/business_side/edit_offer.php")
+    @FormUrlEncoded
+    Call<ResponseEditDoctorService> editDoctorCouponsDetails(@Header("Authorization") String authHeader,
+                                                             @Field("accesskey") String accesskey,
+                                                             @Field("business_id") String business_id,
+                                                             @Field("coupn_code") String coupn_code,
+                                                             @Field("min_amount") String min_amount,
+                                                             @Field("max_amount") String max_amount,
+                                                             @Field("terms_condition") String terms_condition,
+                                                             @Field("percentage") String percentage,
+                                                             @Field("id") String id);
+
+    //-----------------------------New Insurence Api----------------------------------
+
+
+    @POST("insurance/business_side/edit_service.php")
+    @FormUrlEncoded
+    Call<ResponseEditDoctorService> editInsuranceService(@Header("Authorization") String authorization,
+                                                         @Field("accesskey") String accesskey,
+                                                         @Field("business_id") String business_id,
+                                                         @Field("company_id") String company_id,
+                                                         @Field("service_id") String service_id,
+                                                         @Field("id") String id);
+
+    //-----------------------------New Lawyer Api----------------------------------
+
+    @Multipart
+    @POST("lawyer/business_side/edit_services.php")
+    Call<ResponseEditDoctorService> editLawyerService(@Header("Authorization") String authorization,
+                                                      @Part("accesskey") RequestBody accesskey,
+                                                      @Part("business_id") RequestBody business_id,
+                                                      @Part("doctor_name") RequestBody doctor_name,
+                                                      @Part("service_name") RequestBody service_name,
+                                                      @Part("amount") RequestBody amount,
+                                                      @Part("description") RequestBody description,
+                                                      @Part("offer") RequestBody offer,
+                                                      @Part("id") RequestBody id,
+                                                      @Part MultipartBody.Part image);
+
+    //-----------------------------New Restaurent Api----------------------------------
+
+
+    @Multipart
+    @POST("restaurant/business_side/edit_offer.php")
+    Call<ResponseEditDoctorService> editSetUpOffers(@Header("Authorization") String authHeader,
+                                                    @Part("accesskey") RequestBody accesskey,
+                                                    @Part("business_id") RequestBody businessId,
+                                                    @Part("coupn_code") RequestBody coupnCode,
+                                                    @Part("min_amount") RequestBody minAmount,
+                                                    @Part("max_amount") RequestBody maxAmount,
+                                                    @Part("terms_condition") RequestBody termsCondition,
+                                                    @Part("percentage") RequestBody percentage,
+                                                    @Part("id") RequestBody id);
+
+    @Multipart
+    @POST("restaurant/business_side/edit_menu_item.php")
+    Call<ResponseEditDoctorService> editSetUpMenu(@Header("Authorization") String authorization,
+                                                  @Part("accesskey") RequestBody accesskey,
+                                                  @Part("business_id") RequestBody business_id,
+                                                  @Part("title") RequestBody title,
+                                                  @Part("cuisines") RequestBody cuisines,
+                                                  @Part("dish_type") RequestBody dish_type,
+                                                  @Part("amount") RequestBody amount,
+                                                  @Part("max_dish") RequestBody max_dish,
+                                                  @Part("description") RequestBody description,
+                                                  @Part("category") RequestBody category,
+                                                  @Part("offer") RequestBody offer,
+                                                  @Part("id") RequestBody id,
+                                                  @Part MultipartBody.Part image);
 
 }

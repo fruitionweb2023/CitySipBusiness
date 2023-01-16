@@ -85,7 +85,7 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
                     public void onClick(DialogInterface dialog, int which) {
                         remove = position;
                         Log.e("Delete Services :", "UserId : "+ new SessionManager(context).getUserId() + "," + "Type : " + "hospital_services" + "Servide Id : " + service.getId() );
-                        delete(new SessionManager(context).getUserId(), "hospital_services", service.getId());
+                        delete(new SessionManager(context).getUserId(), "spa_salon_services", service.getId());
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -110,7 +110,7 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
                     holder.binding.llBottom.setAlpha(0.25f);
                     holder.binding.imgEdit.setClickable(false);
                     holder.binding.imgDelete.setClickable(false);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"0");
+                    sendStatus(new SessionManager(context).getUserId(),"spa_salon_services",service.getId(),"0");
 
                 } else {
 
@@ -119,7 +119,7 @@ public class ServicesListSpaAndSalonAdapter extends RecyclerView.Adapter<Service
                     holder.binding.llBottom.setAlpha(1.0f);
                     holder.binding.imgEdit.setClickable(true);
                     holder.binding.imgDelete.setClickable(true);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"1");
+                    sendStatus(new SessionManager(context).getUserId(),"spa_salon_services",service.getId(),"1");
                 }
 
             }

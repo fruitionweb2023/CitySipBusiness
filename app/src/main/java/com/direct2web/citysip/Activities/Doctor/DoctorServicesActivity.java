@@ -15,6 +15,8 @@ import com.direct2web.citysip.Activities.Restaurent.MainActivity;
 import com.direct2web.citysip.Activities.Restaurent.MenuActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpAddCouponsActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpCouponsActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddServicesActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonServicesActivity;
 import com.direct2web.citysip.Adapter.DoctorAdapters.AppointmentListAdapter;
 import com.direct2web.citysip.Adapter.DoctorAdapters.ServicesListAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.NewCouponsListItemAdapter;
@@ -37,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DoctorServicesActivity extends AppCompatActivity {
+public class DoctorServicesActivity extends AppCompatActivity implements ServicesListAdapter.OnItemClickListner {
 
     ActivityDoctorServicesBinding binding;
     SessionManager sessionManager;
@@ -105,7 +107,7 @@ public class DoctorServicesActivity extends AppCompatActivity {
 
                         serviceList = response.body().getServiceList();
 
-                        adapter = new ServicesListAdapter(serviceList, DoctorServicesActivity.this);
+                        adapter = new ServicesListAdapter(serviceList, DoctorServicesActivity.this,DoctorServicesActivity.this);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DoctorServicesActivity.this);
                         binding.rcleAddServices.setLayoutManager(linearLayoutManager);
                         binding.rcleAddServices.setAdapter(adapter);
@@ -131,6 +133,22 @@ public class DoctorServicesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(DoctorServicesActivity.this, DoctorDeshboardActivity.class);
+        finish();
+        startActivity(i);
+    }
+
+    @Override
+    public void onAddButtonClick(int postion) {
+        Intent i = new Intent(DoctorServicesActivity.this, DoctorAddServicesActivity.class);
+        i.putExtra("flag","1");
+        i.putExtra("serviceName", serviceList.get(postion).getServiceName());
+        i.putExtra("doctorName", serviceList.get(postion).getDoctorName());
+        i.putExtra("amount", serviceList.get(postion).getAmount());
+        i.putExtra("description", serviceList.get(postion).getDescription());
+        i.putExtra("offer", serviceList.get(postion).getOffer());
+        // i.putExtra("name", serviceList.get(postion).getName());
+        i.putExtra("image", serviceList.get(postion).getImage());
+        i.putExtra("serviceId", serviceList.get(postion).getId());
         finish();
         startActivity(i);
     }

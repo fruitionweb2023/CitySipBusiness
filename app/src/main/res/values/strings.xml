@@ -79,8 +79,16 @@
 
     //spinner
     <string-array name="dish_type">
+        <item>Select</item>
         <item>Veg</item>
         <item>NonVeg</item>
+
+    </string-array> //spinner
+
+    <string-array name="select_state">
+        <item>Select</item>
+        <item>Yes</item>
+        <item>No</item>
     </string-array>
 
 

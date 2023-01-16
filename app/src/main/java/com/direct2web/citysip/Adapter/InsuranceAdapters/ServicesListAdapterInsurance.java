@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.direct2web.citysip.Adapter.DoctorAdapters.ServicesListAdapter;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceDeleteData.ResponseInsuranceDelete;
 import com.direct2web.citysip.Model.InsuranceModel.InsuranceServices.Service;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
@@ -42,10 +43,13 @@ public class ServicesListAdapterInsurance extends RecyclerView.Adapter<ServicesL
     Context context;
     ProgressDialog pd;
     int remove;
+    OnItemClickListner addButtonClick;
 
-    public ServicesListAdapterInsurance(List<Service> serviceList, Context context) {
+    public ServicesListAdapterInsurance(List<Service> serviceList, Context context, OnItemClickListner addButtonClick) {
         this.serviceList = serviceList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
+
     }
 
     @NonNull
@@ -63,6 +67,7 @@ public class ServicesListAdapterInsurance extends RecyclerView.Adapter<ServicesL
 
         holder.binding.txtServiceName.setText(service.getServiceName());
         holder.binding.txtDescription.setText(service.getDescription());
+        Log.e("Service Description : ",service.getDescription());
 //        holder.binding.txtName.setText(service.getDoctorName());
 //        holder.binding.txtPrice.setText(service.getAmount());
 
@@ -126,7 +131,8 @@ public class ServicesListAdapterInsurance extends RecyclerView.Adapter<ServicesL
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+//                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -261,5 +267,9 @@ public class ServicesListAdapterInsurance extends RecyclerView.Adapter<ServicesL
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

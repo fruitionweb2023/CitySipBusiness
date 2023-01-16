@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.direct2web.citysip.Adapter.SpaAndSalonAdapter.ServicesListSpaAndSalonAdapter;
 import com.direct2web.citysip.Model.DoctorModels.DoctorCouponsOffers.Offer;
 import com.direct2web.citysip.Model.DoctorModels.DoctorDeleteData.ResponseDoctorDelete;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
@@ -38,10 +40,13 @@ public class CouponListDoctorAdapter extends RecyclerView.Adapter<CouponListDoct
     Context context;
     ProgressDialog pd;
     int remove ;
+    OnItemClickListner addButtonClick;
 
-    public CouponListDoctorAdapter(List<Offer> offerList, Context context) {
+    public CouponListDoctorAdapter(List<Offer> offerList, Context context, OnItemClickListner addButtonClick) {
         this.offerList = offerList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
+
     }
 
     @NonNull
@@ -117,7 +122,8 @@ public class CouponListDoctorAdapter extends RecyclerView.Adapter<CouponListDoct
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -252,5 +258,9 @@ public class CouponListDoctorAdapter extends RecyclerView.Adapter<CouponListDoct
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

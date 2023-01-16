@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.direct2web.citysip.Activities.Restaurent.SetUpAddCouponsActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpCouponsActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddCouponsActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonCouponsActivity;
 import com.direct2web.citysip.Adapter.DoctorAdapters.CouponListDoctorAdapter;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.NewCouponsListItemAdapter;
 import com.direct2web.citysip.Model.DoctorModels.DoctorCouponsOffers.Offer;
@@ -33,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DoctorCouponsActivity extends AppCompatActivity {
+public class DoctorCouponsActivity extends AppCompatActivity implements CouponListDoctorAdapter.OnItemClickListner {
 
     ActivityDoctorCouponsBinding binding;
     SessionManager sessionManager;
@@ -100,7 +102,7 @@ public class DoctorCouponsActivity extends AppCompatActivity {
 
                     } else {
 
-                        adapter = new CouponListDoctorAdapter(offerList, DoctorCouponsActivity.this);
+                        adapter = new CouponListDoctorAdapter(offerList, DoctorCouponsActivity.this,DoctorCouponsActivity.this);
 
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                         binding.rvCouponsListItem.setLayoutManager(layoutManager);
@@ -127,6 +129,20 @@ public class DoctorCouponsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(DoctorCouponsActivity.this, DoctorDeshboardActivity.class);
+        finish();
+        startActivity(i);
+    }
+
+    @Override
+    public void onAddButtonClick(int postion) {
+        Intent i = new Intent(DoctorCouponsActivity.this, DoctorAddCouponsActivity.class);
+        i.putExtra("flag","1");
+        i.putExtra("couponCode", offerList.get(postion).getCoupnCode());
+        i.putExtra("maxAmount", offerList.get(postion).getMaxAmount());
+        i.putExtra("percentage", offerList.get(postion).getPercentage());
+        i.putExtra("minAmount", offerList.get(postion).getMinAmount());
+        i.putExtra("terms", offerList.get(postion).getTermsCondition());
+        i.putExtra("couponId", offerList.get(postion).getId());
         finish();
         startActivity(i);
     }

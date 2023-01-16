@@ -8,24 +8,21 @@ public class Service {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("doctor_name")
-    @Expose
-    private String doctorName;
     @SerializedName("service_name")
     @Expose
     private String serviceName;
-    @SerializedName("amount")
+    @SerializedName("service_id")
     @Expose
-    private String amount;
-    @SerializedName("description")
-    @Expose
-    private String description;
-    @SerializedName("offer")
-    @Expose
-    private String offer;
+    private String serviceId;
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("company_id")
+    @Expose
+    private String companyId;
     @SerializedName("status")
     @Expose
     private String status;
@@ -38,12 +35,12 @@ public class Service {
         this.id = id;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getServiceName() {
@@ -54,12 +51,12 @@ public class Service {
         this.serviceName = serviceName;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getImage() {
+        return image;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
@@ -70,20 +67,12 @@ public class Service {
         this.description = description;
     }
 
-    public String getOffer() {
-        return offer;
+    public String getCompanyId() {
+        return companyId;
     }
 
-    public void setOffer(String offer) {
-        this.offer = offer;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public String getStatus() {

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.direct2web.citysip.Adapter.SpaAndSalonAdapter.ServicesListSpaAndSalonAdapter;
 import com.direct2web.citysip.Model.DoctorModels.DoctorDeleteData.ResponseDoctorDelete;
 import com.direct2web.citysip.Model.DoctorModels.DoctorServices.Service;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
@@ -41,10 +42,13 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
     Context context;
     ProgressDialog pd;
     int remove;
+    OnItemClickListner addButtonClick;
 
-    public ServicesListAdapter(List<Service> serviceList, Context context) {
+    public ServicesListAdapter(List<Service> serviceList, Context context, OnItemClickListner addButtonClick) {
         this.serviceList = serviceList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
+
     }
 
     @NonNull
@@ -127,7 +131,8 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -265,5 +270,9 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

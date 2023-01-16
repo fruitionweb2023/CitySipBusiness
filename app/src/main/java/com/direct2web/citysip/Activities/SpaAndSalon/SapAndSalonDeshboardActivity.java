@@ -84,7 +84,7 @@ public class SapAndSalonDeshboardActivity extends AppCompatActivity {
 
         getDashboardData(sessionManager.getUserId());
 
-        url = "http://direct2web.in/city_slip/api-firebase/business_side/chart.php?business_id="+sessionManager.getUserId();
+        url = "http://medicaiditpark.com/city_slip/api-firebase/business_side/chart.php?business_id="+sessionManager.getUserId();
 
         Log.e("url", url);
 

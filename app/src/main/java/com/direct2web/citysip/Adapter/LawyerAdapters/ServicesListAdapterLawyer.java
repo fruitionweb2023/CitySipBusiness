@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.direct2web.citysip.Adapter.DoctorAdapters.ServicesListAdapter;
 import com.direct2web.citysip.Model.LawyerModels.LawyerDeleteData.ResponseLawyerDelete;
 import com.direct2web.citysip.Model.LawyerModels.LawyerServices.Service;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
@@ -42,10 +43,15 @@ public class ServicesListAdapterLawyer extends RecyclerView.Adapter<ServicesList
     Context context;
     ProgressDialog pd;
     int remove;
+    OnItemClickListner addButtonClick;
 
-    public ServicesListAdapterLawyer(List<Service> serviceList, Context context) {
+
+
+    public ServicesListAdapterLawyer(List<Service> serviceList, Context context,OnItemClickListner addButtonClick) {
         this.serviceList = serviceList;
         this.context = context;
+        this.addButtonClick = addButtonClick;
+
     }
 
     @NonNull
@@ -126,7 +132,8 @@ public class ServicesListAdapterLawyer extends RecyclerView.Adapter<ServicesList
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+                addButtonClick.onAddButtonClick(position);
+               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -261,5 +268,9 @@ public class ServicesListAdapterLawyer extends RecyclerView.Adapter<ServicesList
                 Log.e("errorStatus", t.getMessage());
             }
         });
+    }
+
+    public interface OnItemClickListner{
+        public void onAddButtonClick(int postion);
     }
 }

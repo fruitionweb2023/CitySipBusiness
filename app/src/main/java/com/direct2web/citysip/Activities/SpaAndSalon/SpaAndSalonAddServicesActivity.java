@@ -83,8 +83,8 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
             binding.txtAboutService.setText(getIntent().getStringExtra("description"));
             binding.btnSubmit.setText("Edit");
             couponId = getIntent().getStringExtra("serviceId");
-            img2 = getIntent().getStringExtra("image");
-            Glide.with(this).load(Api.imageUrl + img2)
+            //img2 = getIntent().getStringExtra("image");
+            Glide.with(this).load(Api.imageUrl + getIntent().getStringExtra("image"))
                     .thumbnail(0.5f)
                     .error(R.drawable.city_sip_logo)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -253,6 +253,8 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
 
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseEditService> call = api.editSpaAndSalonService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,body1);
+
+        Log.e("Services Edit : ","business_id : " + business_id + "\nname : " + name + "\nservice : " + service + "\nprice : " + price + "\ndescription : " + description + "\noffer : " + offer + "\nserviceId : " + serviceId + "\nimage : " + img2);
 
         call.enqueue(new Callback<ResponseEditService>() {
             @Override

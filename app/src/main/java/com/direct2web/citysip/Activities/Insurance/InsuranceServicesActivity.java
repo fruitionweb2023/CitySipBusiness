@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InsuranceServicesActivity extends AppCompatActivity {
+public class InsuranceServicesActivity extends AppCompatActivity implements ServicesListAdapterInsurance.OnItemClickListner {
 
     ActivityInsuranceServicesBinding binding;
     SessionManager sessionManager;
@@ -105,9 +105,7 @@ public class InsuranceServicesActivity extends AppCompatActivity {
 
                         serviceList = response.body().getServiceList();
 
-                        adapter = new ServicesListAdapterInsurance(serviceList, InsuranceServicesActivity.this);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(InsuranceServicesActivity.this);
-                        binding.rcleAddServices.setLayoutManager(linearLayoutManager);
+                        adapter = new ServicesListAdapterInsurance(serviceList, InsuranceServicesActivity.this,InsuranceServicesActivity.this);
                         binding.rcleAddServices.setAdapter(adapter);
                     }
 
@@ -133,5 +131,29 @@ public class InsuranceServicesActivity extends AppCompatActivity {
         Intent i = new Intent(InsuranceServicesActivity.this, InsuranceDashboardActivity.class);
         finish();
         startActivity(i);
+    }
+
+    @Override
+    public void onAddButtonClick(int postion) {
+
+        Intent i = new Intent(InsuranceServicesActivity.this, InsuranceAddServicesActivity.class);
+        i.putExtra("flag", "1");
+        i.putExtra("company_id", serviceList.get(postion).getCompanyId());
+        i.putExtra("service_id", serviceList.get(postion).getServiceId());
+        i.putExtra("id", serviceList.get(postion).getId());
+        i.putExtra("serviceName", serviceList.get(postion).getServiceName());
+        i.putExtra("description", serviceList.get(postion).getDescription());
+
+        Log.e("Service send Data : ",
+                "\ncompany_id : " + serviceList.get(postion).getCompanyId() +
+                " \nservice_id : " + serviceList.get(postion).getServiceId() +
+                "\nid : " + serviceList.get(postion).getId() +
+                "\nserviceName : " + serviceList.get(postion).getServiceName() +
+                "\ndescription : " + serviceList.get(postion).getDescription()
+        );
+
+        finish();
+        startActivity(i);
+
     }
 }

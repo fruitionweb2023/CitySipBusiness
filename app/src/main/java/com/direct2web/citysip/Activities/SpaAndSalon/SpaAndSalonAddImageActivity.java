@@ -439,6 +439,7 @@ public class SpaAndSalonAddImageActivity extends AppCompatActivity implements Ad
         Api api = RetrofitClient.getClient().create(Api.class);
 
         Call<ResponseSpaAndSalonAddImage> call = api.sendSpaAndSalonImage(header, t2, t1, body);
+        Log.e("Image Send :" , "businessId : " + business_id + "Image : " + body );
         call.enqueue(new Callback<ResponseSpaAndSalonAddImage>() {
             @Override
             public void onResponse(Call<ResponseSpaAndSalonAddImage> call, Response<ResponseSpaAndSalonAddImage> response) {
@@ -477,6 +478,8 @@ public class SpaAndSalonAddImageActivity extends AppCompatActivity implements Ad
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseSpaAndSalonAddImageAndVedio> call = api.getSpaAndSalonImageAndVedioList("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key, userId);
+        Log.e("Image get :" , "UserId : " + userId );
+
         call.enqueue(new Callback<ResponseSpaAndSalonAddImageAndVedio>() {
             @Override
             public void onResponse(Call<ResponseSpaAndSalonAddImageAndVedio> call, Response<ResponseSpaAndSalonAddImageAndVedio> response) {

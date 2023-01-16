@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonAddServicesActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonServicesActivity;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.NewCouponsListItemAdapter;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
 import com.direct2web.citysip.Model.RestaurentModels.offer.Offer;
@@ -67,6 +70,8 @@ public class SetUpCouponsActivity extends AppCompatActivity implements NewCoupon
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SetUpCouponsActivity.this, SetUpAddCouponsActivity.class);
+                intent.putExtra("flag","0");
+
                 startActivity(intent);
             }
         });
@@ -125,8 +130,23 @@ public class SetUpCouponsActivity extends AppCompatActivity implements NewCoupon
     @Override
     public void onEditButtonClicked(int postion) {
 
-        Intent intent = new Intent(SetUpCouponsActivity.this, SetUpEditCoupons.class);
-        startActivity(intent);
+        Intent i = new Intent(SetUpCouponsActivity.this, SetUpAddCouponsActivity.class);
+        i.putExtra("flag","1");
+        i.putExtra("precentage", offerList.get(postion).getPercentage());
+        i.putExtra("couponCode", offerList.get(postion).getCoupnCode());
+        i.putExtra("maxAmount", offerList.get(postion).getMaxAmount());
+        i.putExtra("minAmount", offerList.get(postion).getMinAmount());
+        i.putExtra("termsAndCondition", offerList.get(postion).getTermsCondition());
+        i.putExtra("offerId", offerList.get(postion).getId());
+
+        Log.e("Coupon Send Data : ", "precentage" + offerList.get(postion).getPercentage() +
+                "\ncouponCode : " +  offerList.get(postion).getCoupnCode() +
+                "\nmaxAmount : " + offerList.get(postion).getMaxAmount() +
+                "\nminAmount : " + offerList.get(postion).getMinAmount() +
+                "\ntermsAndCondition : " + offerList.get(postion).getTermsCondition() +
+                "\nofferId : " +   offerList.get(postion).getId());
+        finish();
+        startActivity(i);
     }
 
     @Override
