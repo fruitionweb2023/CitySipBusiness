@@ -3,11 +3,14 @@ package com.direct2web.citysip.Adapter.RestaurentAdapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.direct2web.citysip.Model.RestaurentModels.ImageVideo.Video;
@@ -28,11 +31,13 @@ public class SelectedVideoAdapter extends RecyclerView.Adapter<SelectedVideoAdap
     private DefaultTrackSelector trackSelector;
     SimpleExoPlayer simpleExoPlayer;
     OnItemClickListner addVedio;
+    OnVideoItemClickListner playVedio;
 
-    public SelectedVideoAdapter(Context context, List<Video> stringArrayList,OnItemClickListner addVedio) {
+    public SelectedVideoAdapter(Context context, List<Video> stringArrayList,OnItemClickListner addVedio,OnVideoItemClickListner playVedio) {
         this.context = context;
         this.stringArrayList = stringArrayList;
         this.addVedio = addVedio;
+        this.playVedio= playVedio;
     }
 
 
@@ -67,6 +72,15 @@ public class SelectedVideoAdapter extends RecyclerView.Adapter<SelectedVideoAdap
                 }
             });
         } else {
+
+            holder.videoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    playVedio.onPlayVideoButtonClick(position);
+                    Log.e("VideoBtnClicked : ", "URL : " + stringArrayList.get(position).getVideo() );
+                }
+
+            });
 //            vid_url = stringArrayList.get(position).getUri();
 //
 //            holder.videoView.setVideoURI(vid_url);
@@ -91,6 +105,7 @@ public class SelectedVideoAdapter extends RecyclerView.Adapter<SelectedVideoAdap
 
             simpleExoPlayer.addMediaItem(mediaItem);
             simpleExoPlayer.prepare();
+
 
             //simpleExoPlayer.play();
 
@@ -158,10 +173,12 @@ public class SelectedVideoAdapter extends RecyclerView.Adapter<SelectedVideoAdap
         ImageView play;
         ImageView pause;
         ImageView btnAddVideo;
+        RelativeLayout btnCard;
 
         public ViewHolder(View itemView) {
             super(itemView);
             videoView = (PlayerView) itemView.findViewById(R.id.videoView);
+            btnCard = (RelativeLayout) itemView.findViewById(R.id.rl_main);
 //            farwordBtn = (ImageView) videoView.findViewById(R.id.fwd);
 //            rewBtn = (ImageView) videoView.findViewById(R.id.rew);
 //
@@ -193,6 +210,11 @@ public class SelectedVideoAdapter extends RecyclerView.Adapter<SelectedVideoAdap
 
     public interface OnItemClickListner{
         public void onAddButtonClick(int postion);
+
+    }
+
+    public interface OnVideoItemClickListner{
+        public void onPlayVideoButtonClick(int postion);
 
     }
 }

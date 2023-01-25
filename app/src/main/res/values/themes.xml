@@ -40,6 +40,12 @@
 
     </style>
 
+    <style name="SCBSwitchDoctor" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/clr_0059C8</item>
+
+    </style>
+
     <style name="SCBSwitchSS" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">@color/clr_spa_salon</item>

@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         checkAndRequestPermissions();
 
-        getData(sessionManager.getUserId(), "monthly_turn_over");
 
         getDashboardData(sessionManager.getUserId());
 
@@ -161,9 +160,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getData(String userId, String monthly_turn_over) {
+   /* private void getData(String userId, String monthly_turn_over) {
 
-
+        Log.e("MonthlyTurnOver : ", "UserId : " + userId + "\nMonthlyTurnOver : " + monthly_turn_over );
         Api api = RetrofitClient.getClient().create(Api.class);
 
         Call<ResponseGetBasicDetails> call = api.getBasicDetails("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
@@ -185,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     } else {
 
-                       // binding.txtRevenueCount.setText(response.body().getDetailData());
+                       // binding.txtRevenueCount.setText("₹" + response.body().getDetailData());
 
                     }
 
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 
     private void getMenuList2(String userId) {
 
@@ -465,7 +464,8 @@ public class MainActivity extends AppCompatActivity {
                         binding.txtInActiveMenu.setText(response.body().getmInactiveMenuItem());
                         binding.txtActiveOffer.setText(response.body().getmActiveOffer());
                         binding.txtInActiveOffer.setText(response.body().getmInactiveOffer());
-                         binding.txtRevenueCount.setText("₹" + response.body().getMonthlyTurenOver());
+                        binding.txtRevenueCount.setText("₹" + response.body().getMonthlyTurenOver());
+                      //  getData(sessionManager.getUserId(), response.body().getMonthlyTurenOver());
 
 
                     }

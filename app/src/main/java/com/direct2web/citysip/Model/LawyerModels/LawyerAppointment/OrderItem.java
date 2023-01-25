@@ -5,60 +5,84 @@ import com.google.gson.annotations.SerializedName;
 
 public class OrderItem {
 
-@SerializedName("id")
-@Expose
-private String id;
-@SerializedName("item_id")
-@Expose
-private String itemId;
-@SerializedName("qty")
-@Expose
-private String qty;
-@SerializedName("amount")
-@Expose
-private String amount;
-@SerializedName("service_name")
-@Expose
-private String serviceName;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("item_id")
+    @Expose
+    private String itemId;
+    @SerializedName("qty")
+    @Expose
+    private String qty;
+    @SerializedName("amount")
+    @Expose
+    private String amount;
+    @SerializedName("service_name")
+    @Expose
+    private String serviceName;
 
-public String getId() {
-return id;
-}
+    @SerializedName("appointment_time")
+    @Expose
+    private String appointmentTime;
 
-public void setId(String id) {
-this.id = id;
-}
+    @SerializedName("appointment_date")
+    @Expose
+    private String appointmentDate;
 
-public String getItemId() {
-return itemId;
-}
+    public String getId() {
+        return id;
+    }
 
-public void setItemId(String itemId) {
-this.itemId = itemId;
-}
+    public String getAppointmentTime() {
+        return appointmentTime;
+    }
 
-public String getQty() {
-return qty;
-}
+    public void setAppointmentTime(String appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
 
-public void setQty(String qty) {
-this.qty = qty;
-}
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
 
-public String getAmount() {
-return amount;
-}
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
 
-public void setAmount(String amount) {
-this.amount = amount;
-}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-public String getServiceName() {
-return serviceName;
-}
+    public String getItemId() {
+        return itemId;
+    }
 
-public void setServiceName(String serviceName) {
-this.serviceName = serviceName;
-}
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
 
 }

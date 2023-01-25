@@ -56,29 +56,38 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
 
+       /* if (getIntent().getStringExtra("flag").equals("1") && getIntent().getStringExtra("flag") != null) {
+
+            binding.edtRestName.setText(getIntent().getStringExtra("userName"));
+            binding.edtRestNumber.setText(getIntent().getStringExtra("contect"));
+            binding.edtRestWebsite.setText(getIntent().getStringExtra("dob"));
+            binding.edtRestDescription.setText(getIntent().getStringExtra("nationality"));
+            binding.btnVerify.setText("Edit");
+
+        } else {
+
+            binding.edtRestName.setText("");
+            binding.edtRestNumber.setText("");
+            binding.edtRestWebsite.setText("Select Date");
+            binding.edtRestDescription.setText("");
+            binding.btnVerify.setText("Continue");
+        }*/
 
         binding.edtRestName.addTextChangedListener(tw);
         binding.edtRestNumber.addTextChangedListener(tw);
         binding.edtRestWebsite.addTextChangedListener(tw);
         binding.edtRestDescription.addTextChangedListener(tw);
 
-         date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, monthOfYear);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+         date = (view, year, monthOfYear, dayOfMonth) -> {
+             // TODO Auto-generated method stub
+             calendar.set(Calendar.YEAR, year);
+             calendar.set(Calendar.MONTH, monthOfYear);
+             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
 
-                updateLabel();
+             updateLabel();
 
-            }
-
-
-        };
+         };
 
         binding.edtRestWebsite.setOnClickListener(new View.OnClickListener() {
 
@@ -128,6 +137,11 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
 
                     if (new ConnectionToInternet(DoctorAboutYouActivity.this).isConnectingToInternet()) {
                         sendProfile(sessionManager.getUserId());
+/*
+                        if (getIntent().getStringExtra("flag").equals("1")) {
+                           editProfile(sessionManager.getUserId());
+                       } else {
+                       }*/
                     } else {
                         new ConnectionToInternet(DoctorAboutYouActivity.this).ShowDilog(DoctorAboutYouActivity.this);
                     }
@@ -139,7 +153,7 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         if (flag_calander == 1) {
             binding.edtRestWebsite.setText(sdf.format(calendar.getTime()));
@@ -164,6 +178,7 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseDoctorAboutYou> call = api.sendAboutDetails("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key,userId,name,number,dateOfBirth,nationality);
+
         call.enqueue(new Callback<ResponseDoctorAboutYou>() {
             @Override
             public void onResponse(Call<ResponseDoctorAboutYou> call, Response<ResponseDoctorAboutYou> response) {
@@ -196,6 +211,56 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
         });
     }
 
+    private void editProfile(String userId) {
+
+
+        pd = new ProgressDialog(DoctorAboutYouActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+        String name = binding.edtRestName.getText().toString();
+        String number = binding.edtRestNumber.getText().toString();
+        String dateOfBirth = binding.edtRestWebsite.getText().toString();
+        String nationality = binding.edtRestDescription.getText().toString();
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseSendProfile> call = api.editAboutyou("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
+                WS_URL_PARAMS.access_key,userId,name,number,dateOfBirth,nationality);
+
+        call.enqueue(new Callback<ResponseSendProfile>() {
+            @Override
+            public void onResponse(Call<ResponseSendProfile> call, Response<ResponseSendProfile> response) {
+
+                Log.e("responseEditProfile",new Gson().toJson(response.body()));
+                pd.dismiss();
+                if (response.body() != null && response.isSuccessful()){
+
+                    if (!response.body().getError()){
+
+                        Intent i = new Intent(DoctorAboutYouActivity.this, DoctorAboutBusinessActivity.class);
+                        finish();
+                        startActivity(i);
+
+                    }else {
+                        Toast.makeText(DoctorAboutYouActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    Toast.makeText(DoctorAboutYouActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseSendProfile> call, Throwable t) {
+                pd.dismiss();
+                t.printStackTrace();
+                Log.e("errorEditProfile", t.getMessage());
+            }
+        });
+    }
+
 
     TextWatcher tw = new TextWatcher() {
         @Override
@@ -205,7 +270,7 @@ public class DoctorAboutYouActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (binding.edtRestName.getText().length() > 0 && binding.edtRestNumber.getText().length() > 0 && binding.edtRestWebsite.getText().length() > 0 && binding.edtRestDescription.getText().length() > 0) {
                 binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button));
+                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_doctor));
 
             } else {
 

@@ -32,7 +32,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.direct2web.citysip.Activities.Restaurent.VideoListActivity;
 import com.direct2web.citysip.Activities.Restaurent.VideoTrimmerActivity;
+import com.direct2web.citysip.Activities.VideoViewActivity;
 import com.direct2web.citysip.Adapter.DoctorAdapters.AddAndSetVedioListDoctorAdapter;
 import com.direct2web.citysip.Model.DoctorModels.DoctorAddImage.ImageAndVedio.ResponseDoctorAddImageAndVedio;
 import com.direct2web.citysip.Model.DoctorModels.DoctorAddImage.ImageAndVedio.Video;
@@ -59,7 +61,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndSetVedioListDoctorAdapter.OnItemClickListner {
+public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndSetVedioListDoctorAdapter.OnItemClickListner, AddAndSetVedioListDoctorAdapter.OnVideoItemClickListner {
 
     ActivityDoctorAddVedioBinding binding;
     SessionManager sessionManager;
@@ -129,7 +131,7 @@ public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndS
             int numberOfColumns = 3;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
             binding.rclrVideo.setLayoutManager(gridLayoutManager);
-            AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(this, vedioList,this);
+            AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(this, vedioList,this,this);
             binding.rclrVideo.setAdapter(propertyImageAdapter);
         }
 
@@ -292,7 +294,7 @@ public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndS
         int numberOfColumns = 3;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-        AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(this, vedioList,DoctorAddVedioActivity.this);
+        AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(this, vedioList,DoctorAddVedioActivity.this,DoctorAddVedioActivity.this);
         binding.rclrVideo.setAdapter(propertyImageAdapter);
     }
 
@@ -551,7 +553,7 @@ public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndS
                         int numberOfColumns = 3;
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(DoctorAddVedioActivity.this,numberOfColumns);
                         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-                        AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(DoctorAddVedioActivity.this, vedioList,DoctorAddVedioActivity.this);
+                        AddAndSetVedioListDoctorAdapter propertyImageAdapter = new AddAndSetVedioListDoctorAdapter(DoctorAddVedioActivity.this, vedioList,DoctorAddVedioActivity.this,DoctorAddVedioActivity.this);
                         binding.rclrVideo.setAdapter(propertyImageAdapter);
 
 
@@ -659,5 +661,14 @@ public class DoctorAddVedioActivity extends AppCompatActivity implements AddAndS
         Intent i = new Intent(DoctorAddVedioActivity.this, DoctorBusinessProfileActivity.class);
         finish();
         startActivity(i);
+    }
+
+    @Override
+    public void onPlayVideoButtonClick(int postion) {
+
+        Intent intent = new Intent(DoctorAddVedioActivity.this, VideoViewActivity.class);
+        intent.putExtra("video", vedioList.get(postion).getVideo());
+        Log.e("SendUrlVideo : ", "URL : " + vedioList.get(postion).getVideo());
+        startActivity(intent);
     }
 }

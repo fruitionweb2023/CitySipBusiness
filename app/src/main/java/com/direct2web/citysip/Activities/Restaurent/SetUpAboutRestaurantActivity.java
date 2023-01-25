@@ -1,8 +1,10 @@
 package com.direct2web.citysip.Activities.Restaurent;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,9 @@ import com.direct2web.citysip.Utils.SessionManager;
 import com.direct2web.citysip.Utils.WS_URL_PARAMS;
 import com.direct2web.citysip.databinding.ActivitySetUpAboutRestaurantBinding;
 import com.google.gson.Gson;
+
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,6 +54,7 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
                     binding.restauraneLayout.setAlpha(0.25f);
                     binding.locationLayout.setAlpha(0.25f);
                     binding.imgEdit.setClickable(false);
+                    binding.imgEditLocation.setClickable(false);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"0");
 
                 } else {
@@ -56,14 +62,34 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
                     binding.restauraneLayout.setAlpha(1.0f);
                     binding.locationLayout.setAlpha(1.0f);
                     binding.imgEdit.setClickable(true);
+                    binding.imgEditLocation.setClickable(true);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"1");
+
 
                 }
             }
         });
+
+        binding.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(SetUpAboutRestaurantActivity.this, EditRestaurantDetailsActivity.class);
+                i.putExtra("contect",binding.txtPhoneNo.getText().toString());
+                i.putExtra("website",binding.txtWebsite.getText().toString());
+                i.putExtra("about",binding.txtDescription.getText().toString());
+                i.putExtra("businessName",binding.txtBusignessName.getText().toString());
+                startActivity(i);
+            }
+        });
+
+
+
+
     }
 
     private void getRestaurantDetails(String userId) {
+        Log.e("AboutBusiness : ", userId );
 
         Api api = RetrofitClient.getClient().create(Api.class);
 
@@ -72,7 +98,7 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
         call.enqueue(new Callback<AboutResturant>() {
             @Override
             public void onResponse(Call<AboutResturant> call, Response<AboutResturant> response) {
-                Log.e("responseAboutRestaurant", new Gson().toJson(response.body()));
+                Log.e("ResponseAboutRestaurant", new Gson().toJson(response.body()));
 
                 if (pd.isShowing()) {
                     pd.dismiss();
@@ -100,6 +126,7 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
                             binding.switchOnOff.setChecked(true);
                             binding.restauraneLayout.setAlpha(1.0f);
                             binding.imgEdit.setClickable(true);
+                            binding.imgEditLocation.setClickable(true);
                             binding.locationLayout.setAlpha(1.0f);
 
 
@@ -107,15 +134,29 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
                             binding.switchOnOff.setChecked(false);
                             binding.restauraneLayout.setAlpha(0.25f);
                             binding.imgEdit.setClickable(false);
+                            binding.imgEditLocation.setClickable(false);
                             binding.locationLayout.setAlpha(0.25f);
 
 
                         }
 
+                        binding.imgEditLocation.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Intent i = new Intent(SetUpAboutRestaurantActivity.this, EditLocationFetchActivity.class);
+                                i.putExtra("lat",response.body().getLatitude());
+                                i.putExtra("lang",response.body().getLongitude());
+                                i.putExtra("address1",response.body().getAddressLine1());
+                                i.putExtra("address2",response.body().getAddressLine2());
+                                startActivity(i);
+                            }
+                        });
+
                     }
 
                 }else {
-                    Toast.makeText(SetUpAboutRestaurantActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SetUpAboutRestaurantActivity.this, Objects.requireNonNull(response.body()).getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -181,4 +222,12 @@ public class SetUpAboutRestaurantActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SetUpAboutRestaurantActivity.this, MenuActivity.class);
+        finish();
+        startActivity(i);
+    }
+
 }

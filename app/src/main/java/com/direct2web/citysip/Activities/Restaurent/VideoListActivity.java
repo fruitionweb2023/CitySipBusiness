@@ -33,6 +33,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.direct2web.citysip.Activities.VideoViewActivity;
 import com.direct2web.citysip.Adapter.RestaurentAdapters.SelectedVideoAdapter;
 import com.direct2web.citysip.Model.RestaurentModels.ImageVideo.ResponseAddVideo;
 import com.direct2web.citysip.Model.RestaurentModels.ImageVideo.ResponseImageVideoList;
@@ -59,7 +60,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideoListActivity extends AppCompatActivity implements SelectedVideoAdapter.OnItemClickListner{
+public class VideoListActivity extends AppCompatActivity implements SelectedVideoAdapter.OnItemClickListner, SelectedVideoAdapter.OnVideoItemClickListner {
 
     private static final String TAG = "MainActivity";
     private static final int REQUEST_TAKE_GALLERY_VIDEO = 100;
@@ -151,7 +152,7 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
             int numberOfColumns = 3;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
             binding.rclrVideo.setLayoutManager(gridLayoutManager);
-            SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(this, imagesEncodedList,this);
+            SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(this, imagesEncodedList,this,this);
             binding.rclrVideo.setAdapter(propertyImageAdapter);
         }
 
@@ -289,7 +290,7 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                         int numberOfColumns = 3;
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(VideoListActivity.this,numberOfColumns);
                         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-                        SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(VideoListActivity.this, imagesEncodedList,VideoListActivity.this);
+                        SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(VideoListActivity.this, imagesEncodedList,VideoListActivity.this,VideoListActivity.this);
                         binding.rclrVideo.setAdapter(propertyImageAdapter);
 
 
@@ -447,7 +448,7 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
         int numberOfColumns = 3;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-        SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(this, imagesEncodedList,VideoListActivity.this);
+        SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(this, imagesEncodedList,VideoListActivity.this,VideoListActivity.this);
         binding.rclrVideo.setAdapter(propertyImageAdapter);
         //selectedImageAdapter.notifyDataSetChanged();
         //imageAdapter.notifyDataSetChanged();
@@ -765,5 +766,14 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
             clicked = true;
             onMinToMaxTrimClicked();
         }*/
+    }
+
+    @Override
+    public void onPlayVideoButtonClick(int postion) {
+
+        Intent intent = new Intent(VideoListActivity.this, VideoViewActivity.class);
+        intent.putExtra("video", imagesEncodedList.get(postion).getVideo());
+        Log.e("SendUrlVideo : ", "URL : " + imagesEncodedList.get(postion).getVideo());
+        startActivity(intent);
     }
 }

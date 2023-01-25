@@ -126,6 +126,8 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
             addDishType.clear();
             for (int i=0;i<array.length;i++) {
                 addDishType.add(new CompanyList(array[i],array2[i]));
+                cId = array[i];
+                cDesc = array2[i];
 
             }
 

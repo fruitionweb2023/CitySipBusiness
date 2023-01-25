@@ -520,7 +520,7 @@ public class InsuranceSelectTimingActivtiy extends AppCompatActivity implements 
 
                         } else {
 
-                            Intent intent = new Intent(InsuranceSelectTimingActivtiy.this, DoctorSetUpTimingListActivity.class);
+                            Intent intent = new Intent(InsuranceSelectTimingActivtiy.this, InsuranceSetUpTimingListActivity.class);
                             finish();
                             startActivity(intent);
 

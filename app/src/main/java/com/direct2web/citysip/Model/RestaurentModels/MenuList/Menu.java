@@ -29,6 +29,12 @@ public class Menu {
     @SerializedName("category")
     @Expose
     private String category;
+    @SerializedName("offer_id")
+    @Expose
+    private String offerId;
+    @SerializedName("offer_desc")
+    @Expose
+    private String offerDesc;
     @SerializedName("image")
     @Expose
     private String image;
@@ -54,6 +60,22 @@ public class Menu {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(String offerId) {
+        this.offerId = offerId;
+    }
+
+    public String getOfferDesc() {
+        return offerDesc;
+    }
+
+    public void setOfferDesc(String offerDesc) {
+        this.offerDesc = offerDesc;
     }
 
     public String getCuisines() {

@@ -32,8 +32,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.direct2web.citysip.Activities.Doctor.DoctorAddVedioActivity;
 import com.direct2web.citysip.Activities.Doctor.DoctorDeleteVideoActivity;
 import com.direct2web.citysip.Activities.Restaurent.VideoTrimmerActivity;
+import com.direct2web.citysip.Activities.VideoViewActivity;
 import com.direct2web.citysip.Adapter.LawyerAdapters.AddAndSetVedioListLawyerAdapter;
 import com.direct2web.citysip.Model.LawyerModels.LawyerAddImage.ImageAndVedio.ResponseLawyerAddImageAndVedio;
 import com.direct2web.citysip.Model.LawyerModels.LawyerAddImage.ImageAndVedio.Video;
@@ -60,7 +62,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndSetVedioListLawyerAdapter.OnItemClickListner {
+public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndSetVedioListLawyerAdapter.OnItemClickListner, AddAndSetVedioListLawyerAdapter.OnVideoItemClickListner {
 
     ActivityLawyerAddVedioBinding binding;
     SessionManager sessionManager;
@@ -130,7 +132,7 @@ public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndS
             int numberOfColumns = 3;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
             binding.rclrVideo.setLayoutManager(gridLayoutManager);
-            AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(this, vedioList,this);
+            AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(this, vedioList,this,this);
             binding.rclrVideo.setAdapter(propertyImageAdapter);
         }
 
@@ -275,7 +277,7 @@ public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndS
         int numberOfColumns = 3;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-        AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(this, vedioList, LawyerAddVideoActivity.this);
+        AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(this, vedioList, LawyerAddVideoActivity.this,LawyerAddVideoActivity.this);
         binding.rclrVideo.setAdapter(propertyImageAdapter);
     }
 
@@ -544,7 +546,7 @@ public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndS
                         int numberOfColumns = 3;
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(LawyerAddVideoActivity.this,numberOfColumns);
                         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-                        AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(LawyerAddVideoActivity.this, vedioList, LawyerAddVideoActivity.this);
+                        AddAndSetVedioListLawyerAdapter propertyImageAdapter = new AddAndSetVedioListLawyerAdapter(LawyerAddVideoActivity.this, vedioList, LawyerAddVideoActivity.this,LawyerAddVideoActivity.this);
                         binding.rclrVideo.setAdapter(propertyImageAdapter);
 
 
@@ -652,5 +654,14 @@ public class LawyerAddVideoActivity extends AppCompatActivity implements AddAndS
         Intent i = new Intent(LawyerAddVideoActivity.this, LawyerMenuActivity.class);
         finish();
         startActivity(i);
+    }
+
+    @Override
+    public void onPlayVideoButtonClick(int postion) {
+
+        Intent intent = new Intent(LawyerAddVideoActivity.this, VideoViewActivity.class);
+        intent.putExtra("video", vedioList.get(postion).getVideo());
+        Log.e("SendUrlVideo : ", "URL : " + vedioList.get(postion).getVideo());
+        startActivity(intent);
     }
 }

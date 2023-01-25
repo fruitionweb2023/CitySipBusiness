@@ -83,7 +83,8 @@
         <item>Veg</item>
         <item>NonVeg</item>
 
-    </string-array> //spinner
+    </string-array>
+    //spinner
 
     <string-array name="select_state">
         <item>Select</item>

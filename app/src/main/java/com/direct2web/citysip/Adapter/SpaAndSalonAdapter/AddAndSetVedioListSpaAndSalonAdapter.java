@@ -3,6 +3,7 @@ package com.direct2web.citysip.Adapter.SpaAndSalonAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.direct2web.citysip.Adapter.DoctorAdapters.AddAndSetVedioListDoctorAdapter;
 import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.Video;
 import com.direct2web.citysip.R;
 import com.google.android.exoplayer2.MediaItem;
@@ -28,11 +30,13 @@ public class AddAndSetVedioListSpaAndSalonAdapter extends RecyclerView.Adapter<A
     private DefaultTrackSelector trackSelector;
     SimpleExoPlayer simpleExoPlayer;
     OnItemClickListner addVedio;
+    OnVideoItemClickListner playVedio;
 
-    public AddAndSetVedioListSpaAndSalonAdapter(Context context, List<Video> videoList, OnItemClickListner addVedio) {
+    public AddAndSetVedioListSpaAndSalonAdapter(Context context, List<Video> videoList, OnItemClickListner addVedio, OnVideoItemClickListner playVedio) {
         this.context = context;
         this.videoList = videoList;
         this.addVedio = addVedio;
+        this.playVedio= playVedio;
     }
 
 
@@ -64,6 +68,15 @@ public class AddAndSetVedioListSpaAndSalonAdapter extends RecyclerView.Adapter<A
             });
 
         } else {
+
+            holder.videoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    playVedio.onPlayVideoButtonClick(position);
+                    Log.e("VideoBtnClicked : ", "URL : " + videoList.get(position).getVideo() );
+                }
+
+            });
 
             if (videoList.get(position).getUri() == null){
                 vid_url = Uri.parse(videoList.get(position).getVideo());
@@ -123,6 +136,11 @@ public class AddAndSetVedioListSpaAndSalonAdapter extends RecyclerView.Adapter<A
 
     public interface OnItemClickListner{
         public void onAddButtonClick(int postion);
+
+    }
+
+    public interface OnVideoItemClickListner{
+        public void onPlayVideoButtonClick(int postion);
 
     }
 }

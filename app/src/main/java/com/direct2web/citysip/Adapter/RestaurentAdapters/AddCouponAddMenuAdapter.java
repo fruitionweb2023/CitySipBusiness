@@ -117,7 +117,7 @@ public class AddCouponAddMenuAdapter extends RecyclerView.Adapter<AddCouponAddMe
 
     }
 
-    public void updateDataList(ArrayList<Offer> categoryList) {
+    public void updateDataList(List<Offer> categoryList) {
 
         this.stringArrayList = categoryList;
         notifyDataSetChanged();

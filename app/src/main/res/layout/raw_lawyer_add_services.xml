@@ -135,6 +135,8 @@
                         android:text="Lorem ipsum is the dum..."
                         android:textColor="@color/clr_888888"
                         android:textSize="14sp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
                         android:textStyle="normal"/>
 
 

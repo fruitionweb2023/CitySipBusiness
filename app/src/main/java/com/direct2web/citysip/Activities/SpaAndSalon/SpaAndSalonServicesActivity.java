@@ -140,6 +140,7 @@ public class SpaAndSalonServicesActivity extends AppCompatActivity implements Se
        // i.putExtra("name", serviceList.get(postion).getName());
         i.putExtra("image", serviceList.get(postion).getImage());
         i.putExtra("serviceId", serviceList.get(postion).getId());
+        i.putExtra("time", serviceList.get(postion).getTime());
         finish();
         startActivity(i);
     }

@@ -35,6 +35,14 @@ public class Order {
     @Expose
     private String appointmentTime;
 
+    @SerializedName("appointment_date")
+    @Expose
+    private String appointmentDate;
+
+    @SerializedName("customer_number")
+    @Expose
+    private String appointmentNumber;
+
     public String getAppointmentTime() {
         return appointmentTime;
     }
@@ -43,7 +51,21 @@ public class Order {
         this.appointmentTime = appointmentTime;
     }
 
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
 
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public String getAppointmentNumber() {
+        return appointmentNumber;
+    }
+
+    public void setAppointmentNumber(String appointmentNumber) {
+        this.appointmentNumber = appointmentNumber;
+    }
 
     public String getId() {
         return id;

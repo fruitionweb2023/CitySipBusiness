@@ -8,7 +8,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.direct2web.citysip.Activities.PrivacyPolicyActivity;
+import com.direct2web.citysip.Activities.Restaurent.MenuActivity;
+import com.direct2web.citysip.Activities.Restaurent.SetUpTimingListActivity;
 import com.direct2web.citysip.Activities.Restaurent.SettingActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessProfileActivity;
+import com.direct2web.citysip.Activities.TermsAndConditionsActivity;
 import com.direct2web.citysip.R;
 import com.direct2web.citysip.Utils.BottomButtonClickListner;
 import com.direct2web.citysip.Utils.SessionManager;
@@ -51,10 +56,40 @@ public class DoctorBusinessProfileActivity extends AppCompatActivity {
             }
         });*/
 
+        binding.txtBusinessHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(DoctorBusinessProfileActivity.this, DoctorBusinessTimingListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         binding.menuTxtDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DoctorBusinessProfileActivity.this, DoctorAboutBusinessActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        binding.menuTxtPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorBusinessProfileActivity.this, PrivacyPolicyActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        binding.menuTxtTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DoctorBusinessProfileActivity.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
 
 

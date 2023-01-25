@@ -239,7 +239,6 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
-                    android:singleLine="true"
                     android:textColor="#333333"
                     android:textSize="16sp" />
 

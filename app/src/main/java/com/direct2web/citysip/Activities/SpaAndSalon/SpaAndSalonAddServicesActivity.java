@@ -65,13 +65,11 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
     Bitmap bitmap2;
     String couponId = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_spa_salon_add_services);
         sessionManager = new SessionManager(this);
-
 
         couponId = getIntent().getStringExtra("serviceId");
 
@@ -81,6 +79,7 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
             binding.txtService.setText(getIntent().getStringExtra("serviceName"));
             binding.txtPrice.setText(getIntent().getStringExtra("amount"));
             binding.txtAboutService.setText(getIntent().getStringExtra("description"));
+            binding.txtTime.setText(getIntent().getStringExtra("time"));
             binding.btnSubmit.setText("Edit");
             couponId = getIntent().getStringExtra("serviceId");
             //img2 = getIntent().getStringExtra("image");
@@ -136,7 +135,6 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
-
         String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
         String accesskey = WS_URL_PARAMS.access_key;
         String business_id = sessionManager.getUserId();
@@ -144,17 +142,18 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         String service = binding.txtService.getText().toString();
         String description = binding.txtAboutService.getText().toString();
         String price = binding.txtPrice.getText().toString();
-
+        String time = binding.txtTime.getText().toString();
+        String offer = "";
 
         RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
         RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
         RequestBody t3 = RequestBody.create(MediaType.parse("multipart/form-data"), business_id);
         RequestBody t4 = RequestBody.create(MediaType.parse("multipart/form-data"), name);
         RequestBody t5 = RequestBody.create(MediaType.parse("multipart/form-data"), service);
-        RequestBody t6 = RequestBody.create(MediaType.parse("multipart/form-data"), description);
-        RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), price);
-        RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-
+        RequestBody t6 = RequestBody.create(MediaType.parse("multipart/form-data"), price);
+        RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), description);
+        RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), offer);
+        RequestBody t9 = RequestBody.create(MediaType.parse("multipart/form-data"), time);
 
         File file = null;
         MultipartBody.Part body1 = null;
@@ -167,9 +166,8 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
             body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
         }
 
-
         Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseSpaAndSalonAddService> call = api.sendSpaAndSalonService(authHeader,t2,t3,t4,t5,t7,t6,t8,body1);
+        Call<ResponseSpaAndSalonAddService> call = api.sendSpaAndSalonService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,body1);
 
         call.enqueue(new Callback<ResponseSpaAndSalonAddService>() {
             @Override
@@ -214,7 +212,6 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
-
         String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
         String accesskey = WS_URL_PARAMS.access_key;
         String business_id = sessionManager.getUserId();
@@ -224,8 +221,7 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         String description = binding.txtAboutService.getText().toString();
         String offer = getIntent().getStringExtra("offer");
         String serviceId = couponId;
-
-
+        String time = binding.txtTime.getText().toString();
 
         RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
         RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
@@ -236,8 +232,7 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
         RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), description);
         RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), offer);
         RequestBody t9 = RequestBody.create(MediaType.parse("multipart/form-data"), serviceId);
-        RequestBody t10 = RequestBody.create(MediaType.parse("multipart/form-data"), "");
-
+        RequestBody t10 = RequestBody.create(MediaType.parse("multipart/form-data"), time);
 
         File file = null;
         MultipartBody.Part body1 = null;
@@ -250,9 +245,8 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
             body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
         }
 
-
         Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseEditService> call = api.editSpaAndSalonService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,body1);
+        Call<ResponseEditService> call = api.editSpaAndSalonService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,t10,body1);
 
         Log.e("Services Edit : ","business_id : " + business_id + "\nname : " + name + "\nservice : " + service + "\nprice : " + price + "\ndescription : " + description + "\noffer : " + offer + "\nserviceId : " + serviceId + "\nimage : " + img2);
 
@@ -333,17 +327,14 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
     private void launchCameraIntent() {
         Intent intent = new Intent(SpaAndSalonAddServicesActivity.this, ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
-
         // setting aspect ratio
         intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
-
         // setting maximum bitmap width and height
         intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
         intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
         intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
-
         startActivityForResult(intent, REQUEST_IMAGE);
     }
 
@@ -400,7 +391,6 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
     private void launchGalleryIntent() {
         Intent intent = new Intent(SpaAndSalonAddServicesActivity.this, ImagePickerActivity.class);
         intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
-
         // setting aspect ratio
         intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
         intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2

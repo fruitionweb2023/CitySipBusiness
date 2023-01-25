@@ -126,6 +126,11 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
         RequestBody t7 = RequestBody.create(MediaType.parse("multipart/form-data"), percentage);
         RequestBody t8 = RequestBody.create(MediaType.parse("multipart/form-data"), userId);
 
+        Log.e("Coupon Add  Data : ", "precentage" +percentage +
+                "\ncouponCode : " + coupnCode +
+                "\nmaxAmount : " + maxAmount +
+                "\nminAmount : " + minAmount +
+                "\ntermsAndCondition : " + termsCondition);
 
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseAddOffer> call = api.sendSetUpOffers(authHeader,t2,t8,t3,t6,t4,t5,t7);

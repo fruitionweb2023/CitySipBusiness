@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.direct2web.citysip.Activities.Restaurent.EditLocationFetchActivity;
+import com.direct2web.citysip.Activities.Restaurent.EditRestaurantDetailsActivity;
 import com.direct2web.citysip.Activities.Restaurent.SetUpAboutRestaurantActivity;
 import com.direct2web.citysip.Model.DoctorModels.DoctorBusinessDetails.ResponseDoctorBusinessDetails;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
@@ -35,7 +37,7 @@ public class DoctorAboutBusinessActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_doctor_about_business);
         sessionManager = new SessionManager(this);
 
-        binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
+       /* binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
 
 
         binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +47,7 @@ public class DoctorAboutBusinessActivity extends AppCompatActivity {
                 onBackPressed();
 
             }
-        });
+        });*/
 
         getDoctorBusinessDetails(sessionManager.getUserId());
 
@@ -55,14 +57,20 @@ public class DoctorAboutBusinessActivity extends AppCompatActivity {
                 if (!b) {
                     binding.restauraneLayout.setAlpha(0.25f);
                     binding.locationLayout.setAlpha(0.25f);
+                    binding.llAboutYou.setAlpha(0.25f);
                     binding.imgEdit.setClickable(false);
+                    binding.edtAboutYou.setClickable(false);
+                    binding.edtLocation.setClickable(false);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"0");
 
                 } else {
 
                     binding.restauraneLayout.setAlpha(1.0f);
                     binding.locationLayout.setAlpha(1.0f);
+                    binding.llAboutYou.setAlpha(1.0f);
                     binding.imgEdit.setClickable(true);
+                    binding.edtAboutYou.setClickable(true);
+                    binding.edtLocation.setClickable(true);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"1");
 
                 }
@@ -108,18 +116,54 @@ public class DoctorAboutBusinessActivity extends AppCompatActivity {
 
                             binding.switchOnOff.setChecked(true);
                             binding.restauraneLayout.setAlpha(1.0f);
+                            binding.llAboutYou.setAlpha(1.0f);
                             binding.imgEdit.setClickable(true);
+                            binding.edtAboutYou.setClickable(true);
+                            binding.edtLocation.setClickable(true);
                             binding.locationLayout.setAlpha(1.0f);
 
 
                         }else {
                             binding.switchOnOff.setChecked(false);
                             binding.restauraneLayout.setAlpha(0.25f);
+                            binding.llAboutYou.setAlpha(0.25f);
                             binding.imgEdit.setClickable(false);
+                            binding.edtAboutYou.setClickable(false);
+                            binding.edtLocation.setClickable(false);
                             binding.locationLayout.setAlpha(0.25f);
 
 
                         }
+
+                        binding.edtLocation.setOnClickListener(v -> {
+
+                            Intent i = new Intent(DoctorAboutBusinessActivity.this, DoctorEditLocationFetchActivity.class);
+                            i.putExtra("lat",response.body().getLatitude());
+                            i.putExtra("lang",response.body().getLongitude());
+                            i.putExtra("address1",response.body().getAddressLine1());
+                            i.putExtra("address2",response.body().getAddressLine2());
+                            startActivity(i);
+                        });
+
+                        binding.imgEdit.setOnClickListener(v -> {
+
+                            Intent i = new Intent(DoctorAboutBusinessActivity.this, DoctorEditAboutHospitalActivity.class);
+                            i.putExtra("contect",response.body().getPhoneNo());
+                            i.putExtra("website",response.body().getWebsite());
+                            i.putExtra("about",response.body().getDescription());
+                            i.putExtra("businessName",response.body().getBusinessName());
+                            startActivity(i);
+
+                        });
+
+                        binding.edtAboutYou.setOnClickListener(v -> {
+                            Intent i = new Intent(DoctorAboutBusinessActivity.this, DoctorEditAboutYouActivity.class);
+                            i.putExtra("userName",response.body().getAboutYouName());
+                            i.putExtra("contect",response.body().getAboutYouMobile());
+                            i.putExtra("dob",response.body().getAboutYouDOB());
+                            i.putExtra("nationality",response.body().getAboutYouNationality());
+                            startActivity(i);
+                        });
 
                     }
 

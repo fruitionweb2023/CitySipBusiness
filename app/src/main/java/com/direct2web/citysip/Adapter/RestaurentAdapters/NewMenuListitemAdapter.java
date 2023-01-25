@@ -92,9 +92,9 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
         holder.binding.txtDiscreption.setText(menu.getDescription());
         holder.binding.txtCuisines.setText(menu.getCuisines());
         holder.binding.txtMaxDish.setText(menu.getMaxDish());
-        holder.binding.txtOffer.setText(menu.getOffer());
+        holder.binding.txtOffer.setText(menu.getOffer().equals("NO") ? "NO" : "YES");
 
-        if (menu.getOffer().equals("No")) {
+        if (menu.getOffer().equals("NO")) {
             holder.binding.txtOffer.setTextColor(context.getResources().getColor(R.color.red));
         }
 
@@ -182,9 +182,12 @@ public class NewMenuListitemAdapter extends RecyclerView.Adapter<NewMenuListitem
                 intent.putExtra("dishType", menu.getDishType());
                 intent.putExtra("description", menu.getDescription());
                 intent.putExtra("offer", menu.getOffer());
+                intent.putExtra("offerType", menu.getOffer().equals("NO") ? "NO" : "YES");
                 intent.putExtra("image", menu.getImage());
                 intent.putExtra("maxDish", menu.getMaxDish());
                 intent.putExtra("category", menu.getCategory());
+               /* intent.putExtra("offer_desc", menu.getOfferDesc());
+                intent.putExtra("offer_id", menu.getOffer());*/
                 intent.putExtra("menuId", menu.getId());
                 Log.e("Menu Items : ", "\ndishName : " + menu.getTitle() + "\namount : " + menu.getAmount() +
                       "\ncuisine : " +   menu.getCuisines() + "\ndishType : " + menu.getDishType() + "\ndescription : " +

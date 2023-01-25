@@ -26,6 +26,9 @@ public class Service {
     @SerializedName("offer")
     @Expose
     private String offer;
+    @SerializedName("time")
+    @Expose
+    private String time;
     @SerializedName("image")
     @Expose
     private String image;
@@ -37,6 +40,14 @@ public class Service {
         this.id = id;
         this.name = name;
 
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getId() {

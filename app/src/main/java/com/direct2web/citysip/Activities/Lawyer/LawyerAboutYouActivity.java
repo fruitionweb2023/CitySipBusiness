@@ -16,10 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.direct2web.citysip.Activities.Doctor.DoctorAboutBusinessActivity;
 import com.direct2web.citysip.Activities.Doctor.DoctorAboutHospitalActivity;
 import com.direct2web.citysip.Activities.Doctor.DoctorAboutYouActivity;
 import com.direct2web.citysip.Model.DoctorModels.DoctorAboutYou.ResponseDoctorAboutYou;
 import com.direct2web.citysip.Model.LawyerModels.LawyerAboutYou.ResponseLawyerAboutYou;
+import com.direct2web.citysip.Model.RestaurentModels.Profile.ResponseSendProfile;
 import com.direct2web.citysip.R;
 import com.direct2web.citysip.Utils.Api;
 import com.direct2web.citysip.Utils.ConnectionToInternet;
@@ -54,6 +56,22 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_lawyer_about_you);
         sessionManager = new SessionManager(this);
+
+      /*  if (getIntent().getStringExtra("flag").equals("1")) {
+
+            binding.edtRestName.setText(getIntent().getStringExtra("userName"));
+            binding.edtRestNumber.setText(getIntent().getStringExtra("contect"));
+            binding.edtRestWebsite.setText(getIntent().getStringExtra("dob"));
+            binding.edtRestDescription.setText(getIntent().getStringExtra("nationality"));
+            binding.btnVerify.setText("Edit");
+        } else {
+
+            binding.edtRestName.setText("");
+            binding.edtRestNumber.setText("");
+            binding.edtRestWebsite.setText("Select Date");
+            binding.edtRestDescription.setText("");
+            binding.btnVerify.setText("Continue");
+        }*/
 
         binding.edtRestName.addTextChangedListener(tw);
         binding.edtRestNumber.addTextChangedListener(tw);
@@ -125,6 +143,13 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
 
                     if (new ConnectionToInternet(LawyerAboutYouActivity.this).isConnectingToInternet()) {
                         sendProfile(sessionManager.getUserId());
+
+                       /* if (getIntent().getStringExtra("flag").equals("1")) {
+
+                            editProfile(sessionManager.getUserId());
+                        } else {
+                            sendProfile(sessionManager.getUserId());
+                        }*/
                     } else {
                         new ConnectionToInternet(LawyerAboutYouActivity.this).ShowDilog(LawyerAboutYouActivity.this);
                     }
@@ -136,7 +161,7 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         if (flag_calander == 1) {
             binding.edtRestWebsite.setText(sdf.format(calendar.getTime()));
@@ -193,6 +218,56 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
         });
     }
 
+    private void editProfile(String userId) {
+
+
+        pd = new ProgressDialog(LawyerAboutYouActivity.this);
+        pd.setMessage("Loading...");
+        pd.setCancelable(false);
+        pd.show();
+
+        String name = binding.edtRestName.getText().toString();
+        String number = binding.edtRestNumber.getText().toString();
+        String dateOfBirth = binding.edtRestWebsite.getText().toString();
+        String nationality = binding.edtRestDescription.getText().toString();
+
+        Api api = RetrofitClient.getClient().create(Api.class);
+        Call<ResponseSendProfile> call = api.editLawyerAboutyou("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
+                WS_URL_PARAMS.access_key,userId,name,number,dateOfBirth,nationality);
+
+        call.enqueue(new Callback<ResponseSendProfile>() {
+            @Override
+            public void onResponse(Call<ResponseSendProfile> call, Response<ResponseSendProfile> response) {
+
+                Log.e("responseEditProfile",new Gson().toJson(response.body()));
+                pd.dismiss();
+                if (response.body() != null && response.isSuccessful()){
+
+                    if (!response.body().getError()){
+
+                        Intent i = new Intent(LawyerAboutYouActivity.this, LawyerAboutBusinessActivity.class);
+                        finish();
+                        startActivity(i);
+
+                    }else {
+                        Toast.makeText(LawyerAboutYouActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    Toast.makeText(LawyerAboutYouActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseSendProfile> call, Throwable t) {
+                pd.dismiss();
+                t.printStackTrace();
+                Log.e("errorEditProfile", t.getMessage());
+            }
+        });
+    }
+
 
     TextWatcher tw = new TextWatcher() {
         @Override
@@ -202,7 +277,7 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (binding.edtRestName.getText().length() > 0 && binding.edtRestNumber.getText().length() > 0 && binding.edtRestWebsite.getText().length() > 0 && binding.edtRestDescription.getText().length() > 0) {
                 binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button));
+                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_doctor));
 
             } else {
 

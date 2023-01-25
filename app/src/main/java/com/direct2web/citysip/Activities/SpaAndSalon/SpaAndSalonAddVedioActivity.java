@@ -32,7 +32,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cocosw.bottomsheet.BottomSheet;
+import com.direct2web.citysip.Activities.Doctor.DoctorAddVedioActivity;
 import com.direct2web.citysip.Activities.Restaurent.VideoTrimmerActivity;
+import com.direct2web.citysip.Activities.VideoViewActivity;
 import com.direct2web.citysip.Adapter.SpaAndSalonAdapter.AddAndSetVedioListSpaAndSalonAdapter;
 import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.ResponseSpaAndSalonAddImageAndVedio;
 import com.direct2web.citysip.Model.SpaAndSalon.MediaLibrary.ResponseSpaAndSalonAddVedio;
@@ -60,7 +62,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements AddAndSetVedioListSpaAndSalonAdapter.OnItemClickListner {
+public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements AddAndSetVedioListSpaAndSalonAdapter.OnItemClickListner, AddAndSetVedioListSpaAndSalonAdapter.OnVideoItemClickListner {
 
     ActivitySpaSalonAddVedioBinding binding;
     SessionManager sessionManager;
@@ -130,7 +132,7 @@ public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements Ad
             int numberOfColumns = 3;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
             binding.rclrVideo.setLayoutManager(gridLayoutManager);
-            AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(this, vedioList,this);
+            AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(this, vedioList,this,this);
             binding.rclrVideo.setAdapter(propertyImageAdapter);
         }
 
@@ -293,7 +295,7 @@ public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements Ad
         int numberOfColumns = 3;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-        AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(this, vedioList, SpaAndSalonAddVedioActivity.this);
+        AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(this, vedioList, SpaAndSalonAddVedioActivity.this,SpaAndSalonAddVedioActivity.this);
         binding.rclrVideo.setAdapter(propertyImageAdapter);
     }
 
@@ -552,7 +554,7 @@ public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements Ad
                         int numberOfColumns = 3;
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(SpaAndSalonAddVedioActivity.this,numberOfColumns);
                         binding.rclrVideo.setLayoutManager(gridLayoutManager);
-                        AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(SpaAndSalonAddVedioActivity.this, vedioList, SpaAndSalonAddVedioActivity.this);
+                        AddAndSetVedioListSpaAndSalonAdapter propertyImageAdapter = new AddAndSetVedioListSpaAndSalonAdapter(SpaAndSalonAddVedioActivity.this, vedioList, SpaAndSalonAddVedioActivity.this,SpaAndSalonAddVedioActivity.this);
                         binding.rclrVideo.setAdapter(propertyImageAdapter);
 
 
@@ -660,5 +662,14 @@ public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements Ad
         Intent i = new Intent(SpaAndSalonAddVedioActivity.this, SpaAndSalonBusinessProfileActivity.class);
         finish();
         startActivity(i);
+    }
+
+    @Override
+    public void onPlayVideoButtonClick(int postion) {
+
+        Intent intent = new Intent(SpaAndSalonAddVedioActivity.this, VideoViewActivity.class);
+        intent.putExtra("video", vedioList.get(postion).getVideo());
+        Log.e("SendUrlVideo : ", "URL : " + vedioList.get(postion).getVideo());
+        startActivity(intent);
     }
 }

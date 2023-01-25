@@ -224,6 +224,8 @@
                         android:text="View Details"
                         android:textColor="@color/clr_888888"
                         android:textSize="12sp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
                         android:layout_marginStart="17dp"
                         android:textStyle="normal"/>
 

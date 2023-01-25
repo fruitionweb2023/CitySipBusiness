@@ -14,7 +14,10 @@ import com.direct2web.citysip.Activities.Lawyer.LawyerAddVideoActivity;
 import com.direct2web.citysip.Activities.Lawyer.LawyerAppointmentActivity;
 import com.direct2web.citysip.Activities.Lawyer.LawyerCustomerActivity;
 import com.direct2web.citysip.Activities.Lawyer.LawyerDashboardActivity;
+import com.direct2web.citysip.Activities.PrivacyPolicyActivity;
 import com.direct2web.citysip.Activities.Restaurent.SettingActivity;
+import com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessProfileActivity;
+import com.direct2web.citysip.Activities.TermsAndConditionsActivity;
 import com.direct2web.citysip.R;
 import com.direct2web.citysip.Utils.BottomButtonClickListner;
 import com.direct2web.citysip.Utils.SessionManager;
@@ -64,6 +67,26 @@ public class InsuranceMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InsuranceMenuActivity.this, InsuranceAboutBusinessActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        binding.menuTxtPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InsuranceMenuActivity.this, PrivacyPolicyActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        binding.menuTxtTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InsuranceMenuActivity.this, TermsAndConditionsActivity.class);
                 startActivity(intent);
 
 

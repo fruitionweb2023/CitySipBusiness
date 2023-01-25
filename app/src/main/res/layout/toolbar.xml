@@ -65,7 +65,7 @@
                         android:id="@+id/toolbar_logo"
                         android:layout_width="120dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/city_sip_logo"/>
+                        android:src="@drawable/restaurant_logo_new"/>
 
                     <!--<TextView
                         android:id="@+id/toolbar_title"

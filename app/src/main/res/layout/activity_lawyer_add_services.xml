@@ -95,7 +95,7 @@
                     android:layout_marginTop="25dp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="center_vertical"
-                    android:text="Select Service"
+                    android:text="Service Name"
                     android:textColor="#666666"
                     android:textSize="12sp" />
 
@@ -163,7 +163,6 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
-                    android:singleLine="true"
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
