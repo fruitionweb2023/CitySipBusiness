@@ -47,6 +47,10 @@ public class ResponseInsuranceBusinessDetails {
     @SerializedName("about_you_mobile")
     @Expose
     private String aboutYouMobile;
+
+    @SerializedName("about_you_intro")
+    @Expose
+    private String aboutYouIntro;
     @SerializedName("about_you_d_o_b")
     @Expose
     private String aboutYouDOB;
@@ -82,6 +86,14 @@ public class ResponseInsuranceBusinessDetails {
 
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
+    }
+
+    public String getAboutYouIntro() {
+        return aboutYouIntro;
+    }
+
+    public void setAboutYouIntro(String aboutYouIntro) {
+        this.aboutYouIntro = aboutYouIntro;
     }
 
     public String getAddressLine1() {

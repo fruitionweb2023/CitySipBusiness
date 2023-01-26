@@ -37,17 +37,6 @@ public class DoctorAboutBusinessActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_doctor_about_business);
         sessionManager = new SessionManager(this);
 
-       /* binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
-
-
-        binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-
-            }
-        });*/
 
         getDoctorBusinessDetails(sessionManager.getUserId());
 

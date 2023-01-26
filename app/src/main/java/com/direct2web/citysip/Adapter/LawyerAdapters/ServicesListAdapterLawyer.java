@@ -84,58 +84,44 @@ public class ServicesListAdapterLawyer extends RecyclerView.Adapter<ServicesList
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Are you sure want to delete ?");
-                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        remove = position;
-                        delete(new SessionManager(context).getUserId(), "menu", service.getId());
-                    }
+                builder.setPositiveButton("yes", (dialog, which) -> {
+                    remove = position;
+                    delete(new SessionManager(context).getUserId(), "hospital_services", service.getId());
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
 
-        holder.binding.switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        holder.binding.switchOnOff.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-                if (!isChecked) {
+            if (!isChecked) {
 
 //                    onClickSwitchOff.onSwitchItemClickOff(position);
-                    holder.binding.llBottom.setAlpha(0.25f);
-                    holder.binding.imgEdit.setClickable(false);
-                    holder.binding.imgDelete.setClickable(false);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"0");
+                holder.binding.llBottom.setAlpha(0.25f);
+                holder.binding.imgEdit.setClickable(false);
+                holder.binding.imgDelete.setClickable(false);
+                sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"0");
 
-                } else {
+            } else {
 
 //                    onClickSwitch.onSwitchItemClick(position);
 //                    holder.binding.llBottom.setBackground(context.getResources().getDrawable(R.drawable.eight_dp_corner_box_two_dp_thik));
-                    holder.binding.llBottom.setAlpha(1.0f);
-                    holder.binding.imgEdit.setClickable(true);
-                    holder.binding.imgDelete.setClickable(true);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"1");
-                }
-
+                holder.binding.llBottom.setAlpha(1.0f);
+                holder.binding.imgEdit.setClickable(true);
+                holder.binding.imgDelete.setClickable(true);
+                sendStatus(new SessionManager(context).getUserId(),"hospital_services",service.getId(),"1");
             }
+
         });
 
-        holder.binding.imgEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.binding.imgEdit.setOnClickListener(v -> {
 
-                addButtonClick.onAddButtonClick(position);
-               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
+            addButtonClick.onAddButtonClick(position);
+           // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
 
-            }
         });
 
         if (service.getStatus().equals("1")){

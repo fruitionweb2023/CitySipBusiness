@@ -101,16 +101,14 @@ public class CouponListSpaAndSalonAdapter extends RecyclerView.Adapter<CouponLis
                     holder.binding.llBottom.setAlpha(0.25f);
                     holder.binding.imgEdit.setClickable(false);
                     holder.binding.imgDelete.setClickable(false);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",offer.getId(),"0");
+                    sendStatus(new SessionManager(context).getUserId(),"offer",offer.getId(),"0");
 
                 } else {
 
-//                    onClickSwitch.onSwitchItemClick(position);
-//                    holder.binding.llBottom.setBackground(context.getResources().getDrawable(R.drawable.eight_dp_corner_box_two_dp_thik));
                     holder.binding.llBottom.setAlpha(1.0f);
                     holder.binding.imgEdit.setClickable(true);
                     holder.binding.imgDelete.setClickable(true);
-                    sendStatus(new SessionManager(context).getUserId(),"hospital_services",offer.getId(),"1");
+                    sendStatus(new SessionManager(context).getUserId(),"offer",offer.getId(),"1");
                 }
 
             }
@@ -120,7 +118,6 @@ public class CouponListSpaAndSalonAdapter extends RecyclerView.Adapter<CouponLis
             @Override
             public void onClick(View v) {
 
-               // Toast.makeText(context, "Edit Clicked", Toast.LENGTH_SHORT).show();
                 addButtonClick.onAddButtonClick(position);
 
             }

@@ -45,6 +45,11 @@
         <item name="colorControlActivated">@color/clr_0059C8</item>
 
     </style>
+   <style name="SCBSwitchInsurence" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/clr_insurence</item>
+
+    </style>
 
     <style name="SCBSwitchSS" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->

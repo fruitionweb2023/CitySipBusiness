@@ -491,6 +491,16 @@
         <activity android:name="com.direct2web.citysip.Activities.Doctor.DoctorEditAboutYouActivity" />
         <activity android:name="com.direct2web.citysip.Activities.Lawyer.LawyerEditAboutYouActivity" />
         <activity android:name="com.direct2web.citysip.Activities.Lawyer.LawyerEditAboutOfficeActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessSelectTimeActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonBusinessTimingListActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonEditAboutSpaAndSalonActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonEditAboutYouActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.SpaAndSalon.SpaAndSalonEditLocationFetchActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.Insurance.InsurenceBusinessTimingListActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.Insurance.InsurenceBusinessSelectTimeActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.Insurance.InsurenceEditAboutOfficeActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.Insurance.InsurenceEditAboutYouActivity" />
+        <activity android:name="com.direct2web.citysip.Activities.Insurance.InsurenceEditLocationFetchActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

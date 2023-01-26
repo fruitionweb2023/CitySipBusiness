@@ -10,6 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.direct2web.citysip.Activities.Doctor.DoctorAboutBusinessActivity;
+import com.direct2web.citysip.Activities.Doctor.DoctorEditAboutHospitalActivity;
+import com.direct2web.citysip.Activities.Doctor.DoctorEditAboutYouActivity;
+import com.direct2web.citysip.Activities.Doctor.DoctorEditLocationFetchActivity;
 import com.direct2web.citysip.Model.RestaurentModels.Delete.ResponseStatus;
 import com.direct2web.citysip.Model.SpaAndSalon.BusinessDetails.ResponseSpaAndSalonBusinessDetails;
 import com.direct2web.citysip.R;
@@ -56,14 +60,19 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
                 if (!b) {
                     binding.restauraneLayout.setAlpha(0.25f);
                     binding.locationLayout.setAlpha(0.25f);
+                    binding.llAboutYou.setAlpha(0.25f);
                     binding.imgEdit.setClickable(false);
+                    binding.edtAboutYou.setClickable(false);
+                    binding.edtLocation.setClickable(false);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"0");
 
                 } else {
-
                     binding.restauraneLayout.setAlpha(1.0f);
                     binding.locationLayout.setAlpha(1.0f);
+                    binding.llAboutYou.setAlpha(1.0f);
                     binding.imgEdit.setClickable(true);
+                    binding.edtAboutYou.setClickable(true);
+                    binding.edtLocation.setClickable(true);
                     sendStatus(sessionManager.getUserId(),"business_detail",sessionManager.getUserId(),"1");
 
                 }
@@ -109,18 +118,54 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
 
                             binding.switchOnOff.setChecked(true);
                             binding.restauraneLayout.setAlpha(1.0f);
+                            binding.llAboutYou.setAlpha(1.0f);
                             binding.imgEdit.setClickable(true);
+                            binding.edtAboutYou.setClickable(true);
+                            binding.edtLocation.setClickable(true);
                             binding.locationLayout.setAlpha(1.0f);
-
 
                         }else {
                             binding.switchOnOff.setChecked(false);
                             binding.restauraneLayout.setAlpha(0.25f);
+                            binding.llAboutYou.setAlpha(0.25f);
                             binding.imgEdit.setClickable(false);
+                            binding.edtAboutYou.setClickable(false);
+                            binding.edtLocation.setClickable(false);
                             binding.locationLayout.setAlpha(0.25f);
 
-
                         }
+
+
+
+                        binding.edtLocation.setOnClickListener(v -> {
+
+                            Intent i = new Intent(SpaAndSalonAboutBusinessActivity.this, SpaAndSalonEditLocationFetchActivity.class);
+                            i.putExtra("lat",response.body().getLatitude());
+                            i.putExtra("lang",response.body().getLongitude());
+                            i.putExtra("address1",response.body().getAddressLine1());
+                            i.putExtra("address2",response.body().getAddressLine2());
+                            startActivity(i);
+                        });
+
+                        binding.imgEdit.setOnClickListener(v -> {
+
+                            Intent i = new Intent(SpaAndSalonAboutBusinessActivity.this, SpaAndSalonEditAboutSpaAndSalonActivity.class);
+                            i.putExtra("contect",response.body().getPhoneNo());
+                            i.putExtra("website",response.body().getWebsite());
+                            i.putExtra("about",response.body().getDescription());
+                            i.putExtra("businessName",response.body().getBusinessName());
+                            startActivity(i);
+
+                        });
+
+                        binding.edtAboutYou.setOnClickListener(v -> {
+                            Intent i = new Intent(SpaAndSalonAboutBusinessActivity.this, SpaAndSalonEditAboutYouActivity.class);
+                            i.putExtra("userName",response.body().getAboutYouName());
+                            i.putExtra("contect",response.body().getAboutYouMobile());
+                            i.putExtra("dob",response.body().getAboutYouDOB());
+                            i.putExtra("nationality",response.body().getAboutYouNationality());
+                            startActivity(i);
+                        });
 
                     }
 
@@ -141,13 +186,8 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
 
     public void sendStatus(String userId,String type,String id,String status){
 
-       /* pd = new ProgressDialog(SetUpCouponsActivity.this);
-        pd.setMessage("Please Wait....");
-        pd.setCancelable(false);
-        pd.show();
-*/
         Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseStatus> call = api.sendDoctorStatus("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
+        Call<ResponseStatus> call = api.sendSpaAndSalonBusinessHoursStatus("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key, userId, type, id,status);
         call.enqueue(new Callback<ResponseStatus>() {
             @Override
@@ -155,23 +195,13 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
 
                 Log.e("responseDelete", new Gson().toJson(response.body()));
 
-               /* if (pd.isShowing()) {
-                    pd.dismiss();
-                }*/
-
                 if (response.body() != null && response.isSuccessful()) {
 
                     if (response.body().getError()) {
 
                         Toast.makeText(SpaAndSalonAboutBusinessActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
-                    } /*else {
-
-                        Toast.makeText(SetUpCouponsActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-
-                    }*/
-
+                    }
                 } else {
                     Toast.makeText(SpaAndSalonAboutBusinessActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -182,9 +212,6 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
 
-               /* if (pd.isShowing()) {
-                    pd.dismiss();
-                }*/
                 t.printStackTrace();
                 Log.e("errorDelete", t.getMessage());
             }

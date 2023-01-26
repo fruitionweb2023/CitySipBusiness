@@ -44,6 +44,10 @@ public class ServiceItemAdapterInsurance extends RecyclerView.Adapter<ServiceIte
         OrderItem order = orderList.get(position);
 
         holder.binding.txtName.setText(order.getServiceName());
+        holder.binding.txtQnty.setText(order.getQty());
+        holder.binding.txtAmount.setText(order.getAmount());
+        holder.binding.txtAppointmentDate.setText(order.getAppointmentDate());
+        holder.binding.txtAppointmentTime.setText(order.getAppointmentTime());
 
     }
 

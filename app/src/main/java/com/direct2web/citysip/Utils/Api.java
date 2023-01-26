@@ -1067,6 +1067,74 @@ public interface Api {
                                                           @Field("percentage") String percentage,
                                                           @Field("id") String id);
 
+
+    // New Spa And Salon
+
+    @POST("spa_salon/business_side/get-hour-title.php")
+    @FormUrlEncoded
+    Call<ResponseHoursTitleList> getSpaAndSalonHoursTitleList(@Header("Authorization") String authHeader,
+                                                              @Field("accesskey") String accesskey,
+                                                              @Field("cat_id") String cat_id);
+
+    @POST("spa_salon/business_side/save_business_hours.php")
+    @FormUrlEncoded
+    Call<ResponseSendTiming> sendSpaAndSalonTiming(@Header("Authorization") String authHeader,
+                                                   @Field("accesskey") String accesskey,
+                                                   @Field("business_id") String business_id,
+                                                   @Field("title_id") String title_id,
+                                                   @Field("working_day") String working_day,
+                                                   @Field("restaurent_time") String restaurent_time);
+
+    @POST("spa_salon/business_side/get-timing.php")
+    @FormUrlEncoded
+    Call<ResponseGetTimingList> getSpaAndSalonTimingList(@Header("Authorization") String authHeader,
+                                                         @Field("accesskey") String accesskey,
+                                                         @Field("business_id") String business_id);
+
+    @POST("spa_salon/business_side/manage_status.php")
+    @FormUrlEncoded
+    Call<ResponManageStatus> getSpaAndSalonManageStatus(@Header("Authorization") String authHeader,
+                                                        @Field("accesskey") String accesskey,
+                                                        @Field("type") String type,
+                                                        @Field("id") String id,
+                                                        @Field("status") String status);
+
+    @POST("spa_salon/business_side/manage_status.php")
+    @FormUrlEncoded
+    Call<ResponseStatus> sendSpaAndSalonBusinessHoursStatus(@Header("Authorization") String authHeader,
+                                                            @Field("accesskey") String accesskey,
+                                                            @Field("business_id") String business_id,
+                                                            @Field("type") String type,
+                                                            @Field("id") String id,
+                                                            @Field("status") String status);
+
+    @POST("spa_salon/business_side/edit_about_you.php")
+    @FormUrlEncoded
+    Call<ResponseSendProfile> editSapAndSalonAboutyou(@Header("Authorization") String authHeader,
+                                                      @Field("accesskey") String accesskey,
+                                                      @Field("user_id") String user_id,
+                                                      @Field("name") String name,
+                                                      @Field("mobile") String mobile,
+                                                      @Field("d_o_b") String d_o_b,
+                                                      @Field("nationality") String nationality);
+
+    @POST("spa_salon/business_side/save_profile.php")
+    @FormUrlEncoded
+    Call<ResponseSendProfile> editSpaAndSalonProfile(@Header("Authorization") String authHeader,
+                                                     @Field("accesskey") String accesskey,
+                                                     @Field("user_id") String user_id,
+                                                     @Field("address_line_1") String address_line_1,
+                                                     @Field("address_line_2") String address_line_2,
+                                                     @Field("city_id") String city_id,
+                                                     @Field("email_id") String email_id,
+                                                     @Field("business_name") String business_name,
+                                                     @Field("phone_no") String phone_no,
+                                                     @Field("website") String website,
+                                                     @Field("description") String description,
+                                                     @Field("latitude") String latitude,
+                                                     @Field("longitude") String longitude,
+                                                     @Field("password") String password);
+
     //-----------------------------New Doctor Api----------------------------------
 
     @Multipart
@@ -1127,21 +1195,21 @@ public interface Api {
     @POST("doctor/business_side/manage_status.php")
     @FormUrlEncoded
     Call<ResponseStatus> sendDoctorBusinessHoursStatus(@Header("Authorization") String authHeader,
-                                    @Field("accesskey") String accesskey,
-                                    @Field("business_id") String business_id,
-                                    @Field("type") String type,
-                                    @Field("id") String id,
-                                    @Field("status") String status);
+                                                       @Field("accesskey") String accesskey,
+                                                       @Field("business_id") String business_id,
+                                                       @Field("type") String type,
+                                                       @Field("id") String id,
+                                                       @Field("status") String status);
 
     @POST("doctor/business_side/edit_about_you.php")
     @FormUrlEncoded
     Call<ResponseSendProfile> editAboutyou(@Header("Authorization") String authHeader,
-                                            @Field("accesskey") String accesskey,
-                                            @Field("user_id") String user_id,
-                                            @Field("name") String name,
-                                            @Field("mobile") String mobile,
-                                            @Field("d_o_b") String d_o_b,
-                                            @Field("nationality") String nationality);
+                                           @Field("accesskey") String accesskey,
+                                           @Field("user_id") String user_id,
+                                           @Field("name") String name,
+                                           @Field("mobile") String mobile,
+                                           @Field("d_o_b") String d_o_b,
+                                           @Field("nationality") String nationality);
 
     @POST("doctor/business_side/save_profile.php")
     @FormUrlEncoded
@@ -1172,10 +1240,76 @@ public interface Api {
                                                          @Field("service_id") String service_id,
                                                          @Field("id") String id);
 
+    @POST("insurance/business_side/get-hour-title.php")
+    @FormUrlEncoded
+    Call<ResponseHoursTitleList> getInsurenceHoursTitleList(@Header("Authorization") String authHeader,
+                                                            @Field("accesskey") String accesskey,
+                                                            @Field("cat_id") String cat_id);
+
+    @POST("insurance/business_side/save_business_hours.php")
+    @FormUrlEncoded
+    Call<ResponseSendTiming> sendInsurenceTiming(@Header("Authorization") String authHeader,
+                                                 @Field("accesskey") String accesskey,
+                                                 @Field("business_id") String business_id,
+                                                 @Field("title_id") String title_id,
+                                                 @Field("working_day") String working_day,
+                                                 @Field("restaurent_time") String restaurent_time);
+
+    @POST("insurance/business_side/get-timing.php")
+    @FormUrlEncoded
+    Call<ResponseGetTimingList> getInsurenceTimingList(@Header("Authorization") String authHeader,
+                                                       @Field("accesskey") String accesskey,
+                                                       @Field("business_id") String business_id);
+
+    @POST("insurance/business_side/manage_status.php")
+    @FormUrlEncoded
+    Call<ResponManageStatus> getInsurenceManageStatus(@Header("Authorization") String authHeader,
+                                                      @Field("accesskey") String accesskey,
+                                                      @Field("type") String type,
+                                                      @Field("id") String id,
+                                                      @Field("status") String status);
+
+    @POST("insurance/business_side/manage_status.php")
+    @FormUrlEncoded
+    Call<ResponseStatus> sendInsurenceBusinessHoursStatus(@Header("Authorization") String authHeader,
+                                                          @Field("accesskey") String accesskey,
+                                                          @Field("business_id") String business_id,
+                                                          @Field("type") String type,
+                                                          @Field("id") String id,
+                                                          @Field("status") String status);
+
+    @POST("insurance/business_side/edit_about_you.php")
+    @FormUrlEncoded
+    Call<ResponseSendProfile> editInsurenceAboutyou(@Header("Authorization") String authHeader,
+                                                    @Field("accesskey") String accesskey,
+                                                    @Field("user_id") String user_id,
+                                                    @Field("name") String name,
+                                                    @Field("mobile") String mobile,
+                                                    @Field("d_o_b") String d_o_b,
+                                                    @Field("nationality") String nationality,
+                                                    @Field("intro") String intro);
+
+    @POST("insurance/business_side/save_profile.php")
+    @FormUrlEncoded
+    Call<ResponseSendProfile> editInsurenceProfile(@Header("Authorization") String authHeader,
+                                                   @Field("accesskey") String accesskey,
+                                                   @Field("user_id") String user_id,
+                                                   @Field("address_line_1") String address_line_1,
+                                                   @Field("address_line_2") String address_line_2,
+                                                   @Field("city_id") String city_id,
+                                                   @Field("email_id") String email_id,
+                                                   @Field("business_name") String business_name,
+                                                   @Field("phone_no") String phone_no,
+                                                   @Field("website") String website,
+                                                   @Field("description") String description,
+                                                   @Field("latitude") String latitude,
+                                                   @Field("longitude") String longitude,
+                                                   @Field("password") String password);
+
     //-----------------------------New Lawyer Api----------------------------------
 
     @Multipart
-    @POST("lawyer/business_side/edit_services.php")
+    @POST("lawyer/business_side/edit_service.php")
     Call<ResponseEditDoctorService> editLawyerService(@Header("Authorization") String authorization,
                                                       @Part("accesskey") RequestBody accesskey,
                                                       @Part("business_id") RequestBody business_id,
@@ -1190,16 +1324,16 @@ public interface Api {
     @POST("lawyer/business_side/edit_about_you.php")
     @FormUrlEncoded
     Call<ResponseSendProfile> editLawyerAboutyou(@Header("Authorization") String authHeader,
-                                           @Field("accesskey") String accesskey,
-                                           @Field("user_id") String user_id,
-                                           @Field("name") String name,
-                                           @Field("mobile") String mobile,
-                                           @Field("d_o_b") String d_o_b,
-                                           @Field("nationality") String nationality);
+                                                 @Field("accesskey") String accesskey,
+                                                 @Field("user_id") String user_id,
+                                                 @Field("name") String name,
+                                                 @Field("mobile") String mobile,
+                                                 @Field("d_o_b") String d_o_b,
+                                                 @Field("nationality") String nationality);
 
     @POST("lawyer/business_side/save_profile.php")
     @FormUrlEncoded
-Call<ResponseSendProfile> editLawyerProfile(@Header("Authorization") String authHeader,
+    Call<ResponseSendProfile> editLawyerProfile(@Header("Authorization") String authHeader,
                                                 @Field("accesskey") String accesskey,
                                                 @Field("user_id") String user_id,
                                                 @Field("address_line_1") String address_line_1,
@@ -1216,9 +1350,9 @@ Call<ResponseSendProfile> editLawyerProfile(@Header("Authorization") String auth
 
     @POST("lawyer/business_side/get-hour-title.php")
     @FormUrlEncoded
- Call<ResponseHoursTitleList> getLawyerHoursTitleList(@Header("Authorization") String authHeader,
-                                                      @Field("accesskey") String accesskey,
-                                                      @Field("cat_id") String cat_id);
+    Call<ResponseHoursTitleList> getLawyerHoursTitleList(@Header("Authorization") String authHeader,
+                                                         @Field("accesskey") String accesskey,
+                                                         @Field("cat_id") String cat_id);
 
     @POST("lawyer/business_side/save_business_hours.php")
     @FormUrlEncoded
@@ -1247,10 +1381,10 @@ Call<ResponseSendProfile> editLawyerProfile(@Header("Authorization") String auth
     @POST("lawyer/business_side/manage_status.php")
     @FormUrlEncoded
     Call<ResponManageStatus> getLawyerManageStatus(@Header("Authorization") String authHeader,
-                                             @Field("accesskey") String accesskey,
-                                             @Field("type") String type,
-                                             @Field("id") String id,
-                                             @Field("status") String status);
+                                                   @Field("accesskey") String accesskey,
+                                                   @Field("type") String type,
+                                                   @Field("id") String id,
+                                                   @Field("status") String status);
 
 
     //-----------------------------New Restaurent Api----------------------------------

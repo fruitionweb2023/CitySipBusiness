@@ -116,7 +116,7 @@ public class LawyerAddServicesActivity extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "Please Select Cuisines First", Toast.LENGTH_SHORT).show();
 
-                }else {
+                } else {
 
                     if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
                         editServices();
@@ -166,9 +166,9 @@ public class LawyerAddServicesActivity extends AppCompatActivity {
             body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
         }
 
-
+        Log.e("AddService : ", "\nbusiness_id : " + business_id + "\ndoctor_name : " + name + "\nservice_name : " + service + "\namount : " + price + "\ndescription : " + description +"\nimage : " + body1);
         Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseLawyerAddService> call = api.sendLawyerService(authHeader,t2,t3,t4,t5,t7,t6,t8,body1);
+        Call<ResponseLawyerAddService> call = api.sendLawyerService(authHeader, t2, t3, t4, t5, t7, t6, t8, body1);
 
         call.enqueue(new Callback<ResponseLawyerAddService>() {
             @Override
@@ -249,9 +249,10 @@ public class LawyerAddServicesActivity extends AppCompatActivity {
             body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
         }
 
+        Log.e("EditServices : ", "\nbusiness_id : " + business_id + "\ndoctor_name : " + name + "\nservice_name : " + service + "\namount : " + price + "\ndescription : " + description + "\noffer : " + offer + "\nid : " + serviceId +"\nimage : " + body1);
 
         Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseEditDoctorService> call = api.editLawyerService(authHeader,t2,t3,t4,t5,t6,t7,t8,t9,body1);
+        Call<ResponseEditDoctorService> call = api.editLawyerService(authHeader, t2, t3, t4, t5, t6, t7, t8, t9, body1);
 
         call.enqueue(new Callback<ResponseEditDoctorService>() {
             @Override

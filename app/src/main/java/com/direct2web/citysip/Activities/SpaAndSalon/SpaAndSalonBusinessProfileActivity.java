@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.direct2web.citysip.Activities.Doctor.DoctorBusinessProfileActivity;
+import com.direct2web.citysip.Activities.Doctor.DoctorBusinessTimingListActivity;
 import com.direct2web.citysip.Activities.PrivacyPolicyActivity;
 import com.direct2web.citysip.Activities.Restaurent.SettingActivity;
 import com.direct2web.citysip.Activities.TermsAndConditionsActivity;
@@ -53,6 +55,17 @@ public class SpaAndSalonBusinessProfileActivity extends AppCompatActivity {
 
             }
         });*/
+
+
+        binding.txtBusinessHours.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(SpaAndSalonBusinessProfileActivity.this, SpaAndSalonBusinessTimingListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         binding.menuTxtDetails.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -68,8 +68,6 @@ public class ServicesListAdapterInsurance extends RecyclerView.Adapter<ServicesL
         holder.binding.txtServiceName.setText(service.getServiceName());
         holder.binding.txtDescription.setText(service.getDescription());
         Log.e("Service Description : ",service.getDescription());
-//        holder.binding.txtName.setText(service.getDoctorName());
-//        holder.binding.txtPrice.setText(service.getAmount());
 
         Glide.with(context).load(Api.imageUrl + service.getImage())
                 .thumbnail(0.5f)

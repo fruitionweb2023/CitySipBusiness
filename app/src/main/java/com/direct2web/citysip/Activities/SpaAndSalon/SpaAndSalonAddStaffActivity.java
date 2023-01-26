@@ -92,8 +92,8 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
             binding.txtAboutService.setText(getIntent().getStringExtra("description"));
             binding.btnSubmit.setText("Edit");
             couponId = getIntent().getStringExtra("staffId");
-            img2 = getIntent().getStringExtra("image");
-            Glide.with(this).load(Api.imageUrl + img2)
+            //img2 = getIntent().getStringExtra("image");
+            Glide.with(this).load(Api.imageUrl + getIntent().getStringExtra("image"))
                     .thumbnail(0.5f)
                     .error(R.drawable.city_sip_logo)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -312,6 +312,7 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
             body1 = MultipartBody.Part.createFormData("image", logo, requestFile);
         }
 
+        Log.e("EditServices : ", "\nbusiness_id : " + business_id + "\ndoctor_name : " + name + "\nabout : " + about + "\nfrom : " + from + "\nto : " + to + "\nserviceId : " + serviceId +"\nimage : " + body1);
 
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseEditStaff> call = api.editSpaAndSalonStaff(authHeader,t2,t3,t4,t5,t6,t7,t8,body1);

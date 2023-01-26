@@ -46,18 +46,10 @@ public class GetTimingItemAdapter extends RecyclerView.Adapter<GetTimingItemAdap
     public void onBindViewHolder(@NonNull GetTimingItemAdapter.viewHolder holder, int position) {
 
         AddSpecialTime order = orderList.get(position);
-
         holder.binding.imgDelete.setVisibility(View.GONE);
-
-        /*id2 += id;
-
-        holder.binding.txtId.setText(String.valueOf(id2));*/
         holder.binding.llMain .setVisibility(View.GONE);
-
         holder.binding.txtTime.setText(order.getTime());
         holder.binding.txtTitle.setText(order.getTitle());
-
-
 
     }
 
