@@ -73,6 +73,7 @@
                     android:text="Spa/Salon Name"
                     android:textColor="#666666"
                     android:textSize="12sp"
+                    android:visibility="gone"
                     android:textStyle="normal" />
 
                 <EditText
@@ -80,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:fontFamily="@font/roboto_regular"
                     android:hint="Enter Name"
                     android:paddingStart="10dp"
@@ -112,7 +114,8 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"                    android:textColor="#333333"
                     android:textSize="16sp" />
 <LinearLayout
     android:layout_width="match_parent"
@@ -150,6 +153,8 @@
            android:paddingEnd="10dp"
            android:paddingBottom="20dp"
            android:singleLine="true"
+           android:inputType="number"
+           android:imeOptions="actionNext"
            android:textColor="#333333"
            android:textSize="16sp" />
    </LinearLayout>
@@ -181,6 +186,8 @@
             android:paddingEnd="10dp"
             android:paddingBottom="20dp"
             android:singleLine="true"
+            android:inputType="number"
+            android:imeOptions="actionNext"
             android:textColor="#333333"
             android:textSize="16sp" />
     </LinearLayout>
@@ -211,6 +218,8 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     android:textColor="#333333"
+                    android:inputType="textLongMessage"
+                    android:imeOptions="actionGo"
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton

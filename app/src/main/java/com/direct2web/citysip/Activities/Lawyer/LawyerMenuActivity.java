@@ -46,231 +46,66 @@ public class LawyerMenuActivity extends AppCompatActivity {
         binding.bottomnavigation.bbAppointment.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
 
-
-        /*binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
-
-        binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-
-            }
-        });*/
-
-        binding.txtBusinessHours.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerBusinessTimingListActivity.class);
-                startActivity(intent);
-            }
+        binding.txtBusinessHours.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerBusinessTimingListActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerAboutBusinessActivity.class);
-                startActivity(intent);
-
-
-            }
+        binding.menuTxtDetails.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerAboutBusinessActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LawyerMenuActivity.this, PrivacyPolicyActivity.class);
-                startActivity(intent);
-
-
-            }
+        binding.menuTxtPrivacyPolicy.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, PrivacyPolicyActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtTerms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LawyerMenuActivity.this, TermsAndConditionsActivity.class);
-                startActivity(intent);
-
-
-            }
+        binding.menuTxtTerms.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, TermsAndConditionsActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                binding.menuViewDashboard.setVisibility(View.VISIBLE);
-//                binding.menuTxtDashboard.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerDashboardActivity.class);
-                finish();
-                startActivity(intent);
-
-
-            }
+        binding.menuTxtDashboard.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerDashboardActivity.class);
+            finish();
+            startActivity(intent);
         });
 
-        binding.menuTxtInvoice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.menuTxtInvoice.setOnClickListener(v -> Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show());
 
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-//                binding.menuViewInvoice.setVisibility(View.VISIBLE);
-//                binding.menuTxtInvoice.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                /*Intent intent = new Intent(DoctorBusinessProfileActivity.this, OrderListActivity.class);
-                startActivity(intent);*/
-
-                Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-
-
-            }
+        binding.menuTxtCustomer.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerCustomerActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.menuTxtChatRoom.setOnClickListener(v -> Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show());
 
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
+        binding.menuTxtHelp.setOnClickListener(v -> Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show());
 
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerCustomerActivity.class);
-                startActivity(intent);
-//                Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-            }
+        binding.menuTxtSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, SettingActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtChatRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-//                Intent intent = new Intent(MenuActivity.this, ChatRoomActivity.class);
-//                startActivity(intent);
-
-                Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-            }
+        binding.menuTxtImageList.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerAddImageActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-            }
+        binding.menuTxtVideoList.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerAddVideoActivity.class);
+            startActivity(intent);
         });
 
-        binding.menuTxtSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Intent intent = new Intent(LawyerMenuActivity.this, SettingActivity.class);
-                startActivity(intent);
-
-//                Toast.makeText(MenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-            }
+        binding.menuTxtRestHour.setOnClickListener(v -> {
+            Intent intent = new Intent(LawyerMenuActivity.this, LawyerAppointmentActivity.class);
+            startActivity(intent);
         });
 
-        /*binding.menuTxtPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(MenuActivity.this, PaymentActivity.class);
-                startActivity(intent);
-
-            }
-        });*/
-
-        /*binding.menuTxtMenuList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(MenuActivity.this, SetUpMenuActivity.class);
-                intent.putExtra("flag", 1);
-                startActivity(intent);
-
-            }
-        });*/
-
-        binding.menuTxtImageList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerAddImageActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        binding.menuTxtVideoList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerAddVideoActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        binding.menuTxtRestHour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                setTextViewDrawableColor(binding.menuTxtInvoice,getResources().getColor(R.color.menu_view_divider_color));
-
-//                binding.menuViewCustomer.setVisibility(View.VISIBLE);
-//                binding.menuTxtCustomer.getCompoundDrawables()[0].setTint(getResources().getColor(R.color.menu_view_divider_color));
-
-                Intent intent = new Intent(LawyerMenuActivity.this, LawyerAppointmentActivity.class);
-                startActivity(intent);
-//                Toast.makeText(LawyerMenuActivity.this, "Work In Progress", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                sessionManager.LogOut();
-                sessionManager.setLogin(false);
-
-            }
+        binding.btnLogout.setOnClickListener(v -> {
+            sessionManager.LogOut();
+            sessionManager.setLogin(false);
         });
     }
     @Override

@@ -59,11 +59,6 @@ public class SpaAndSalonEditAboutYouActivity extends AppCompatActivity {
         binding.edtRestDescription.setText(getIntent().getStringExtra("nationality"));
         binding.btnVerify.setText("Edit");
 
-        binding.edtRestName.addTextChangedListener(tw);
-        binding.edtRestNumber.addTextChangedListener(tw);
-        binding.edtRestWebsite.addTextChangedListener(tw);
-        binding.edtRestDescription.addTextChangedListener(tw);
-
          date = (view, year, monthOfYear, dayOfMonth) -> {
              // TODO Auto-generated method stub
              calendar.set(Calendar.YEAR, year);
@@ -109,7 +104,7 @@ public class SpaAndSalonEditAboutYouActivity extends AppCompatActivity {
 
                 } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+                    binding.edtRestNumber.setError("Please enter valid phoneNo.");
 
                 } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 
@@ -192,26 +187,4 @@ public class SpaAndSalonEditAboutYouActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    TextWatcher tw = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (binding.edtRestName.getText().length() > 0 && binding.edtRestNumber.getText().length() > 0 && binding.edtRestWebsite.getText().length() > 0 && binding.edtRestDescription.getText().length() > 0) {
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_spa_salon));
-
-            } else {
-
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.cle_979592));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_disable));
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) { }
-    };
 }

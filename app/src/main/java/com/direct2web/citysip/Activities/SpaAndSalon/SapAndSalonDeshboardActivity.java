@@ -71,10 +71,8 @@ public class SapAndSalonDeshboardActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
 
         bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
-
         binding.bottomnavigation.bbImgHome.setColorFilter(getResources().getColor(R.color.clr_spa_salon));
         binding.bottomnavigation.bbTxtHome.setTextColor(getResources().getColor(R.color.clay));
-
         binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));

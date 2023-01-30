@@ -47,42 +47,34 @@ public class LawyerEditAboutOfficeActivity extends AppCompatActivity {
         binding.edtRestDescription.setText(getIntent().getStringExtra("about"));
         binding.btnVerify.setText("Edit");
 
-        binding.edtRestName.addTextChangedListener(tw);
-        binding.edtRestNumber.addTextChangedListener(tw);
-        binding.edtRestWebsite.addTextChangedListener(tw);
-        binding.edtRestDescription.addTextChangedListener(tw);
+        binding.btnVerify.setOnClickListener(v -> {
 
-        binding.btnVerify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            if (binding.edtRestName.getText().toString().equals("")) {
 
-                if (binding.edtRestName.getText().toString().equals("")) {
+                binding.edtRestName.setError("Field can not be empty");
 
-                    binding.edtRestName.setError("Field can not be empty");
+            } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
+                binding.edtRestNumber.setError("Please enter valid phoneNo.");
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+            } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 
-                } else if (binding.edtRestWebsite.getText().toString().equals("")) {
+                binding.edtRestWebsite.setError("Field can not be empty");
 
-                    binding.edtRestWebsite.setError("Field can not be empty");
+            } else if (binding.edtRestDescription.getText().toString().equals("")) {
 
-                } else if (binding.edtRestDescription.getText().toString().equals("")) {
+                binding.edtRestDescription.setError("Field can not be empty");
 
-                    binding.edtRestDescription.setError("Field can not be empty");
+            } else {
 
+                if (new ConnectionToInternet(LawyerEditAboutOfficeActivity.this).isConnectingToInternet()) {
+                    editProfile(sessionManager.getUserId());
                 } else {
-
-                    if (new ConnectionToInternet(LawyerEditAboutOfficeActivity.this).isConnectingToInternet()) {
-                        editProfile(sessionManager.getUserId());
-                    } else {
-                        new ConnectionToInternet(LawyerEditAboutOfficeActivity.this).ShowDilog(LawyerEditAboutOfficeActivity.this);
-                    }
-
+                    new ConnectionToInternet(LawyerEditAboutOfficeActivity.this).ShowDilog(LawyerEditAboutOfficeActivity.this);
                 }
 
             }
+
         });
     }
     private void editProfile(String userId) {
@@ -134,26 +126,4 @@ public class LawyerEditAboutOfficeActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    TextWatcher tw = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (binding.edtRestName.getText().length() > 0 && binding.edtRestNumber.getText().length() > 0 && binding.edtRestWebsite.getText().length() > 0 && binding.edtRestDescription.getText().length() > 0) {
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_doctor));
-
-            } else {
-
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.cle_979592));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_disable));
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) { }
-    };
 }

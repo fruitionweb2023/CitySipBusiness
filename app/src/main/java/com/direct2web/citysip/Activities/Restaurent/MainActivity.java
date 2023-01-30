@@ -84,26 +84,11 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
 
-//        pd = new ProgressDialog(MainActivity.this);
-//        pd.setMessage("Please wait Loading...");
-//        pd.show();
-
         checkAndRequestPermissions();
-
-
         getDashboardData(sessionManager.getUserId());
-
-
-//        getMenuList2(sessionManager.getUserId());
-
         url = "http://medicaiditpark.com/city_slip/api-firebase/business_side/chart.php?business_id="+sessionManager.getUserId();
-
         Log.e("url", url);
-
         binding.webView.setWebViewClient(new MyWebViewClient());
-//        binding.webView.setInitialScale(1);
-//        binding.webView.getSettings().setLoadWithOverviewMode(true);
-//        binding.webView.getSettings().setUseWideViewPort(true);
         binding.webView.getSettings().setJavaScriptEnabled(true);
         binding.webView.getSettings().setSupportZoom(true);
         binding.webView.loadUrl(url);
@@ -159,126 +144,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-   /* private void getData(String userId, String monthly_turn_over) {
-
-        Log.e("MonthlyTurnOver : ", "UserId : " + userId + "\nMonthlyTurnOver : " + monthly_turn_over );
-        Api api = RetrofitClient.getClient().create(Api.class);
-
-        Call<ResponseGetBasicDetails> call = api.getBasicDetails("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
-                WS_URL_PARAMS.access_key, userId, monthly_turn_over);
-
-        call.enqueue(new Callback<ResponseGetBasicDetails>() {
-            @Override
-            public void onResponse(Call<ResponseGetBasicDetails> call, Response<ResponseGetBasicDetails> response) {
-
-                Log.e("responceMainActivity", new Gson().toJson(response.body()));
-
-                if (pd.isShowing()){
-                    pd.dismiss();
-                }
-                if (response.body() != null && response.isSuccessful()) {
-
-                    if (response.body().getError()) {
-
-                        Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                    } else {
-
-                       // binding.txtRevenueCount.setText("₹" + response.body().getDetailData());
-
-                    }
-
-                } else {
-
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
-
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseGetBasicDetails> call, Throwable t) {
-                if (pd.isShowing()){
-                    pd.dismiss();
-                }
-                t.printStackTrace();
-                Log.e("error", t.getMessage());
-
-            }
-        });
-
-
-    }*/
-
-    private void getMenuList2(String userId) {
-
-        Log.e("userId", userId);
-
-        Api api = RetrofitClient.getClient().create(Api.class);
-
-        Call<ResponseMenuList> call = api.getMenuList("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
-                WS_URL_PARAMS.access_key, userId);
-        call.enqueue(new Callback<ResponseMenuList>() {
-            @Override
-            public void onResponse(Call<ResponseMenuList> call, Response<ResponseMenuList> response) {
-                Log.e("responseMenuList", new Gson().toJson(response.body()));
-
-                if (pd.isShowing()) {
-                    pd.dismiss();
-                }
-
-                if (response.body() != null && response.isSuccessful()) {
-
-                    if (response.body().getError()) {
-
-                        Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        binding.txtActiveMenu.setText("0");
-                        binding.txtInActiveMenu.setText("0");
-                    } else {
-
-                        menuList = response.body().getMenuList();
-
-                        if (menuList != null) {
-
-                            List<Menu> tempActive = new ArrayList<>();
-                            List<Menu> tempInActive = new ArrayList<>();
-
-
-                            for (Menu menuItemList : menuList) {
-
-                                if (menuItemList.getStatus().equals("1")) {
-                                    tempActive.add(menuItemList);
-                                } else {
-
-                                    tempInActive.add(menuItemList);
-                                }
-                            }
-                            binding.txtActiveMenu.setText(String.valueOf(tempActive.size()));
-                            binding.txtInActiveMenu.setText(String.valueOf(tempInActive.size()));
-
-
-                        } else {
-                            binding.txtActiveMenu.setText("0");
-                            binding.txtInActiveMenu.setText("0");
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseMenuList> call, Throwable t) {
-
-                if (pd.isShowing()) {
-                    pd.dismiss();
-                }
-                Log.e("erro", t.getMessage());
-                t.printStackTrace();
-            }
-        });
-
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -345,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, listpermissionneeded.toArray(new String[listpermissionneeded.size()]), PERMISSIONS_REQUEST_CODE);
         }
-
     }
 
     @Override
@@ -456,7 +320,6 @@ public class MainActivity extends AppCompatActivity {
                 if (response.body() != null && response.isSuccessful()) {
 
                     if (response.body().getmError()) {
-
                         Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     } else {
 
@@ -465,18 +328,11 @@ public class MainActivity extends AppCompatActivity {
                         binding.txtActiveOffer.setText(response.body().getmActiveOffer());
                         binding.txtInActiveOffer.setText(response.body().getmInactiveOffer());
                         binding.txtRevenueCount.setText("₹" + response.body().getMonthlyTurenOver());
-                      //  getData(sessionManager.getUserId(), response.body().getMonthlyTurenOver());
-
-
                     }
 
                 } else {
-
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
-
                 }
-
-
             }
 
             @Override
@@ -489,9 +345,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
-
-
 }

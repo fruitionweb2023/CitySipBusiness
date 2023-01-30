@@ -97,17 +97,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
             }
         });
 
-        /*binding.txtSetUpLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ImageListActivity.this,SetUpVideoActivity.class);
-                startActivity(intent);
-
-            }
-        });*/
-
-
         if (imagesEncodedList != null) {
             int numberOfColumns = 3;
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this,numberOfColumns);
@@ -133,32 +122,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
 
                 } else {
 
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(ImageListActivity.this);
-                    builder.setCancelable(false);
-                    builder.setMessage("Are you sure want to go further without adding photos?");
-                    builder.setTitle("Confirmation");
-                    builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent intent = new Intent(ImageListActivity.this, SetUpVideoActivity.class);
-                            startActivity(intent);
-
-                        }
-                    });
-
-                    builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-
-                        }
-                    });
-
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();*/
-
 
                     onBackPressed();
 
@@ -167,26 +130,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
 
             }
         });
-
-       /* binding.imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //binding.rclrImage.setVisibility(View.GONE);
-                *//*Intent i = new Intent(SalePropertyActivity.this,ImagesActivity.class);
-                startActivity(i);*//*
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
-//                flag_image = 2;
-                //openSelectpicDilog();
-                onProfileImageClick();
-
-            }
-        });
-*/
 
     }
 
@@ -294,8 +237,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
 
                 if (uri12 != null) {         //on Single image selected
 
-                    /*binding.rclrImage.setVisibility(View.GONE);
-                    Toast.makeText(this, "Minimum 2 Image Select", Toast.LENGTH_SHORT).show();*/
                     Uri uri = data.getData();
 
                     binding.rclrImage.setVisibility(View.VISIBLE);
@@ -324,45 +265,8 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
                             uri = getImageUri(getApplicationContext(), bitmap2);
                             Log.e("uripath", "" + uri);
                             getImageFilePath(uri);
-
-                            //mArrayUri.add(uri);
-                            // Get the cursor
-                            /*Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-                            // Move to first row
-                            cursor.moveToFirst();
-
-                            int columnIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
-                            imageEncoded = cursor.getString(columnIndex);
-                            Log.e("imagepath",imageEncoded);
-                            filePaths.add(imageEncoded);
-                            cursor.close();*/
-
-                                /*bitmap2 = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                                uri = getImageUri(getApplicationContext(), bitmap2);
-                                Log.e("uripath", "" + uri);*/
-                            //getImageFilePath(uri);
-                            //filePaths.add(uri);
-                            //String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-                                /*Cursor cursor = getContentResolver().query(uri,
-                                        filePathColumn, null, null, null);
-                                cursor.moveToFirst();
-
-                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                                img2 = cursor.getString(columnIndex);
-                                cursor.close();
-
-                                addImage(img2);
-
-                                Log.e("path", img2);*/
-
-
                         }
                         Log.e("MainActivity", "Selected Images" + mClipData.getItemCount());
-
-                        /*} else {
-                            Toast.makeText(this, "Please Select Only 4 Picture", Toast.LENGTH_SHORT).show();
-                        }*/
                     }
 
                 }
@@ -379,11 +283,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
                             bitmap2 = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                             selectedImage = getImageUri(getApplicationContext(), bitmap2);
                             Log.e("uripath", "" + selectedImage);
-
-                            //getImageFilePath(uri);
-
-                            /*img2 = RealPathUtils.getRealPathFromURI_API19(SetUpImageActivity.this, selectedImage);
-                            Log.d("TAG", "File Path: " + img2);*/
 
                             String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
@@ -434,17 +333,7 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
 
     private void loadProfile(String url) {
         Log.e("TAG....", "Image cache path: " + url);
-
-        //img2 = url;
-
-        /*Glide.with(this).load(url)
-                .into(binding.imglogoPic);
-        binding.imglogoPic.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));*/
-
-//        addImage(url);
         checkImage(url);
-
-
     }
 
 
@@ -462,16 +351,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
                 }
             }
         }
-
-        /*String absolutePathOfImage = UriUtils.getPathFromUri(this,uri);
-        if (absolutePathOfImage != null) {
-            Log.e("absolutePathOfImage", absolutePathOfImage);
-            checkImage(absolutePathOfImage);
-        } else {
-            Log.e("absolutePathOfImageUri", String.valueOf(uri));
-            checkImage(String.valueOf(uri));
-        }*/
-
     }
 
 
@@ -504,8 +383,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
         binding.rclrImage.setLayoutManager(gridLayoutManager);
         SetImageAdapter setImageAdapter = new SetImageAdapter(this, imagesEncodedList,this);
         binding.rclrImage.setAdapter(setImageAdapter);
-        //selectedImageAdapter.notifyDataSetChanged();
-        //imageAdapter.notifyDataSetChanged();
     }
 
     public void sendData() {
@@ -559,11 +436,7 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
                         Toast.makeText(ImageListActivity.this , response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     }else {
-
-                        /*Intent intent = new Intent(ImageListActivity.this,SetUpVideoActivity.class);
-                        startActivity(intent);*/
                         Toast.makeText(ImageListActivity.this , response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
 
                 }
@@ -573,7 +446,6 @@ public class ImageListActivity extends AppCompatActivity implements SetImageAdap
 
             @Override
             public void onFailure(Call<ResponseAddImages> call, Throwable t) {
-
                 pd.dismiss();
                 t.printStackTrace();
                 Log.e("errorImage", t.getMessage());

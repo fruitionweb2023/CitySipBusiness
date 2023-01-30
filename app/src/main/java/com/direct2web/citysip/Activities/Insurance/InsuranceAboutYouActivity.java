@@ -139,7 +139,7 @@ public class InsuranceAboutYouActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         if (flag_calander == 1) {
             binding.edtRestWebsite.setText(sdf.format(calendar.getTime()));

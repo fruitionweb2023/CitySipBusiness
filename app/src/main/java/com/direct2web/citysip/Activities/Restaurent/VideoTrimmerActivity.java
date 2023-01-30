@@ -277,26 +277,6 @@ public class VideoTrimmerActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void onVideoPrepared(@NonNull MediaPlayer mp) {
-        // Adjust the size of the video
-        // so it fits on the screen
-        //TODO manage proportion for video
-        /*int videoWidth = mp.getVideoWidth();
-        int videoHeight = mp.getVideoHeight();
-        float videoProportion = (float) videoWidth / (float) videoHeight;
-        int screenWidth = rlVideoView.getWidth();
-        int screenHeight = rlVideoView.getHeight();
-        float screenProportion = (float) screenWidth / (float) screenHeight;
-        ViewGroup.LayoutParams lp = mVideoView.getLayoutParams();
-
-        if (videoProportion > screenProportion) {
-            lp.width = screenWidth;
-            lp.height = (int) ((float) screenWidth / videoProportion);
-        } else {
-            lp.width = (int) (videoProportion * (float) screenHeight);
-            lp.height = screenHeight;
-        }
-        mVideoView.setLayoutParams(lp);*/
-
         mDuration = mVideoView.getDuration() / 1000;
         setSeekBarPosition();
     }

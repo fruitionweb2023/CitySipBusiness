@@ -41,16 +41,13 @@ public class SettingActivity extends AppCompatActivity {
     ActivitySettingBinding binding;
     SessionManager sessionManager;
     ProgressDialog pd;
-    BottomButtonClickListner bottomButtonClickListner;
     SettingsAdapter adapter;
     List<NotificationSetting> offerList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_setting);
         sessionManager = new SessionManager(this);
-
 
         if (Objects.equals(sessionManager.getBusinessType(), "1")) {
             binding.toolbarLogo.setBackgroundResource(R.drawable.ic_lawyer_logo);
@@ -63,19 +60,8 @@ public class SettingActivity extends AppCompatActivity {
         }else if (Objects.equals(sessionManager.getBusinessType(), "5")){
             binding.toolbarLogo.setBackgroundResource(R.drawable.ic_lawyer_logo);
         }else if (Objects.equals(sessionManager.getBusinessType(), "6")){
-            binding.toolbarLogo.setBackgroundResource(R.drawable.logo);
+            binding.toolbarLogo.setBackgroundResource(R.drawable.restaurant_logo_new);
         }
-
-       /* bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
-
-        binding.bottomnavigation.bbImgOrder.setColorFilter(getResources().getColor(R.color.clr_0059C8));
-
-        binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-*/
-
 
         pd = new ProgressDialog(SettingActivity.this);
         pd.setMessage("Please Wait....");
@@ -89,7 +75,6 @@ public class SettingActivity extends AppCompatActivity {
 
         Api api = RetrofitClient.getClient().create(Api.class);
         Log.e("Settings : ", "businessId : " + id + "\nCatId : " + catId);
-
         Call<ResponseSettings> call = api.getSettings("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key,id,catId);
         call.enqueue(new Callback<ResponseSettings>() {
@@ -106,23 +91,17 @@ public class SettingActivity extends AppCompatActivity {
                     Log.e("userId", sessionManager.getUserId());
 
                     if (response.body().getError()) {
-
                         Toast.makeText(SettingActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                     } else {
-
                         adapter = new SettingsAdapter(offerList, SettingActivity.this);
-
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                         binding.rclrNotification.setLayoutManager(layoutManager);
                         binding.rclrNotification.setAdapter(adapter);
                     }
-
-                }else {
+                } else {
                     Toast.makeText(SettingActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseSettings> call, Throwable t) {
 
@@ -134,13 +113,4 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-
-  /*  @Override
-    public void onBackPressed() {
-        Intent i = new Intent(SettingActivity.this, DoctorDeshboardActivity.class);
-        finish();
-        startActivity(i);
-    }
-*/
-
 }

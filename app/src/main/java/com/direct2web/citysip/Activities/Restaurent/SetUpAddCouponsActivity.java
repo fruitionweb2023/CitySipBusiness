@@ -25,11 +25,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SetUpAddCouponsActivity extends AppCompatActivity {
-
     ActivitySetUpAddCouponsBinding binding;
     SessionManager sessionManager;
     ProgressDialog pd;
-    String strOffersId;
     String offerId = "";
 
     @Override
@@ -52,7 +50,6 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
             binding.edtMaxDiscount.setText(getIntent().getStringExtra("maxAmount"));
             binding.edtTermsConditions.setText(getIntent().getStringExtra("termsAndCondition"));
             binding.btnAddCoupons.setText("Edit");
-
             offerId = getIntent().getStringExtra("offerId");
         } else  {
             binding.txtTitleCoupons.setText("Add Coupons");
@@ -62,41 +59,25 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
             binding.edtMaxDiscount.setText("");
             binding.edtTermsConditions.setText("");
             binding.btnAddCoupons.setText("Add");
-
         }
 
-        binding.btnAddCoupons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.btnAddCoupons.setOnClickListener(view -> {
 
-                if (binding.edtCouponOffers.getText().toString().equals("percentage")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Coupons offer ", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtCouponsCode.getText().toString().equals("coupn_code")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Coupons Code", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtMinPurchase.getText().toString().equals("min_amount")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Minimum Purchase", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtMaxDiscount.getText().toString().equals("max_amount")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Maximum Discount", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtTermsConditions.getText().toString().equals("terms_condition")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Terms and Conditions", Toast.LENGTH_SHORT).show();
-
+            if (binding.edtCouponOffers.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter Coupons offer ", Toast.LENGTH_SHORT).show();
+            } else if (binding.edtCouponsCode.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter Coupons Code", Toast.LENGTH_SHORT).show();
+            } else if (binding.edtMinPurchase.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter Minimum Purchase", Toast.LENGTH_SHORT).show();
+            } else if (binding.edtMaxDiscount.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter Maximum Discount", Toast.LENGTH_SHORT).show();
+            } else if (binding.edtTermsConditions.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter Terms and Conditions", Toast.LENGTH_SHORT).show();
+            } else {
+                if (getIntent().getStringExtra("flag").equals("1")) {
+                    editSetUpOffer(sessionManager.getUserId());
                 } else {
-                    if (getIntent().getStringExtra("flag").equals("1")) {
-                        editSetUpOffer(sessionManager.getUserId());
-
-                    } else {
-
-                        sendSetUpOffer(sessionManager.getUserId());
-                    }
+                    sendSetUpOffer(sessionManager.getUserId());
                 }
             }
         });
@@ -168,26 +149,6 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
                 Log.e("error", t.getMessage());
             }
         });
-
-    /*private void getdata(String userId) {
-        Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseOfferList> call = api.getOffers("Bearer " +  WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
-                WS_URL_PARAMS.access_key,userId);
-        call.enqueue(new Callback<ResponseOfferList>() {
-            @Override
-            public void onResponse(Call<ResponseOfferList> call, Response<ResponseOfferList> response) {
-                Log.e("ResponseOfferList", new Gson().toJson(response.body()));
-                if (response.body() != null && response.isSuccessful()) {
-                    offerList = response.body().getOfferList();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseOfferList> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("error", t.getMessage());
-            }
-        });
-    }*/
     }
 
     private void editSetUpOffer(String userId) {
@@ -199,7 +160,6 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
 
         String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
         String accesskey = WS_URL_PARAMS.access_key;
-      //  String businessId = sessionManager.getUserId();
         String coupnCode = binding.edtCouponsCode.getText().toString();
         String minAmount = binding.edtMinPurchase.getText().toString();
         String maxAmount = binding.edtMaxDiscount.getText().toString();
@@ -263,25 +223,5 @@ public class SetUpAddCouponsActivity extends AppCompatActivity {
                 Log.e("error", t.getMessage());
             }
         });
-
-    /*private void getdata(String userId) {
-        Api api = RetrofitClient.getClient().create(Api.class);
-        Call<ResponseOfferList> call = api.getOffers("Bearer " +  WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
-                WS_URL_PARAMS.access_key,userId);
-        call.enqueue(new Callback<ResponseOfferList>() {
-            @Override
-            public void onResponse(Call<ResponseOfferList> call, Response<ResponseOfferList> response) {
-                Log.e("ResponseOfferList", new Gson().toJson(response.body()));
-                if (response.body() != null && response.isSuccessful()) {
-                    offerList = response.body().getOfferList();
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseOfferList> call, Throwable t) {
-                t.printStackTrace();
-                Log.e("error", t.getMessage());
-            }
-        });
-    }*/
     }
 }

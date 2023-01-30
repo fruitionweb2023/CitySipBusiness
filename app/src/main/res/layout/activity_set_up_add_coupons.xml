@@ -91,6 +91,7 @@
                                 android:textColor="#333333"
                                 android:textSize="16sp"
                                 android:inputType="number"
+                                android:singleLine="true"
                                 android:maxLength="3"/>
 
                             <TextView
@@ -138,6 +139,9 @@
                         android:paddingEnd="10dp"
                         android:paddingTop="10dp"
                         android:singleLine="true"
+                        android:inputType="number"
+                        android:imeOptions="actionNext"
+                        android:maxLength="8"
                         android:textColor="#333333"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -202,7 +206,9 @@
                                 android:textColor="#333333"
                                 android:textSize="16sp"
                                 android:inputType="number"
-                                android:gravity="center_vertical"/>
+                                android:singleLine="true"
+                                android:imeOptions="actionNext"
+                                android:maxLength="8"                                android:gravity="center_vertical"/>
 
                         </LinearLayout>
 
@@ -253,6 +259,9 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="Enter"
                                 android:inputType="number"
+                                android:singleLine="true"
+                                android:maxLength="8"
+                                android:imeOptions="actionNext"
                                 android:paddingBottom="20dp"
                                 android:paddingStart="10dp"
                                 android:paddingEnd="10dp"
@@ -292,6 +301,7 @@
                         android:paddingBottom="20dp"
                         android:paddingStart="10dp"
                         android:maxLines="10"
+                        android:inputType="textLongMessage"
                         android:paddingEnd="10dp"
                         android:paddingTop="10dp"
                         android:textColor="#333333"

@@ -94,8 +94,13 @@ public class InsurenceEditLocationFetchActivity extends FragmentActivity impleme
         sessionManager = new SessionManager(this);
 
         binding.edtRestName.setText(getIntent().getStringExtra("address1"));
-      // address = getIntent().getStringExtra("address2");
-        binding.dragResult.setText(getIntent().getStringExtra("address2"));
+        String str = getIntent().getStringExtra("address2");
+        String delimiter = ",";
+        String[] temp = str.split(delimiter);
+        String streetAdd = temp[0];
+        String roadAdd = temp[1];
+        binding.edtStreet.setText(streetAdd);
+        binding.edtStreet.setText(roadAdd);
         latitude = getIntent().getStringExtra("lat");
         longitude = getIntent().getStringExtra("lang");
 

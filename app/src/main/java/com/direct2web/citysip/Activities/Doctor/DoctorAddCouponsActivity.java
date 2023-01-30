@@ -65,25 +65,20 @@ public class DoctorAddCouponsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (binding.edtCouponOffers.getText().toString().equals("percentage")) {
+                if (binding.edtCouponOffers.getText().toString().equals("")) {
+                    binding.edtCouponOffers.setError("Field can not be empty");
 
-                    Toast.makeText(getApplicationContext(), "Enter Coupons offer ", Toast.LENGTH_SHORT).show();
+                } else if (binding.edtCouponsCode.getText().toString().equals("")) {
+                    binding.edtCouponsCode.setError("Field can not be empty");
 
-                } else if (binding.edtCouponsCode.getText().toString().equals("coupn_code")) {
+                } else if (binding.edtMinPurchase.getText().toString().equals("")) {
+                    binding.edtMinPurchase.setError("Field can not be empty");
 
-                    Toast.makeText(getApplicationContext(), "Enter Coupons Code", Toast.LENGTH_SHORT).show();
+                } else if (binding.edtMaxDiscount.getText().toString().equals("")) {
+                    binding.edtMaxDiscount.setError("Field can not be empty");
 
-                } else if (binding.edtMinPurchase.getText().toString().equals("min_amount")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Minimum Purchase", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtMaxDiscount.getText().toString().equals("max_amount")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Maximum Discount", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtTermsConditions.getText().toString().equals("terms_condition")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Terms and Conditions", Toast.LENGTH_SHORT).show();
+                } else if (binding.edtTermsConditions.getText().toString().equals("")) {
+                    binding.edtTermsConditions.setError("Field can not be empty");
 
                 } else {
                     if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {

@@ -36,13 +36,10 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
 
     ActivityOrderListBinding binding;
     SessionManager sessionManager;
-    BottomButtonClickListner bottomButtonClickListner;
     ProgressDialog pd;
-
     List<Order> orderList = new ArrayList<>();
     List<Order> temp = new ArrayList<>();
     OrderListAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +47,8 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_list);
 
         sessionManager = new SessionManager(this);
-       /* bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
-
-        binding.bottomnavigation.bbImgOrder.setColorFilter(getResources().getColor(R.color.clay));
-        binding.bottomnavigation.bbTxtOrder.setTextColor(getResources().getColor(R.color.clay));
-
-        binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));*/
-
         binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
-
-        binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-
-            }
-        });
+        binding.toolbar.toolbarBack.setOnClickListener(v -> onBackPressed());
 
         pd = new ProgressDialog(this);
         pd.setMessage("Please Wait...");
@@ -80,65 +59,49 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
         getOrder(sessionManager.getUserId());
 
 
-        binding.txtContinue.setOnClickListener(new View.OnClickListener() {
+        binding.txtContinue.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            filter("0");
 
-                filter("0");
+            binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_f54748));
+            binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
 
-                binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_f54748));
-                binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
-
-            }
         });
 
-        binding.txtAllOrder.setOnClickListener(new View.OnClickListener() {
+        binding.txtAllOrder.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            filter("3");
 
-                filter("3");
+            binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_f54748));
+            binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
 
-                binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_f54748));
-                binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
-
-            }
         });
 
-        binding.txtCanceled.setOnClickListener(new View.OnClickListener() {
+        binding.txtCanceled.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            filter("2");
 
-                filter("2");
+            binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_f54748));
+            binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
 
-                binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_f54748));
-                binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_333333));
-
-            }
         });
 
-        binding.txtCompleted.setOnClickListener(new View.OnClickListener() {
+        binding.txtCompleted.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            filter("1");
 
-                filter("1");
-
-                binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_f54748));
-                binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
-                binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCompleted.setTextColor(getResources().getColor(R.color.clr_f54748));
+            binding.txtContinue.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtAllOrder.setTextColor(getResources().getColor(R.color.clr_333333));
+            binding.txtCanceled.setTextColor(getResources().getColor(R.color.clr_333333));
 
 
-            }
         });
 
         binding.editText.addTextChangedListener(new TextWatcher() {
@@ -204,18 +167,10 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OrderListActivity.this);
                         binding.rclrOrder.setLayoutManager(linearLayoutManager);
                         binding.rclrOrder.setAdapter(adapter);
-
-
                     }
-
-
                 } else {
-
                     Toast.makeText(OrderListActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
-
                 }
-
-
             }
 
             @Override
@@ -228,8 +183,6 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
 
             }
         });
-
-
     }
 
     void filter(String s) {
@@ -244,7 +197,6 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
                         temp.add(orderItemList);
                     }
                 } else if (orderItemList.getStatus().equals(s)) {
-
                     temp.add(orderItemList);
                 }
             }
@@ -260,26 +212,17 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
 
     @Override
     public void onClickRejectButton(int position) {
-
         Order order = orderList.get(position);
         sendStatus("", "order_list", order.getId(), "2");
-
     }
 
     @Override
     public void onClickAcceptButton(int position) {
-
         Order order = orderList.get(position);
         sendStatus("", "order_list", order.getId(), "1");
     }
 
     public void sendStatus(String userId, String type, String id, String status) {
-
-       /* pd = new ProgressDialog(SetUpCouponsActivity.this);
-        pd.setMessage("Please Wait....");
-        pd.setCancelable(false);
-        pd.show();
-*/
         Api api = RetrofitClient.getClient().create(Api.class);
         Call<ResponseStatus> call = api.sendStatus("Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject),
                 WS_URL_PARAMS.access_key, userId, type, id, status);
@@ -289,39 +232,23 @@ public class OrderListActivity extends AppCompatActivity implements OrderListAda
 
                 Log.e("responseDelete", new Gson().toJson(response.body()));
 
-               /* if (pd.isShowing()) {
-                    pd.dismiss();
-                }*/
-
                 if (response.body() != null && response.isSuccessful()) {
 
                     if (response.body().getError()) {
-
                         Toast.makeText(OrderListActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                     } else {
-
                         Toast.makeText(OrderListActivity.this, "Successfully Update", Toast.LENGTH_SHORT).show();
                         getOrder(sessionManager.getUserId());
                     }
-
                 } else {
                     Toast.makeText(OrderListActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
-
             }
-
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
-
-               /* if (pd.isShowing()) {
-                    pd.dismiss();
-                }*/
                 t.printStackTrace();
                 Log.e("errorDelete", t.getMessage());
             }
         });
     }
-
 }

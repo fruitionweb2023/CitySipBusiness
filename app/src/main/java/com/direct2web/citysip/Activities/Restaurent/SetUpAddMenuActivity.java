@@ -90,8 +90,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
     List<Cuisine> cuisineList = new ArrayList<>();
     List<DishType> dishTypeList = new ArrayList<>();
-   // String[] arrFoodType = new String[]{"Select", "Veg", "NonVeg"};
-   // String[] arrOfferApplied = new String[]{"Select", "Yes", "No"};
     ProgressDialog pd;
     List<Menu> menuList;
     SpinnerCusinesListAdapter spinnerCusinesListAdapter;
@@ -115,8 +113,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
     String cId;
     String cDesc;
 
-
-
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,17 +129,11 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         arrayList2.add(new FoodType("0","Select"));
         arrayList2.add(new FoodType("1","Veg"));
         arrayList2.add(new FoodType("2","NonVeg"));
+
         getOfferList(sessionManager.getUserId());
         getdata();
 
-        binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-
-            }
-        });
+        binding.toolbar.toolbarBack.setOnClickListener(v -> onBackPressed());
 
         menuId = getIntent().getStringExtra("menuId");
         if (getIntent().getStringExtra("flag").equals("1")) {
@@ -154,7 +144,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             binding.edtDescription.setText(getIntent().getStringExtra("description"));
             binding.txtOrderLimit.setText( getIntent().getStringExtra("maxDish"));
             binding.btnSubmit.setText("Edit");
-
             menuId = getIntent().getStringExtra("menuId");
             Glide.with(this).load(Api.imageUrl + getIntent().getStringExtra("image"))
                     .thumbnail(0.5f)
@@ -171,21 +160,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             binding.rclrCouponList.setLayoutManager(layoutManager);
             binding.rclrCouponList.setAdapter(typeListAdapter);
 
-               /* addDishType.clear();
-
-                String offerId = getIntent().getStringExtra("offer").equals("NO") ? null : getIntent().getStringExtra("offer");
-                String[] id = offerId.split("~~");
-                Log.e("OfferId : ", offerId);
-                for(int i = 0; i < id.length; i++){
-                    if (offerList.get(i).getId().equals(id)) {
-                        addDishType.add(new Offer(offerList.get(i).getId(),offerList.get(i).getCoupnCode()));
-                        cDesc = offerList.get(i).getCoupnCode();
-                        cId = offerList.get(i).getId();
-                    }
-                }
-                Log.e("OfferDesc : ", "cId : " + cId + "cDesc : "  + cDesc);*/
-
-
         } else  {
 
             binding.loginToYo.setText("Add Dish");
@@ -200,7 +174,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         pd = new ProgressDialog(SetUpAddMenuActivity.this);
         pd.setMessage("Please Wait....");
         pd.setCancelable(true);
-        //pd.show();
 
         typeListAdapter = new AddCouponAddMenuAdapter(SetUpAddMenuActivity.this, addDishType, SetUpAddMenuActivity.this,SetUpAddMenuActivity.this);
 
@@ -209,13 +182,9 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         binding.rclrCouponList.setLayoutManager(layoutManager);
         binding.rclrCouponList.setAdapter(typeListAdapter);
 
-        binding.imgDishLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                flag_image = 2;
-                //openSelectpicDilog();
-                onProfileImageClick();
-            }
+        binding.imgDishLogo.setOnClickListener(v -> {
+            flag_image = 2;
+            onProfileImageClick();
         });
 
         spinnerCusinesListAdapter = new SpinnerCusinesListAdapter(SetUpAddMenuActivity.this,R.layout.raw_recyclear_view_drop_down,R.id.tvName,cuisineList);
@@ -231,16 +200,13 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
                 if (flag) {
                     String c = getIntent().getStringExtra("cuisine");
-                   // Log.e("C Value : ", c);
                     if (c != null) {
                         binding.txtCuisines.setSelection(spinnerCusinesListAdapter.getItemIndexByValue(c));
                         Log.e("Spinner Value : ", String.valueOf(spinnerCusinesListAdapter.getItemIndexByValue(c)));
                     }
                     flag = false;
                 }
-
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -264,7 +230,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                     }
                     flag2 = false;
                 }
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -297,30 +262,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                     }
                     flag4 = false;
                 }
-               /* if (flag4) {
-
-                  if (getIntent().getStringExtra("flag") == "1") {
-                      String c = getIntent().getStringExtra("offer");
-
-                      if (c.equals(strOfferAppliedOrNot)) {
-
-                          binding.txtOffer.setSelection(spinnerOfferTypeListAdapter.getItemIndexByValue(c));
-
-                      } else  {
-
-                          binding.txtOffer.setSelection(spinnerOfferTypeListAdapter.getItemIndexByValue("YES"));
-                      }
-                      flag4 = false;
-                  } else  {
-                      binding.txtOffer.setSelection(i);
-
-                  }
-
-
-                }*/
-
-
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -344,167 +285,53 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                     }
                     flag3 = false;
                 }
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
+       binding.btnSubmit.setOnClickListener(view -> {
+           if (binding.edtRestName.getText().toString().equals("")) {
 
-      //  strOfferAppliedOrNot = binding.txtOffer.getSelectedItem().toString();
-     //   Log.e("SelectedOffer : ", strOfferAppliedOrNot);
-     /*  if (flag3) {
-          if (getIntent().getStringExtra("flag").equals("1") ) {
-              if (getIntent().getStringExtra("offer").equals("Yes")) {
+               Toast.makeText(getApplicationContext(), "Enter Dish Name", Toast.LENGTH_SHORT).show();
 
-                  binding.llAddOffer.setVisibility(View.VISIBLE);
-                  flag3 = true;
-//                    getOfferList(sessionManager.getUserId());
+           } else if (binding.edtPrice.getText().toString().equals("")) {
 
-              } else {
+               Toast.makeText(getApplicationContext(), "Enter Dish Price", Toast.LENGTH_SHORT).show();
 
-                  binding.llAddOffer.setVisibility(View.GONE);
-                  flag3 = false;
-              }
-          } else {
-              if (binding.txtOffer.getSelectedItem().toString().equals("Yes")){
-                  binding.llAddOffer.setVisibility(View.VISIBLE);
-                  flag3 = true;
-              } else {
-                  binding.llAddOffer.setVisibility(View.GONE);
-                  flag3 = false;
-              }
-          }
-       }*/
+           } else if (binding.edtDescription.getText().toString().equals("")) {
 
+               Toast.makeText(getApplicationContext(), "Enter Dish Description", Toast.LENGTH_SHORT).show();
 
-        //Log.e("SelectedFoodType : ", binding.txtFoodType.getSelectedItem().toString());
+           } else if (binding.txtCuisines.equals("Cuisines")) {
 
+               Toast.makeText(getApplicationContext(), "Please Select Cuisines First", Toast.LENGTH_SHORT).show();
 
+           } else if (binding.txtDishType.equals("Dish Type")) {
 
-       /* ArrayAdapter<CharSequence> foodType = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrFoodType);
-        foodType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.txtFoodType.setAdapter(foodType);*/
+               Toast.makeText(getApplicationContext(), "Please Select Dish Type First", Toast.LENGTH_SHORT).show();
 
-     /*   binding.txtFoodType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category = arrFoodType[i];
-               *//* binding.txtFoodType.setSelection(i);
+           } else if (binding.txtFoodType.getSelectedItem().toString().equals("Select")) {
 
-                if (flag3) {
-                    String compareValue = getIntent().getStringExtra("offer");
-                    if (compareValue != null) {
-                        Log.e("offer Food type : ", compareValue);
-                        int spinnerPosition = foodType.getPosition(compareValue);
-                        binding.txtFoodType.setSelection(spinnerPosition);
-                        Log.e("SpinnerPositionFoodType : ", String.valueOf(spinnerPosition));
-                    }
-                    flag3 = false;
-                }*//*
+               Toast.makeText(getApplicationContext(), "Please select categoty Veg or NonVeg", Toast.LENGTH_SHORT).show();
 
-               *//* if (flag3) {
-                   String c = getIntent().getStringExtra("offer");
-                    Log.e("offer Food type : ", c);
-                   if (c != null) {
-                       int spinnerPosition = foodType.getPosition(c);
-                       binding.txtFoodType.setSelection(spinnerPosition);
-                   }
-                   flag3 = false;
-               }*//*
-            }
+           }else if (binding.txtOffer.getSelectedItem().toString().equals("Select")) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+               Toast.makeText(getApplicationContext(), "Please select offer appied or not", Toast.LENGTH_SHORT).show();
 
-            }
-        });*/
-/*
-        ArrayAdapter offer = new ArrayAdapter(this,android.R.layout.simple_spinner_item,arrOfferApplied);
-        offer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.txtOffer.setAdapter(offer);
-        binding.txtOffer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                strOfferAppliedOrNot = arrOfferApplied[i];
-                String c = getIntent().getStringExtra("category");
-                binding.txtOffer.setSelection(i);
+           } else if (binding.txtOrderLimit.getText().toString().equals("")) {
 
-                if (flag4) {
-                    if (c != null) {
-                        int spinnerPosition = offer.getPosition(c);
-                        binding.txtOffer.setSelection(spinnerPosition);
+               Toast.makeText(getApplicationContext(), "Please Select Order Limit First", Toast.LENGTH_SHORT).show();
 
-                    }
-                    flag4 = false;
-                }
+           } else {
 
-                if (strOfferAppliedOrNot.equals("Yes")) {
-
-                    binding.llAddOffer.setVisibility(View.VISIBLE);
-//                    getOfferList(sessionManager.getUserId());
-
-                } else {
-
-                    binding.llAddOffer.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });*/
-
-
-       binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.edtRestName.getText().toString().equals("")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Dish Name", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtPrice.getText().toString().equals("")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Dish Price", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.edtDescription.getText().toString().equals("")) {
-
-                    Toast.makeText(getApplicationContext(), "Enter Dish Description", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.txtCuisines.equals("Cuisines")) {
-
-                    Toast.makeText(getApplicationContext(), "Please Select Cuisines First", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.txtDishType.equals("Dish Type")) {
-
-                    Toast.makeText(getApplicationContext(), "Please Select Dish Type First", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.txtFoodType.getSelectedItem().toString().equals("Select")) {
-
-                    Toast.makeText(getApplicationContext(), "Please select categoty Veg or NonVeg", Toast.LENGTH_SHORT).show();
-
-                }else if (binding.txtOffer.getSelectedItem().toString().equals("Select")) {
-
-                    Toast.makeText(getApplicationContext(), "Please select offer appied or not", Toast.LENGTH_SHORT).show();
-
-                } else if (binding.txtOrderLimit.getText().toString().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please Select Order Limit First", Toast.LENGTH_SHORT).show();
-
-                } else {
-
-                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
-                        editSetUpMenu();
-                        Log.e("OfferClickedBtn", strOfferAppliedOrNot);
-                    } else  {
-                        sendSetUpMenu();
-                        Log.e("StrOfferAppliedOrNot : ", strOfferAppliedOrNot);
-
-                    }
-
-                }
-            }
+               if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                   editSetUpMenu();
+               } else  {
+                   sendSetUpMenu();
+               }
+           }
        });
     }
 
@@ -543,28 +370,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                         if (getIntent().getStringExtra("flag").equals("1")){
                             defaultSelectValue();
                         }
-
-                       /* if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
-                            addDishType.clear();
-
-                            String offerId = getIntent().getStringExtra("offer").equals("NO") ? null : getIntent().getStringExtra("offer");
-
-                            String[] id = offerId.split("~~");
-                            Log.e("OfferId : ", offerId);
-
-                            for(int i = 0; i < id.length; i++){
-
-                                if (offerList.get(i).getId().equals(id)) {
-                                    addDishType.add(new Offer(offerList.get(i).getId(),offerList.get(i).getCoupnCode()));
-                                    cDesc = offerList.get(i).getCoupnCode();
-                                    cId = offerList.get(i).getId();
-                                }
-
-                            }
-
-                            Log.e("OfferDesc : ", "cId : " + cId + "cDesc : "  + cDesc);
-                        }*/
-
                     }
 
                 } else {
@@ -617,7 +422,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
         }
 
-
         RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
         RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
         RequestBody t3 = RequestBody.create(MediaType.parse("multipart/form-data"), business_id);
@@ -666,9 +470,7 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                         Toast.makeText(SetUpAddMenuActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     } else {
-/*
-                        getMenuList(sessionManager.getUserId());
-*/
+
                         Intent intent = new Intent(SetUpAddMenuActivity.this, SetUpMenuActivity.class);
                         startActivity(intent);
                     }
@@ -676,8 +478,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                 } else {
                     Toast.makeText(SetUpAddMenuActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
@@ -689,8 +489,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                 Log.e("error", t.getMessage());
             }
         });
-
-
     }
 
     private void editSetUpMenu() {
@@ -699,7 +497,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
-
 
         String authHeader = "Bearer " + WS_URL_PARAMS.createJWT(WS_URL_PARAMS.issuer, WS_URL_PARAMS.subject);
         String accesskey = WS_URL_PARAMS.access_key;
@@ -713,8 +510,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         String category = strFoodType;
         String offer = strOfferAppliedOrNot;
 
-
-
         if (addDishType.size() > 0){
 
             StringBuilder sb = new StringBuilder();
@@ -726,7 +521,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
             Log.e("string", offer);
 
         }
-
 
         RequestBody t1 = RequestBody.create(MediaType.parse("multipart/form-data"), authHeader);
         RequestBody t2 = RequestBody.create(MediaType.parse("multipart/form-data"), accesskey);
@@ -776,18 +570,15 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                         Toast.makeText(SetUpAddMenuActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     } else {
-/*
-                        getMenuList(sessionManager.getUserId());
-*/
+
                         Intent intent = new Intent(SetUpAddMenuActivity.this, SetUpMenuActivity.class);
                         startActivity(intent);
                     }
 
                 } else {
+
                     Toast.makeText(SetUpAddMenuActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
                 }
-
-
             }
 
             @Override
@@ -799,8 +590,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                 Log.e("error", t.getMessage());
             }
         });
-
-
     }
 
     void onProfileImageClick() {
@@ -900,13 +689,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
     private void loadProfile(String url) {
         Log.e("TAG....", "Image cache path: " + url);
-
-        //img2 = url;
-
-        /*Glide.with(this).load(url)
-                .into(binding.imglogoPic);
-        binding.imglogoPic.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));*/
-
         Glide.with(this).load(url)
                 .into(binding.imgDishLogo);
         binding.imgDishLogo.setColorFilter(ContextCompat.getColor(this, android.R.color.transparent));
@@ -982,32 +764,15 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
 
             }
         });
-
     }
 
     @Override
     public void onAddButtonClick(int postion) {
 
-
-            SelectOfferNameAdapter dataAdapter = new SelectOfferNameAdapter(offerList, SetUpAddMenuActivity.this);
-            customDialog = new CustomListViewDialog(SetUpAddMenuActivity.this, dataAdapter);
-
-            customDialog.show();
-            customDialog.setCanceledOnTouchOutside(false);
-
-
-//            SelectOfferNameAdapter dataAdapter = new SelectOfferNameAdapter(offerList, SetUpAddMenuActivity.this);
-//            customDialog = new CustomListViewDialog(SetUpAddMenuActivity.this, dataAdapter);
-//
-//            customDialog.show();
-//            customDialog.setCanceledOnTouchOutside(false);
-            
-
-
-//            Toast.makeText(SetUpAddMenuActivity.this, "Please Add Offer First", Toast.LENGTH_SHORT).show();
-            
-
-
+        SelectOfferNameAdapter dataAdapter = new SelectOfferNameAdapter(offerList, SetUpAddMenuActivity.this);
+        customDialog = new CustomListViewDialog(SetUpAddMenuActivity.this, dataAdapter);
+        customDialog.show();
+        customDialog.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -1018,13 +783,11 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         if (getIntent().getStringExtra("flag") == "1") {
 
             Offer dishType = new Offer(cId, cDesc);
-
             addDishType.add(dishType);
             typeListAdapter = new AddCouponAddMenuAdapter(SetUpAddMenuActivity.this, addDishType, SetUpAddMenuActivity.this, SetUpAddMenuActivity.this);
             LinearLayoutManager layoutManager = new LinearLayoutManager(SetUpAddMenuActivity.this, LinearLayoutManager.VERTICAL, false);
             binding.rclrCouponList.setLayoutManager(layoutManager);
             binding.rclrCouponList.setAdapter(typeListAdapter);
-
 
         } else {
             Offer dishType = new Offer(id, data);
@@ -1037,6 +800,7 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                 binding.rclrCouponList.setLayoutManager(layoutManager);
                 binding.rclrCouponList.setAdapter(typeListAdapter);
             } else {
+
                 for (Offer d : addDishType) {
                     if (d.getId().equals(id)) {
                         Toast.makeText(SetUpAddMenuActivity.this, "Offer already available", Toast.LENGTH_SHORT).show();
@@ -1044,20 +808,19 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                     }
                 }
                 if (!flag) {
+
                     addDishType.add(dishType);
                     typeListAdapter = new AddCouponAddMenuAdapter(SetUpAddMenuActivity.this, addDishType, this, SetUpAddMenuActivity.this);
                     GridLayoutManager layoutManager = new GridLayoutManager(SetUpAddMenuActivity.this, 1, GridLayoutManager.HORIZONTAL, false);
                     binding.rclrCouponList.setLayoutManager(layoutManager);
                     binding.rclrCouponList.setAdapter(typeListAdapter);
                 }
-
             }
 
             if (customDialog != null) {
                 customDialog.dismiss();
             }
         }
-
     }
 
     @Override
@@ -1066,7 +829,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         addDishType.remove(offer);
         if(addDishType != null)
             typeListAdapter.updateDataList(addDishType);
-
         typeListAdapter.notifyDataSetChanged();
 
     }
@@ -1081,19 +843,10 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
         } else {
             Log.e("getOfferDetails : ", Arrays.toString(offerIdArray));
             addDishType.clear();
-           /* Log.e("OfferArraySize : ", String.valueOf(offerIdArray.length));
-            Log.e("OfferListSize : ", String.valueOf(offerList.size()));*/
 
             for (int i = 0; i<offerIdArray.length; i++) {
-               // Log.e("InFoorLoopOfferListSize : ", String.valueOf(offerList.size()));
-
                 for (Offer item : offerList) {
-                   /* Log.e("OfferInFoorLoopOfferListSize : ", String.valueOf(offerList.size()));
-                    Log.e("oytside : ", offerIdArray[i] + "==" + item.getId());*/
-
                     if (offerIdArray[i].equals( item.getId())){
-                        /*Log.e("insideIfCondition : ", String.valueOf(offerList.size()));*/
-
                         cId = item.getId();
                         cDesc = item.getCoupnCode();
                         addDishType.add(new Offer(cId,cDesc));
@@ -1102,9 +855,6 @@ public class SetUpAddMenuActivity extends AppCompatActivity implements AddCoupon
                 }
             }
         }
-
         typeListAdapter.updateDataList(addDishType);
-        /*Log.e("AddDishTypeAdapter : ", String.valueOf(typeListAdapter.getItemCount()));
-        Log.e("AddDishTypeSize  : ", String.valueOf(addDishType.size()));*/
     }
 }

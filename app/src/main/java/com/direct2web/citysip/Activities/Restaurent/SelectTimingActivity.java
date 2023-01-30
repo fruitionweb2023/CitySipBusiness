@@ -48,27 +48,18 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
 
     ActivitySelectTimingBinding binding;
     SessionManager sessionManager;
-
     String sunday = "0", monday = "0", tuesday = "0", wednesday = "0", thursday = "0", friday = "0", saturday = "0";
-
     Boolean bSunday = true, bMonday = true, bTuesday = true, bWednesday = true, bThursday = true, bFriday = true, bSaturday = true;
-
     List<HourTitle> hourTitleList = new ArrayList<>();
     ProgressDialog pd;
-
     String cat_id = "6";
-
     SpinnerTimingTitleListAdapter titleListAdapter;
-
     String rest_open = "0", rest_close = "0", add_open = "0", add_close = "0", hoursTitle = "", hoursId;
     Calendar myCalendar = Calendar.getInstance();
     private static int flag_calander = 0;
-
-
     ArrayList<AddSpecialTime> specialTimeList = new ArrayList<>();
     AddSpecialTimeAdapter typeListAdapter;
     boolean goIn = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +67,7 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
         binding = DataBindingUtil.setContentView(this, R.layout.activity_select_timing);
         sessionManager = new SessionManager(this);
 
-
         getData(cat_id);
-
 
         binding.txtMonday.setOnClickListener(this);
         binding.txtTuesday.setOnClickListener(this);
@@ -96,12 +85,9 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
         binding.spinnerTitle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 hoursTitle = hourTitleList.get(position).getTitle();
                 hoursId = hourTitleList.get(position).getId();
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -109,21 +95,17 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
         });
 
         final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 myCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 myCalendar.set(Calendar.MINUTE, minute);
                 updateLabel();
             }
-
-
         };
 
         binding.txtSelectFromTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Calendar calendar1 = Calendar.getInstance();
                 TimePickerDialog datePickerDialog = new TimePickerDialog(SelectTimingActivity.this, android.R.style.Theme_Holo_Light_Dialog, time, calendar1
                         .get(Calendar.HOUR_OF_DAY), calendar1.get(Calendar.MINUTE), false) {
@@ -135,7 +117,6 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                             binding.txtSelectFromTime.setText("Select");
                         }
                     }
-
                 };
                 datePickerDialog.show();
                 flag_calander = 1;
@@ -146,7 +127,6 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
         binding.txtSelectToTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Calendar calendar1 = Calendar.getInstance();
                 TimePickerDialog datePickerDialog = new TimePickerDialog(SelectTimingActivity.this, android.R.style.Theme_Holo_Light_Dialog, time, calendar1
                         .get(Calendar.HOUR_OF_DAY), calendar1.get(Calendar.MINUTE), false) {
@@ -158,18 +138,15 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                             binding.txtSelectToTime.setText("Select");
                         }
                     }
-
                 };
                 datePickerDialog.show();
                 flag_calander = 2;
-
             }
         });
 
         binding.txtAddSelectFromTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Calendar calendar1 = Calendar.getInstance();
                 TimePickerDialog datePickerDialog = new TimePickerDialog(SelectTimingActivity.this, android.R.style.Theme_Holo_Light_Dialog, time, calendar1
                         .get(Calendar.HOUR_OF_DAY), calendar1.get(Calendar.MINUTE), false) {
@@ -181,20 +158,16 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                             binding.txtAddSelectFromTime.setText("Select");
                         }
                     }
-
                 };
                 datePickerDialog.show();
                 flag_calander = 3;
-
             }
         });
 
         binding.txtAddSelectToTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Calendar calendar1 = Calendar.getInstance();
-
                 TimePickerDialog datePickerDialog = new TimePickerDialog(SelectTimingActivity.this, android.R.style.Theme_Holo_Light_Dialog, time, calendar1
                         .get(Calendar.HOUR_OF_DAY), calendar1.get(Calendar.MINUTE), false) {
                     @Override
@@ -205,75 +178,53 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                             binding.txtAddSelectToTime.setText("Select");
                         }
                     }
-
                 };
                 datePickerDialog.show();
                 flag_calander = 4;
-
             }
         });
 
-        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.btnAdd.setOnClickListener(v -> {
 
-                if (add_open.equals("0") && add_close.equals("0")){
+            if (add_open.equals("0") && add_close.equals("0")){
+                Toast.makeText(SelectTimingActivity.this, "Please Select Time", Toast.LENGTH_SHORT).show();
+            }else {
 
-                    Toast.makeText(SelectTimingActivity.this, "Please Select Time", Toast.LENGTH_SHORT).show();
+                AddSpecialTime dishType = new AddSpecialTime(hoursId, hoursTitle, add_open + "-" + add_close);
+                boolean flag = false;
+                if (specialTimeList.size() == 0) {
+                    specialTimeList.add(dishType);
+                    goIn = false;
 
-                }else {
-
-                    AddSpecialTime dishType = new AddSpecialTime(hoursId, hoursTitle, add_open + "-" + add_close);
-                    boolean flag = false;
-
-                    if (specialTimeList.size() == 0) {
+                    typeListAdapter = new AddSpecialTimeAdapter(SelectTimingActivity.this, specialTimeList, SelectTimingActivity.this);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(SelectTimingActivity.this);
+                    binding.rclrTiming.setLayoutManager(layoutManager);
+                    binding.rclrTiming.setAdapter(typeListAdapter);
+                } else {
+                    for (AddSpecialTime d : specialTimeList) {
+                        if (d.getTitle().equals(hoursTitle)) {
+                            Toast.makeText(SelectTimingActivity.this, "title already available", Toast.LENGTH_SHORT).show();
+                            flag = true;
+                        }
+                    }
+                    if (!flag) {
                         specialTimeList.add(dishType);
                         goIn = false;
-
                         typeListAdapter = new AddSpecialTimeAdapter(SelectTimingActivity.this, specialTimeList, SelectTimingActivity.this);
                         LinearLayoutManager layoutManager = new LinearLayoutManager(SelectTimingActivity.this);
                         binding.rclrTiming.setLayoutManager(layoutManager);
                         binding.rclrTiming.setAdapter(typeListAdapter);
-                    } else {
-                        for (AddSpecialTime d : specialTimeList) {
-                            if (d.getTitle().equals(hoursTitle)) {
-                                Toast.makeText(SelectTimingActivity.this, "title already available", Toast.LENGTH_SHORT).show();
-                                flag = true;
-                            }
-                        }
-                        if (!flag) {
-                            specialTimeList.add(dishType);
-                            goIn = false;
-                            typeListAdapter = new AddSpecialTimeAdapter(SelectTimingActivity.this, specialTimeList, SelectTimingActivity.this);
-                            LinearLayoutManager layoutManager = new LinearLayoutManager(SelectTimingActivity.this);
-                            binding.rclrTiming.setLayoutManager(layoutManager);
-                            binding.rclrTiming.setAdapter(typeListAdapter);
-                        }
-
                     }
-
                 }
-
-
             }
         });
 
-        binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                sendData();
-
-            }
-        });
-
+        binding.btnUpdate.setOnClickListener(v -> sendData());
 
     }
 
     private void updateLabel() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
-        //SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
+        String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.getDefault());
 
         if (flag_calander == 1) {
@@ -408,12 +359,8 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                     binding.txtSunday.setTextColor(getResources().getColor(R.color.clr_979592));
                 }
                 break;
-
-
         }
-
     }
-
 
     private void getData(String cat_id) {
 
@@ -441,21 +388,14 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                         Toast.makeText(SelectTimingActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     } else {
-
                         hourTitleList = response.body().getHourTitle();
                         titleListAdapter = new SpinnerTimingTitleListAdapter(SelectTimingActivity.this,R.layout.raw_recyclear_view_drop_down_timing,R.id.tvName,hourTitleList);
                         binding.spinnerTitle.setAdapter(titleListAdapter);
-
                     }
-
                 } else {
-
                     Toast.makeText(SelectTimingActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
-
                 }
-
             }
-
             @Override
             public void onFailure(Call<ResponseHoursTitleList> call, Throwable t) {
                 if (pd.isShowing()) {
@@ -465,62 +405,38 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                 Log.e("error", t.getMessage());
             }
         });
-
-
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
         if (isChecked) {
-
             binding.llAdd.setVisibility(View.VISIBLE);
-
         } else {
-
             binding.llAdd.setVisibility(View.GONE);
             if (!goIn) {
                 specialTimeList.clear();
                 typeListAdapter.updateDataList(specialTimeList);
             }
-
             add_close = "0";
             binding.txtAddSelectToTime.setText("Select");
-
             add_open = "0";
             binding.txtAddSelectFromTime.setText("Select");
-
         }
-
     }
-
     @Override
     public void onDishTypeItemCancel(AddSpecialTime data) {
-
-
         specialTimeList.remove(data);
-
         typeListAdapter.updateDataList(specialTimeList);
-
-
     }
-
-
     public void sendData() {
-
-
         pd = new ProgressDialog(SelectTimingActivity.this);
         pd.setMessage("Please Wait.....");
         pd.setCancelable(false);
         pd.show();
 
         if (sunday.equals("0") && monday.equals("0") && tuesday.equals("0") && wednesday.equals("0") && thursday.equals("0") && friday.equals("0") && saturday.equals("0")) {
-
-
             pd.dismiss();
             Toast.makeText(SelectTimingActivity.this, "Please Select WeekDays", Toast.LENGTH_SHORT).show();
-
-
         } else if (rest_open.equals("0")) {
             pd.dismiss();
             Toast.makeText(SelectTimingActivity.this, "Please Select restaurant Open Time", Toast.LENGTH_SHORT).show();
@@ -528,16 +444,13 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
             pd.dismiss();
             Toast.makeText(SelectTimingActivity.this, "Please Select restaurant Close Time", Toast.LENGTH_SHORT).show();
         } else {
-
             String days = monday + "~~" + tuesday + "~~" + wednesday + "~~" + thursday + "~~" + friday + "~~" + saturday + "~~" + sunday;
-
             String defaultId = "0";
             String defaultTime = rest_open + "-" + rest_close;
 
             AddSpecialTime specialTime = new AddSpecialTime(defaultId, "", defaultTime);
 
             specialTimeList.add(0, specialTime);
-
 
             String time = "", id = "";
             StringBuilder sb = new StringBuilder();
@@ -570,24 +483,16 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                     if (response.body() != null && response.isSuccessful()) {
 
                         if (response.body().getError()) {
-
                             Toast.makeText(SelectTimingActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                         } else {
-
                             Intent intent = new Intent(SelectTimingActivity.this, SetUpTimingListActivity.class);
                             finish();
                             startActivity(intent);
-
                         }
-
                     } else {
                         Toast.makeText(SelectTimingActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
-
                 @Override
                 public void onFailure(Call<ResponseSendTiming> call, Throwable t) {
 
@@ -598,11 +503,6 @@ public class SelectTimingActivity extends AppCompatActivity implements View.OnCl
                     Log.e("errorSendTiming", t.getMessage());
                 }
             });
-
-
         }
-
-
     }
-
 }

@@ -111,7 +111,7 @@ public class SpaAndSalonAboutYouActivity extends AppCompatActivity {
 
                 } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+                    binding.edtRestNumber.setError("Please enter valid phoneNo.");
 
                 } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 
@@ -136,7 +136,7 @@ public class SpaAndSalonAboutYouActivity extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "dd-MM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         if (flag_calander == 1) {
             binding.edtRestWebsite.setText(sdf.format(calendar.getTime()));

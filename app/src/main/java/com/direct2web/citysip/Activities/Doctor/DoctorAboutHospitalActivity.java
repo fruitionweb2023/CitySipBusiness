@@ -88,11 +88,6 @@ public class DoctorAboutHospitalActivity extends AppCompatActivity {
 
                     if (new ConnectionToInternet(DoctorAboutHospitalActivity.this).isConnectingToInternet()) {
                         sendProfile(sessionManager.getUserId());
-
-                       /* if (getIntent().getStringExtra("flag").equals("1")) {
-                           editProfile(sessionManager.getUserId());
-                       } else  {
-                       }*/
                     } else {
                         new ConnectionToInternet(DoctorAboutHospitalActivity.this).ShowDilog(DoctorAboutHospitalActivity.this);
                     }

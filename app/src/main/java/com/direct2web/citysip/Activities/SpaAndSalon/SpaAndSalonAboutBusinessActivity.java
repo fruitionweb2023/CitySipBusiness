@@ -135,8 +135,6 @@ public class SpaAndSalonAboutBusinessActivity extends AppCompatActivity {
 
                         }
 
-
-
                         binding.edtLocation.setOnClickListener(v -> {
 
                             Intent i = new Intent(SpaAndSalonAboutBusinessActivity.this, SpaAndSalonEditLocationFetchActivity.class);

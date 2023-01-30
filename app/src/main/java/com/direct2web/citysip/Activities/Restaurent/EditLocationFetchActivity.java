@@ -93,8 +93,13 @@ public class EditLocationFetchActivity extends FragmentActivity implements OnMap
         sessionManager = new SessionManager(this);
 
         binding.edtRestName.setText(getIntent().getStringExtra("address1"));
-      // address = getIntent().getStringExtra("address2");
-        binding.dragResult.setText(getIntent().getStringExtra("address2"));
+        String str = getIntent().getStringExtra("address2");
+        String delimiter = ",";
+        String[] temp = str.split(delimiter);
+        String streetAdd = temp[0];
+        String roadAdd = temp[1];
+        binding.edtStreet.setText(streetAdd);
+        binding.edtStreet.setText(roadAdd);
         latitude = getIntent().getStringExtra("lat");
         longitude = getIntent().getStringExtra("lang");
 
@@ -104,30 +109,27 @@ public class EditLocationFetchActivity extends FragmentActivity implements OnMap
 
 
 
-        binding.btnVerify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.btnVerify.setOnClickListener(v -> {
 
-                if (address.equals("")) {
+            if (address.equals("")) {
 
-                    Toast.makeText(EditLocationFetchActivity.this, "Please Wait", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditLocationFetchActivity.this, "Please Wait", Toast.LENGTH_SHORT).show();
 
 
-                } else if (binding.edtRestName.getText().toString().equals("")) {
+            } else if (binding.edtRestName.getText().toString().equals("")) {
 
-                    binding.edtRestName.setError("Field can not be Empty");
+                binding.edtRestName.setError("Field can not be Empty");
 
-                }else {
+            }else {
 
 
-                    if (new ConnectionToInternet(EditLocationFetchActivity.this).isConnectingToInternet()) {
-                        sendProfile(sessionManager.getUserId());
-                    } else {
-                        new ConnectionToInternet(EditLocationFetchActivity.this).ShowDilog(EditLocationFetchActivity.this);
-                    }
+                if (new ConnectionToInternet(EditLocationFetchActivity.this).isConnectingToInternet()) {
+                    sendProfile(sessionManager.getUserId());
+                } else {
+                    new ConnectionToInternet(EditLocationFetchActivity.this).ShowDilog(EditLocationFetchActivity.this);
                 }
-
             }
+
         });
 
 

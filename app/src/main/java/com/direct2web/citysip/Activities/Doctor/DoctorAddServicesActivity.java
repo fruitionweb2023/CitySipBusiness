@@ -98,19 +98,19 @@ public class DoctorAddServicesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (binding.txtName.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Doctor Name", Toast.LENGTH_SHORT).show();
 
                 } else if (binding.txtService.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Price", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Service", Toast.LENGTH_SHORT).show();
 
                 } else if (binding.txtPrice.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter amount", Toast.LENGTH_SHORT).show();
 
                 } else if (binding.txtAboutService.equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Please Select Cuisines First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter description", Toast.LENGTH_SHORT).show();
 
                 }else {
                     if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {

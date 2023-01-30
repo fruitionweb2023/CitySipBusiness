@@ -222,7 +222,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menu_txt_chat_room"
+                    android:id="@+id/menu_txt_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -251,7 +251,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/menu_txt_customer"
+                    android:id="@+id/menu_txt_chat_room"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">

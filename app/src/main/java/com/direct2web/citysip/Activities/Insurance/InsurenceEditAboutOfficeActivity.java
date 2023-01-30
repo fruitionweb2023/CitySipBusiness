@@ -48,39 +48,30 @@ public class InsurenceEditAboutOfficeActivity extends AppCompatActivity {
         binding.edtRestDescription.setText(getIntent().getStringExtra("about"));
         binding.btnVerify.setText("Edit");
 
+        binding.btnVerify.setOnClickListener(v -> {
 
-        binding.edtRestName.addTextChangedListener(tw);
-        binding.edtRestNumber.addTextChangedListener(tw);
-        binding.edtRestWebsite.addTextChangedListener(tw);
-        binding.edtRestDescription.addTextChangedListener(tw);
+            if (binding.edtRestName.getText().toString().equals("")) {
 
-        binding.btnVerify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                binding.edtRestName.setError("Field can not be empty");
 
-                if (binding.edtRestName.getText().toString().equals("")) {
+            } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                    binding.edtRestName.setError("Field can not be empty");
+                binding.edtRestNumber.setError("Peese enter valid phoneNo.");
 
-                } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
+            } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+                binding.edtRestWebsite.setError("Field can not be empty");
 
-                } else if (binding.edtRestWebsite.getText().toString().equals("")) {
+            } else if (binding.edtRestDescription.getText().toString().equals("")) {
 
-                    binding.edtRestWebsite.setError("Field can not be empty");
+                binding.edtRestDescription.setError("Field can not be empty");
 
-                } else if (binding.edtRestDescription.getText().toString().equals("")) {
+            } else {
 
-                    binding.edtRestDescription.setError("Field can not be empty");
-
+                if (new ConnectionToInternet(InsurenceEditAboutOfficeActivity.this).isConnectingToInternet()) {
+                    editProfile(sessionManager.getUserId());
                 } else {
-
-                    if (new ConnectionToInternet(InsurenceEditAboutOfficeActivity.this).isConnectingToInternet()) {
-                        editProfile(sessionManager.getUserId());
-                    } else {
-                        new ConnectionToInternet(InsurenceEditAboutOfficeActivity.this).ShowDilog(InsurenceEditAboutOfficeActivity.this);
-                    }
+                    new ConnectionToInternet(InsurenceEditAboutOfficeActivity.this).ShowDilog(InsurenceEditAboutOfficeActivity.this);
                 }
             }
         });
@@ -136,26 +127,4 @@ public class InsurenceEditAboutOfficeActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    TextWatcher tw = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (binding.edtRestName.getText().length() > 0 && binding.edtRestNumber.getText().length() > 0 && binding.edtRestWebsite.getText().length() > 0 && binding.edtRestDescription.getText().length() > 0) {
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_insurance));
-
-            } else {
-
-                binding.btnVerify.setTextColor(getResources().getColor(R.color.cle_979592));
-                binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_disable));
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) { }
-    };
 }

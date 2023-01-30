@@ -165,32 +165,29 @@ public class SpaAndSalonAddStaffActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.txtName.getText().toString().equals("")) {
+        binding.btnSubmit.setOnClickListener(view -> {
+            if (binding.txtName.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Staff Name", Toast.LENGTH_SHORT).show();
+                binding.txtName.setError("Field can not be empty");
 
-                } else if (binding.txtAddSelectFromTime.getText().toString().equals("Select")) {
+            } else if (binding.txtAddSelectFromTime.getText().toString().equals("Select")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Time-from", Toast.LENGTH_SHORT).show();
+                binding.txtAddSelectFromTime.setError("Field can not be empty");
 
-                } else if (binding.txtAddSelectToTime.getText().toString().equals("Select")) {
+            } else if (binding.txtAddSelectToTime.getText().toString().equals("Select")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Time-to", Toast.LENGTH_SHORT).show();
+                binding.txtAddSelectToTime.setError("Field can not be empty");
 
-                } else if (binding.txtAboutService.equals("")) {
+            } else if (binding.txtAboutService.equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter About", Toast.LENGTH_SHORT).show();
+                binding.txtAboutService.setError("Field can not be empty");
 
-                }else {
+            }else {
 
-                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
-                        editStaff();
-                    } else {
-                        sendSetUpMenu();
-                    }
+                if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                    editStaff();
+                } else {
+                    sendSetUpMenu();
                 }
             }
         });

@@ -39,7 +39,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         }else if (Objects.equals(sessionManager.getBusinessType(), "5")){
             binding.toolbarLogo.setBackgroundResource(R.drawable.ic_lawyer_logo);
         }else if (Objects.equals(sessionManager.getBusinessType(), "6")){
-            binding.toolbarLogo.setBackgroundResource(R.drawable.logo);
+            binding.toolbarLogo.setBackgroundResource(R.drawable.restaurant_logo_new);
         }
 
         binding.webView.setWebViewClient(new WebViewClient());

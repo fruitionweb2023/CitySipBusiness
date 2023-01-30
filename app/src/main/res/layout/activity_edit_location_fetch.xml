@@ -188,30 +188,6 @@
 
                             </LinearLayout>
 
-                            <!--<LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="20"
-                                android:gravity="center">
-
-
-                                <TextView
-                                    android:id="@+id/txt_change"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="25dp"
-                                    android:background="@drawable/four_dp_corner_box_light_grey"
-                                    android:fontFamily="@font/roboto_bold"
-                                    android:gravity="center"
-                                    android:paddingStart="10dp"
-                                    android:paddingTop="5dp"
-                                    android:paddingEnd="10dp"
-                                    android:paddingBottom="5dp"
-                                    android:text="CHANGE"
-                                    android:textColor="#E75B53"
-                                    android:textSize="10sp" />
-
-                            </LinearLayout>-->
-
 
                         </LinearLayout>
 

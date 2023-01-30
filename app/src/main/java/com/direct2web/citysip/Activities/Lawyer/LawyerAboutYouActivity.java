@@ -129,7 +129,7 @@ public class LawyerAboutYouActivity extends AppCompatActivity {
 
                 } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+                    binding.edtRestNumber.setError("Please enter valid phoneNo.");
 
                 } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 

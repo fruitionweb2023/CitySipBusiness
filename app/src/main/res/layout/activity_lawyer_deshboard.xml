@@ -139,7 +139,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                android:text="₹180000"
+                                android:text="null"
                                 android:textColor="@color/clr_0059C8"
                                 android:textSize="28sp"
                                 android:textStyle="normal" />

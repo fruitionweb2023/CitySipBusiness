@@ -58,8 +58,6 @@ public class DeleteImageActivity extends AppCompatActivity {
                     deleteSelectedItems(sessionManager.getUserId());
                 }
             });
-            // getData(sessionManager.getUserId());
-
     }
 
 

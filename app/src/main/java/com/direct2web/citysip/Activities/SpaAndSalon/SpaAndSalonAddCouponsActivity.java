@@ -57,39 +57,36 @@ public class SpaAndSalonAddCouponsActivity extends AppCompatActivity {
              couponId = getIntent().getStringExtra("couponId");
         }
 
-        binding.btnAddCoupons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.btnAddCoupons.setOnClickListener(view -> {
 
-                if (binding.edtCouponOffers.getText().toString().equals("percentage")) {
+            if (binding.edtCouponOffers.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Coupons offer ", Toast.LENGTH_SHORT).show();
+                binding.edtCouponOffers.setError("Field can not be empty");
 
-                } else if (binding.edtCouponsCode.getText().toString().equals("coupn_code")) {
+            } else if (binding.edtCouponsCode.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Coupons Code", Toast.LENGTH_SHORT).show();
+                binding.edtCouponsCode.setError("Field can not be empty");
 
-                } else if (binding.edtMinPurchase.getText().toString().equals("min_amount")) {
+            } else if (binding.edtMinPurchase.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Minimum Purchase", Toast.LENGTH_SHORT).show();
+                binding.edtMinPurchase.setError("Field can not be empty");
 
-                } else if (binding.edtMaxDiscount.getText().toString().equals("max_amount")) {
+            } else if (binding.edtMaxDiscount.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Maximum Discount", Toast.LENGTH_SHORT).show();
+                binding.edtMaxDiscount.setError("Field can not be empty");
 
-                } else if (binding.edtTermsConditions.getText().toString().equals("terms_condition")) {
+            } else if (binding.edtTermsConditions.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Terms and Conditions", Toast.LENGTH_SHORT).show();
+                binding.edtTermsConditions.setError("Field can not be empty");
 
+            } else {
+
+                if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                    editSetUpOffer(sessionManager.getUserId(),couponId);
                 } else {
-
-                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
-                        editSetUpOffer(sessionManager.getUserId(),couponId);
-                    } else {
-                        sendSetUpOffer(sessionManager.getUserId());
-                    }
-
+                    sendSetUpOffer(sessionManager.getUserId());
                 }
+
             }
         });
     }

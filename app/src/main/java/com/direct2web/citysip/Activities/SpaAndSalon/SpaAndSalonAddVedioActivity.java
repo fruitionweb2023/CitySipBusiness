@@ -145,7 +145,7 @@ public class SpaAndSalonAddVedioActivity extends AppCompatActivity implements Ad
 
         if (filePaths.size() > 0 ){
 
-            binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_doctor));
+            binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_spa_salon));
             binding.btnVerify.setTextColor(getResources().getColor(R.color.white));
             binding.btnVerify.setClickable(true);
 

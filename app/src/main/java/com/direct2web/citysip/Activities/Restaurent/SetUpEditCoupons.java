@@ -15,16 +15,11 @@ public class SetUpEditCoupons extends AppCompatActivity {
 
     ActivitySetUpEditCouponsBinding binding;
     SessionManager sessionManager;
-    List<Offer> offerList;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_up_edit_coupons);
 
         sessionManager = new SessionManager(this);
-
-
     }
 }

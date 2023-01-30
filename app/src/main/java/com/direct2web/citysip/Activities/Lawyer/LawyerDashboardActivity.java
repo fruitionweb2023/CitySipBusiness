@@ -178,8 +178,6 @@ public class LawyerDashboardActivity extends AppCompatActivity {
 
                         binding.txtActiveMenu.setText(""+response.body().getActiveMenuItem());
                         binding.txtInActiveMenu.setText(""+response.body().getInactiveMenuItem());
-//                        binding.txtActiveOffer.setText(""+response.body().getActiveOffer());
-//                        binding.txtInActiveOffer.setText(""+response.body().getInactiveOffer());
                         binding.txtRevenueCount.setText("₹" + response.body().getMonthlyTurnOver());
 
                     }

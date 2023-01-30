@@ -101,7 +101,6 @@ public class LocationFetchActivity extends FragmentActivity implements OnMapRead
 
                     Toast.makeText(LocationFetchActivity.this, "Please Wait", Toast.LENGTH_SHORT).show();
 
-
                 } else if (binding.edtRestName.getText().toString().equals("")) {
 
                     binding.edtRestName.setError("Field can not be Empty");

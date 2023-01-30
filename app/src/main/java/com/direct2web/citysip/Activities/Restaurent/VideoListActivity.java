@@ -81,17 +81,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                     Uri uri = Uri.parse(TrimVideo.getTrimmedVideoPath(result.getData()));
                     Log.e("VideoTrimActivity", "Trimmed path:: " + uri);
 
-
-
-                    /*binding.videoView.setMediaController(mediaController);
-                    binding.videoView.setVideoURI(uri);
-                    binding.videoView.requestFocus();
-                    binding.videoView.start();
-
-                    binding.videoView.setOnPreparedListener(mediaPlayer -> {
-                        mediaController.setAnchorView(binding.videoView);
-                    });*/
-
                     String filepath = String.valueOf(uri);
                     File file = new File(filepath);
                     long length = file.length();
@@ -107,11 +96,7 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                 if (result.getResultCode() == Activity.RESULT_OK &&
                         result.getData() != null) {
                     Intent data = result.getData();
-                    //check video duration if needed
-        /*        if (TrimmerUtils.getDuration(this,data.getData())<=30){
-                    Toast.makeText(this,"Video should be larger than 30 sec",Toast.LENGTH_SHORT).show();
-                    return;
-                }*/
+
                     if (data.getData() != null) {
                         LogMessage.v("Video path:: " + data.getData());
                         openTrimActivity(String.valueOf(data.getData()));
@@ -163,15 +148,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
 
         getData(sessionManager.getUserId());
 
-        /*binding.txtSetUpLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(VideoListActivity.this, SetUpTimingActivity.class);
-                startActivity(intent);
-
-            }
-        });*/
 
         binding.btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,70 +157,11 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                     sendData();
 
                 } else {
-
-                    /*android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(VideoListActivity.this);
-                    builder.setCancelable(false);
-                    builder.setMessage("Are you sure want to go further without adding Video?");
-                    builder.setTitle("Confirmation");
-                    builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            Intent intent = new Intent(VideoListActivity.this, SetUpTimingActivity.class);
-                            startActivity(intent);
-
-                        }
-                    });
-
-                    builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            dialog.dismiss();
-
-                        }
-                    });
-
-                    android.app.AlertDialog alertDialog = builder.create();
-                    alertDialog.show();*/
-
                     onBackPressed();
-
-
                 }
 
             }
         });
-
-     /*   binding.imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showPictureDialog();
-
-//                pickVideo();
-
-                *//*Intent intent = new Intent();
-                intent.setType("video/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Video"), REQUEST_TAKE_GALLERY_VIDEO);*//*
-
-//                showPictureDialog();
-
-                if (clicked) {
-
-                    Toast.makeText(VideoListActivity.this, "Please Confirm How many Video Allowed to Upload", Toast.LENGTH_SHORT).show();
-
-                } else {
-                    clicked = true;
-                    onMinToMaxTrimClicked();
-                }
-
-
-            }
-
-        });*/
-
-
     }
 
     private void getData(String userId) {
@@ -298,12 +215,8 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
 
 
                 } else {
-
                     Toast.makeText(VideoListActivity.this, getResources().getString(R.string.error_admin), Toast.LENGTH_SHORT).show();
-
                 }
-
-
             }
 
             @Override
@@ -316,18 +229,7 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                 Log.e(TAG, t.getMessage());
             }
         });
-
-
     }
-
-    /*private void pickVideo() {
-        new VideoPicker.Builder(SetUpVideoActivity.this)
-                .mode(VideoPicker.Mode.CAMERA_AND_GALLERY)
-                .directory(VideoPicker.Directory.DEFAULT)
-                .extension(VideoPicker.Extension.MP4)
-                .build();
-    }*/
-
 
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -402,8 +304,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
 
                     Uri returnedUri = null;
                     if (Uri.parse(data.getExtras().getString("INTENT_VIDEO_URI")).getScheme() == null) {
-//                        returnedUri = Uri.fromFile(new File(path));
-                        // or you can just do -->
                         returnedUri = Uri.parse("file://" + Uri.parse(data.getExtras().getString("INTENT_VIDEO_URI")).getPath());
                         Log.e("uri", returnedUri.toString());
                     } else {
@@ -412,12 +312,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
                     }
 
                     Uri myUri = returnedUri;
-
-
-//                    binding.vv.setVideoURI(myUri);
-//                    binding.vv.requestFocus();
-//                    binding.vv.start();
-
                     addImage(videoPath, myUri);
 
 
@@ -450,8 +344,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
         binding.rclrVideo.setLayoutManager(gridLayoutManager);
         SelectedVideoAdapter propertyImageAdapter = new SelectedVideoAdapter(this, imagesEncodedList,VideoListActivity.this,VideoListActivity.this);
         binding.rclrVideo.setAdapter(propertyImageAdapter);
-        //selectedImageAdapter.notifyDataSetChanged();
-        //imageAdapter.notifyDataSetChanged();
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -758,14 +650,6 @@ public class VideoListActivity extends AppCompatActivity implements SelectedVide
     @Override
     public void onAddButtonClick(int postion) {
         onMinToMaxTrimClicked();
-       /* if (clicked) {
-
-            Toast.makeText(VideoListActivity.this, "Please Confirm How many Video Allowed to Upload", Toast.LENGTH_SHORT).show();
-
-        } else {
-            clicked = true;
-            onMinToMaxTrimClicked();
-        }*/
     }
 
     @Override

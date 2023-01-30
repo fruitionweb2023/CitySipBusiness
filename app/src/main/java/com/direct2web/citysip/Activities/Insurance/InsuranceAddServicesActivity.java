@@ -162,7 +162,7 @@ public class InsuranceAddServicesActivity extends AppCompatActivity implements I
             public void onClick(View view) {
                 if (binding.txtService.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Price", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Select Service First", Toast.LENGTH_SHORT).show();
 
                 } else {
 

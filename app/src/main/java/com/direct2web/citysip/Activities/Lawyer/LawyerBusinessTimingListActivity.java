@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,13 @@ public class LawyerBusinessTimingListActivity extends AppCompatActivity implemen
         sessionManager = new SessionManager(this);
 
         bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
+
+
+        binding.bottomnavigation.bbOrder.setVisibility(View.GONE);
+        binding.bottomnavigation.bbAppointment.setVisibility(View.VISIBLE);
+
+        binding.bottomnavigation.bbImgAppointment.setColorFilter(getResources().getColor(R.color.clr_0059C8));
+        binding.bottomnavigation.bbTxtAppointment.setTextColor(getResources().getColor(R.color.clay));
 
         binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
         binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));

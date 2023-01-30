@@ -46,40 +46,6 @@ public class AddRestaurantDetailsActivity extends AppCompatActivity {
         binding.edtRestWebsite.addTextChangedListener(tw);
         binding.edtRestDescription.addTextChangedListener(tw);
 
-
-
-        /*new Thread( new Runnable() {
-
-            @Override public void run() {
-            // Run whatever background code you want here.
-            if (binding.edtRestName.getText() != null){
-                next += add;
-            } else if (binding.edtRestNumber.getText() != null){
-                next += add;
-            } else if (binding.edtRestWebsite.getText() != null){
-                next += add;
-            } else if (binding.edtRestDescription.getText() != null){
-                next += add;
-            }
-
-            if (next == 4 ){
-
-                Toast.makeText(AddRestaurantDetailsActivity.this, "next call", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        }).start();*/
-
-        /*if (binding.edtRestName.getText().toString().trim().length() >0 && binding.edtRestNumber.getText().toString().trim().length() >0 && binding.edtRestWebsite.getText().toString().trim().length() >0 && binding.edtRestDescription.getText().toString().trim().length() >0 ) {
-            binding.btnVerify.setTextColor(getResources().getColor(R.color.clr_f8f8f8));
-            binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button));
-        } else {
-            binding.btnVerify.setTextColor(getResources().getColor(R.color.cle_979592));
-            binding.btnVerify.setBackground(getResources().getDrawable(R.drawable.button_disable));
-        }*/
-
-
-
         binding.btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +56,7 @@ public class AddRestaurantDetailsActivity extends AppCompatActivity {
 
                 } else if (binding.edtRestNumber.getText().toString().equals("") && binding.edtRestNumber.getText().length() == 10) {
 
-                    binding.edtRestNumber.setError("Peese enter valid phoneNo.");
+                    binding.edtRestNumber.setError("Please enter valid phoneNo.");
 
                 } else if (binding.edtRestWebsite.getText().toString().equals("")) {
 

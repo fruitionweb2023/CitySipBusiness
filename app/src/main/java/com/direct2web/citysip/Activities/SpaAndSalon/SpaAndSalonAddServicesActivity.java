@@ -97,32 +97,29 @@ public class SpaAndSalonAddServicesActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (binding.txtName.getText().toString().equals("")) {
+        binding.btnSubmit.setOnClickListener(view -> {
+            if (binding.txtName.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Name", Toast.LENGTH_SHORT).show();
+                binding.txtName.setError("Field can not be empty");
 
-                } else if (binding.txtService.getText().toString().equals("")) {
+            } else if (binding.txtService.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Price", Toast.LENGTH_SHORT).show();
+                binding.txtService.setError("Field can not be empty");
 
-                } else if (binding.txtPrice.getText().toString().equals("")) {
+            } else if (binding.txtPrice.getText().toString().equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Enter Dish Description", Toast.LENGTH_SHORT).show();
+                binding.txtPrice.setError("Field can not be empty");
 
-                } else if (binding.txtAboutService.equals("")) {
+            } else if (binding.txtAboutService.equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Please Select Cuisines First", Toast.LENGTH_SHORT).show();
+                binding.txtAboutService.setError("Field can not be empty");
 
-                }else {
+            }else {
 
-                    if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
-                        editServices();
-                    } else {
-                        sendSetUpMenu();
-                    }
+                if (Objects.equals(getIntent().getStringExtra("flag"), "1")) {
+                    editServices();
+                } else {
+                    sendSetUpMenu();
                 }
             }
         });

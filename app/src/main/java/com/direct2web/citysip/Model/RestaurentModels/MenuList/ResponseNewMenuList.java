@@ -13,9 +13,21 @@ public class ResponseNewMenuList {
     @SerializedName("message")
     @Expose
     private String message;
+
+    @SerializedName("no_data_image")
+    @Expose
+    private String noDataImage;
     @SerializedName("new_menu_list")
     @Expose
     private List<NewMenu> newMenuList = null;
+
+    public String getNoDataImage() {
+        return noDataImage;
+    }
+
+    public void setNoDataImage(String noDataImage) {
+        this.noDataImage = noDataImage;
+    }
 
     public Boolean getError() {
         return error;

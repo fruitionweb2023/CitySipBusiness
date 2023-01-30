@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,8 +50,8 @@
                         android:gravity="center"
                         android:textColor="@color/clr_888888"
                         android:textSize="12sp"
-                        app:switchPadding="@dimen/ten_dp"
-                        android:theme="@style/SCBSwitchDoctor"/>
+                        android:theme="@style/SCBSwitchDoctor"
+                        app:switchPadding="@dimen/ten_dp" />
 
                 </LinearLayout>
 
@@ -84,6 +85,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="10"
+                        android:visibility="gone"
                         android:gravity="center">
 
                         <ImageView

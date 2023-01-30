@@ -45,24 +45,9 @@ public class CustomerActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_customer);
 
         sessionManager = new SessionManager(this);
-        /*bottomButtonClickListner = new BottomButtonClickListner(this, sessionManager);
-
-        binding.bottomnavigation.bbHome.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMyBusiness.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbOrder.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-        binding.bottomnavigation.bbMenu.setOnClickListener(new BottomButtonClickListner(this, sessionManager));
-*/
-
         binding.toolbar.toolbarBack.setVisibility(View.VISIBLE);
 
-        binding.toolbar.toolbarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onBackPressed();
-
-            }
-        });
+        binding.toolbar.toolbarBack.setOnClickListener(v -> onBackPressed());
 
         getData(sessionManager.getUserId());
 

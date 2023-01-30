@@ -86,7 +86,8 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"                    android:textColor="#333333"
                     android:textSize="16sp" />
 
                 <TextView
@@ -111,7 +112,8 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     android:singleLine="true"
-                    android:textColor="#333333"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionNext"                    android:textColor="#333333"
                     android:textSize="16sp" />
 
                 <TextView
@@ -164,6 +166,9 @@
                     android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     android:textColor="#333333"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:imeOptions="actionGo"
                     android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
